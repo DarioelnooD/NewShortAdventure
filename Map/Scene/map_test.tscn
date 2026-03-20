@@ -172,7 +172,7 @@ offset_bottom = 412.31848
 color = Color(0.11372549, 0.1254902, 1, 0.13725491)
 
 [node name="Player" parent="." unique_id=87158687 instance=ExtResource("1_wi0av")]
-position = Vector2(-1234, -80)
+position = Vector2(-1292, -110)
 floor_max_angle = 1.3962634
 
 [node name="Node2D" type="Node2D" parent="." unique_id=1323578622]
@@ -199,10 +199,10 @@ label_settings = SubResource("LabelSettings_iowgq")
 
 [node name="Tutorial 1" type="Label" parent="Spawn" unique_id=1136535169]
 layout_mode = 0
-offset_left = -2184.0
-offset_top = -24.0
-offset_right = -1862.0
-offset_bottom = 51.0
+offset_left = -2189.0
+offset_top = -107.0
+offset_right = -1867.0
+offset_bottom = 72.0
 text = "Aqui se le explica como correr en un llano
 y como saltar en una pequena fosa
 Ejemplo: 

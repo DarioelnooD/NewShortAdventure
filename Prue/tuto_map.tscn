@@ -1,0 +1,484 @@
+[gd_scene format=3 uid="uid://dy8stal7iibsi"]
+
+[ext_resource type="Script" uid="uid://bgqtpccxuo1fc" path="res://Prue/tuto_map.gd" id="1_5f6e3"]
+[ext_resource type="Script" uid="uid://cyre13k52atnh" path="res://Prue/player.gd" id="1_cct76"]
+[ext_resource type="Texture2D" uid="uid://i8nivqdhsyd4" path="res://Player/Sprite/male_hero_template-idle.png" id="2_cct76"]
+[ext_resource type="Texture2D" uid="uid://dcw4q0250rcrr" path="res://Player/Sprite/placeholder/CliemTree.png" id="3_8qplv"]
+[ext_resource type="Texture2D" uid="uid://c2n1nycfmen" path="res://Player/Sprite/male_hero_template-run.png" id="3_a1tvq"]
+[ext_resource type="Texture2D" uid="uid://jafyphu21q2u" path="res://Player/Sprite/male_hero_template-jump.png" id="3_gd10h"]
+[ext_resource type="Texture2D" uid="uid://dw55jlo4wngtp" path="res://Player/Sprite/male_hero_template-fall.png" id="3_qpjur"]
+[ext_resource type="Texture2D" uid="uid://dxkxjm4h8mm20" path="res://Player/Sprite/male_hero_template-walk.png" id="4_0vkve"]
+[ext_resource type="Texture2D" uid="uid://dv8ifpexxu628" path="res://Map/Sprite/SkyTemplate.webp" id="5_lbnjl"]
+[ext_resource type="PackedScene" uid="uid://46dvaonsipk7" path="res://Imports/ForestMap.blend" id="6_keqbc"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a1tvq"]
+radius = 0.31445313
+height = 1.5170898
+
+[sub_resource type="Animation" id="Animation_5f6e3"]
+resource_name = "CLIEMTREE"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_8qplv")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite3D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.34, 0.34, 0.171)]
+}
+
+[sub_resource type="Animation" id="Animation_8qplv"]
+resource_name = "FALL"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_qpjur")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite3D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(4.7, 4.7, 4.7)]
+}
+
+[sub_resource type="Animation" id="Animation_cct76"]
+resource_name = "IDLE"
+length = 0.36666667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_cct76")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334, 0.16666667, 0.20000002, 0.23333335, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0), Vector2i(8, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite3D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(4.7, 4.7, 4.7)]
+}
+
+[sub_resource type="Animation" id="Animation_qpjur"]
+resource_name = "JUMP"
+length = 0.56666666
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_gd10h")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite3D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(4.7, 4.7, 4.7)]
+}
+
+[sub_resource type="Animation" id="Animation_a1tvq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_cct76")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite3D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.34, 0.34, 0.171)]
+}
+
+[sub_resource type="Animation" id="Animation_0vkve"]
+resource_name = "RUN"
+length = 0.36666667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_a1tvq")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334, 0.16666667, 0.20000002, 0.23333335, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0), Vector2i(8, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite3D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(4.7, 4.7, 4.7)]
+}
+
+[sub_resource type="Animation" id="Animation_lbnjl"]
+resource_name = "WALK"
+length = 0.36666667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_0vkve")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite3D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite3D:frame_coords")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334, 0.16666667, 0.20000002, 0.23333335, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0), Vector2i(8, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite3D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(4.7, 4.7, 4.7)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a1tvq"]
+_data = {
+&"CLIEMTREE": SubResource("Animation_5f6e3"),
+&"FALL": SubResource("Animation_8qplv"),
+&"IDLE": SubResource("Animation_cct76"),
+&"JUMP": SubResource("Animation_qpjur"),
+&"RESET": SubResource("Animation_a1tvq"),
+&"RUN": SubResource("Animation_0vkve"),
+&"WALK": SubResource("Animation_lbnjl")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5f6e3"]
+size = Vector3(1, 2.8759766, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ia5uu"]
+size = Vector3(1, 5.11792, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qfc5r"]
+
+[node name="TutoMap" type="Node3D" unique_id=1572004141]
+script = ExtResource("1_5f6e3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1999848218]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=2010441629]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.614725, 1.8791153, 0)
+script = ExtResource("1_cct76")
+speedWalk = 4
+speedRun = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=239553337]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2444458, 0)
+shape = SubResource("CapsuleShape3D_a1tvq")
+debug_color = Color(0.99882644, 0, 0.11796094, 1)
+
+[node name="Camera3D" type="Camera3D" parent="Player" unique_id=998641691]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.048448205, 5.544727)
+
+[node name="Sprite3D" type="Sprite3D" parent="Player" unique_id=587410252]
+transform = Transform3D(0.34, 0, 0, 0, 0.34, 0, 0, 0, 0.171, -0.00011920929, -0.2377888, 0)
+texture = ExtResource("2_cct76")
+
+[node name="Velocidad" type="Label3D" parent="Player" unique_id=534645367]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7876339, 0)
+text = "hola buenas"
+
+[node name="stamina" type="Label3D" parent="Player" unique_id=838872926]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0025094748, 0.984421, 0)
+modulate = Color(0.41561958, 0.97295946, 0.15146229, 1)
+text = "12"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player" unique_id=1447506808]
+libraries/ = SubResource("AnimationLibrary_a1tvq")
+
+[node name="RayCast3D" type="RayCast3D" parent="Player" unique_id=1090493994]
+transform = Transform3D(1, 0, 0, 0, -0.0114009585, -1.0176225, 0, 0.3404495, -0.034078095, 0, 0, -0.35109228)
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=110650372]
+transform = Transform3D(32.267677, 0, 0, 0, 22.808594, 0, 0, 0, 1, 11.933319, 0.71524525, -1.8265166)
+texture = ExtResource("5_lbnjl")
+
+[node name="ForestMap" parent="." unique_id=444053104 instance=ExtResource("6_keqbc")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -2.933, 0, 0)
+
+[node name="Pueblo" type="Area3D" parent="." unique_id=1499283444]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.97302, -9.331551, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pueblo" unique_id=1345064643]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.37939453, 0)
+shape = SubResource("BoxShape3D_5f6e3")
+
+[node name="Base" type="Area3D" parent="." unique_id=267274928]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.905373, 2.3889036, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base" unique_id=2055414490]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1534424, 0)
+shape = SubResource("BoxShape3D_ia5uu")
+
+[node name="SpawnPoint" type="Area3D" parent="." unique_id=1414159881]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55.4926, -9.3051605, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnPoint" unique_id=433500556]
+transform = Transform3D(1, 0, 0, 0, 3.445375, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_qfc5r")
+debug_color = Color(0.04660496, 0.55314004, 0, 0.41960785)
+
+[node name="SpawnPoint2" type="Area3D" parent="." unique_id=1560856999]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.232716, 0.1323967, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SpawnPoint2" unique_id=1626988893]
+transform = Transform3D(1, 0, 0, 0, 3.445375, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_qfc5r")
+debug_color = Color(0.04660496, 0.55314004, 0, 0.41960785)
+
+[connection signal="body_entered" from="Pueblo" to="." method="_on_pueblo_body_entered"]
+[connection signal="body_entered" from="Base" to="." method="_on_base_body_entered"]
+[connection signal="body_entered" from="SpawnPoint" to="Player" method="_on_spawn_point_body"]
+[connection signal="body_entered" from="SpawnPoint2" to="Player" method="_on_spawn_point_body"]

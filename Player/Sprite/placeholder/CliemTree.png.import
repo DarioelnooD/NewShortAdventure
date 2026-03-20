@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://r8uf85vtgj61"
-path.s3tc="res://.godot/imported/male_hero_template-design.png-e78250113c575d079858092fc2a24eeb.s3tc.ctex"
+uid="uid://dcw4q0250rcrr"
+path.s3tc="res://.godot/imported/CliemTree.png-626db580d5ab93b8cd5f100945508cb8.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Player/Sprite/male_hero_template-design.png"
-dest_files=["res://.godot/imported/male_hero_template-design.png-e78250113c575d079858092fc2a24eeb.s3tc.ctex"]
+source_file="res://Player/Sprite/placeholder/CliemTree.png"
+dest_files=["res://.godot/imported/CliemTree.png-626db580d5ab93b8cd5f100945508cb8.s3tc.ctex"]
 
 [params]
 

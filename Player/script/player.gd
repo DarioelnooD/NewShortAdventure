@@ -13,6 +13,7 @@ enum STATE {
 }
 
 @onready var Climb: RayCast2D = $Sprite/RayCast2D
+@onready var f_rom: TileMapLayer = $"../Map/Back"
 
 var speed = 150.0
 var current_state: STATE
@@ -29,7 +30,8 @@ func _ready() -> void:
 	$AnimationPlayer.animation_finished.connect(_on_animation_finished)
 
 func _physics_process(delta: float) -> void:
-
+	detectar_arbol()
+	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
@@ -187,15 +189,23 @@ func CheckPoint(PositionFloor: Vector2):
 	$position.text = str(save)
 	if self.position.y > deadZone:
 		var res = 0
-		self.position = save[res]
-		if not is_on_floor():
-			res += 1
+		if save.size() > 0:
+			self.position = save[res]
+			if not is_on_floor():
+				res += 1
 	if is_on_floor():
 		if save.is_empty() or save[0] != PositionFloor:
 			save.push_front(PositionFloor)
 	if save.size() > 3:
 		save.pop_back()
 
+func detectar_arbol():
+	if f_rom:
+		var cell = f_rom.local_to_map(global_position)
+		var data = f_rom.get_cell_tile_data(cell)
+
+		if data and data.get_custom_data("type") == "Arbol":
+			print("Estoy sobre un árbol")
 
 func _on_animation_finished(anim_name):
 	if anim_name == "ATTACK":
