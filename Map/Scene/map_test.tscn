@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://i61uyl47tb5b" path="res://Map/Script/map_test.gd" id="1_fds0u"]
 [ext_resource type="Texture2D" uid="uid://b614nfdv1sh5p" path="res://Map/Sprite/Pueblo.png" id="1_g1ni8"]
 [ext_resource type="Texture2D" uid="uid://dv8ifpexxu628" path="res://Map/Sprite/SkyTemplate.webp" id="1_iowgq"]
-[ext_resource type="PackedScene" uid="uid://bmwegqp1kpymg" path="res://Player/scenes/Player.tscn" id="1_wi0av"]
 [ext_resource type="Texture2D" uid="uid://cw3fvqtixuc2x" path="res://Map/Sprite/WhatsApp Image 2026-03-10 at 9.59.01 PM.jpeg" id="2_fh5v5"]
+[ext_resource type="PackedScene" uid="uid://dkj47x8n1761e" path="res://Player/scenes/p_layer_cut_out.tscn" id="5_fds0u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iowgq"]
 texture = ExtResource("2_fh5v5")
@@ -171,10 +171,6 @@ offset_right = 789.09875
 offset_bottom = 412.31848
 color = Color(0.11372549, 0.1254902, 1, 0.13725491)
 
-[node name="Player" parent="." unique_id=87158687 instance=ExtResource("1_wi0av")]
-position = Vector2(-1292, -110)
-floor_max_angle = 1.3962634
-
 [node name="Node2D" type="Node2D" parent="." unique_id=1323578622]
 
 [node name="Back" type="TileMapLayer" parent="Node2D" unique_id=1695716004]
@@ -253,5 +249,10 @@ position = Vector2(4390, 631)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Viaje" unique_id=1099821086]
 position = Vector2(-1.5, 7.5)
 shape = SubResource("RectangleShape2D_iowgq")
+
+[node name="PLayerCutOut" parent="." unique_id=478286377 instance=ExtResource("5_fds0u")]
+position = Vector2(-1335, -15)
+floor_constant_speed = true
+floor_max_angle = 1.0471976
 
 [connection signal="body_entered" from="Viaje" to="." method="_on_viaje_body_entered"]

@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" uid="uid://lrrgym5t5wf3" path="res://Map/Script/forest.gd" id="1_jgwiv"]
 [ext_resource type="Texture2D" uid="uid://cw3fvqtixuc2x" path="res://Map/Sprite/WhatsApp Image 2026-03-10 at 9.59.01 PM.jpeg" id="1_kn6gv"]
-[ext_resource type="PackedScene" uid="uid://bmwegqp1kpymg" path="res://Player/scenes/Player.tscn" id="3_3go3m"]
+[ext_resource type="Texture2D" uid="uid://blme2fe6soubq" path="res://Imports/ArbolitoPlaceHolder.png" id="4_55eto"]
+[ext_resource type="PackedScene" uid="uid://dkj47x8n1761e" path="res://Player/scenes/p_layer_cut_out.tscn" id="4_sdm13"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jgwiv"]
 texture = ExtResource("1_kn6gv")
@@ -179,8 +180,20 @@ position = Vector2(2488, 368)
 position = Vector2(3, 99)
 shape = SubResource("RectangleShape2D_3go3m")
 
-[node name="Player" parent="." unique_id=87158687 instance=ExtResource("3_3go3m")]
-position = Vector2(343, 581)
+[node name="PLayerCutOut" parent="." unique_id=264839427 instance=ExtResource("4_sdm13")]
+position = Vector2(36, 529)
+floor_constant_speed = true
+floor_max_angle = 1.0471976
+
+[node name="Tree" type="Area2D" parent="." unique_id=1540879288]
+position = Vector2(1564, 437.00003)
+scale = Vector2(0.626183, 0.6983968)
+
+[node name="ArbolitoPlaceHolder" type="Sprite2D" parent="Tree" unique_id=1710872794]
+texture = ExtResource("4_55eto")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Tree" unique_id=416977538]
+polygon = PackedVector2Array(-1.5969238, 1.4318237, -35.133545, 28.637024, -57.49121, 51.54663, -63.87915, 65.86511, -54.297363, 91.63843, -44.715332, 143.18506, -35.133545, 204.75464, -156.5039, 204.75464, -145.32495, 187.57245, -137.34009, 148.91248, -130.95215, 114.548035, -132.54907, 78.75177, -129.35522, 40.091797, -121.37036, 37.22809, -114.98242, 45.819214, -91.02783, 31.500732, -46.312256, 5.727417, 1.5969238, -40.091858, 11.178711, -51.54663, 1.5969238, -61.56958, -12.775879, -73.024414, 43.11841, -61.56958, 36.73047, -44.38739, 17.56665, -20.045898)
 
 [connection signal="body_entered" from="Base" to="." method="_on_base_body_entered"]
 [connection signal="body_entered" from="Pueblo" to="." method="_on_pueblo_body_entered"]
