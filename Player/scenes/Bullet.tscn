@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://dycbl14hyfvbc"]
+
+[ext_resource type="Script" uid="uid://cdcguv8umbjyl" path="res://Player/Sprite/bullet.gd" id="1_lpn1l"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6wsyo"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_lpn1l"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lpn1l"]
+
+[node name="RigidBody2D" type="RigidBody2D" unique_id=2107441509]
+collision_layer = 2
+script = ExtResource("1_lpn1l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1157692842]
+scale = Vector2(0.22352764, 0.23572095)
+shape = SubResource("CircleShape2D_6wsyo")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=298841264]
+modulate = Color(0.24392405, 0.23298207, 0.21142292, 1)
+scale = Vector2(4.2377286, 4.5155125)
+mesh = SubResource("SphereMesh_lpn1l")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=2104146864]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1609196439]
+scale = Vector2(0.24608535, 0.25340202)
+shape = SubResource("CircleShape2D_lpn1l")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

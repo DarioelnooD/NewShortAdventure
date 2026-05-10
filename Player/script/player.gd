@@ -9,11 +9,13 @@ enum STATE {
 	WALK,
 	ATTACK,
 	CLIMB,
-	ROLL
+	ROLL,
+	SHOOT
 }
 
 @onready var Climb: RayCast2D = $CollisionShape2D/RayCast2D
 @onready var f_rom: TileMapLayer = $"../Map/Back"
+const BULLET = preload("uid://dycbl14hyfvbc")
 
 var speed = 150.0
 var topSpeed = 150.0
@@ -31,6 +33,7 @@ var TopClimb : float = 20.0
 var StaticClimb : float = 0.07
 var MoveClimb : float = 0.1
 var SaveClimb : float = 0.5
+var power : int = 0
 
 
 func _ready() -> void:
@@ -121,6 +124,7 @@ func MoveSet():
 func statemachine():
 	validation()
 	$Stamine.text = str(stamine)
+	$Power.text = str(power)
 	match current_state:
 		STATE.IDLE:
 			topSpeed = 90
@@ -140,6 +144,9 @@ func statemachine():
 
 			if velocity.y > 0:
 				current_state = STATE.FALL
+			
+			if Input.is_action_just_pressed("AIM"):
+				current_state = STATE.SHOOT
 		STATE.RUNNING:
 			topSpeed = 200
 			$AnimationPlayer.play("RUN")
@@ -219,6 +226,25 @@ func statemachine():
 		STATE.ROLL:
 			if $AnimationPlayer.current_animation != "ROLL":
 				$AnimationPlayer.play("ROLL")
+		STATE.SHOOT:
+			$AnimationPlayer.play("Shoot")
+			var mouse_pos = get_global_mouse_position()
+			$Body/stomach.look_at(mouse_pos)
+			if Input.is_action_just_pressed("AIM"):
+				current_state = STATE.IDLE
+			var shoot := false
+			if Input.is_action_pressed("SHOOT"):
+				shoot = true
+				if power < 1000:
+					power += 10
+			else:
+				var bullet = BULLET.instantiate()
+				var direction = (get_global_mouse_position() - global_position).normalized()
+				bullet.global_position = $Body/stomach/Chest/LeftArmTop/LeftArmBottom/Hand.global_position
+				bullet.apply_impulse(direction * power)
+				get_tree().current_scene.add_child(bullet)
+				power = 0
+				shoot = false
 
 func validation():
 	if current_state == STATE.IDLE:
@@ -237,6 +263,8 @@ func validation():
 		$Label.text = "CLIMB"
 	if current_state == STATE.ROLL:
 		$Label.text = "ROLL"
+	if current_state == STATE.SHOOT:
+		$Label.text = "SHOOT"
 
 func CheckPoint(PositionFloor: Vector2):
 	$position.text = str(save)

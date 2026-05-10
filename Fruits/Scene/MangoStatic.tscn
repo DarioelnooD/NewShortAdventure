@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://djnbnrh6864h"]
+
+[ext_resource type="Script" uid="uid://d3qgwkfvg8x76" path="res://Fruits/Script/manog.gd" id="1_e1h8g"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_fexpw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e1h8g"]
+
+[node name="MangoStatic" type="StaticBody2D" unique_id=1299835114]
+script = ExtResource("1_e1h8g")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=195524463]
+position = Vector2(1.1920929e-07, 2.2737368e-13)
+scale = Vector2(14.015875, 20.000004)
+mesh = SubResource("SphereMesh_fexpw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=459656046]
+shape = SubResource("CircleShape2D_e1h8g")
+debug_color = Color(0.9999997, 0.0013640736, 0.09838236, 0.41960785)
