@@ -1,17 +1,24 @@
+class_name StaticFruit
 extends RigidBody2D
 
-var _body
+@export var min_break_speed := 300.0
 
-func _process(delta: float) -> void:
-	if self.linear_velocity >= Vector2(0,500) and _body:
-		self.queue_free()
-	$Label.text = str(self.linear_velocity)
+var last_velocity := Vector2.ZERO
 
+func _ready():
+	contact_monitor = true
+	max_contacts_reported = 10
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body != CharacterBody3D:
-		_body = body
+func _process(delta):
+	$Label.text = str(linear_velocity)
 
-func _on_area_2d_body_exited(body: Node2D) -> void:
-	if body != CharacterBody3D:
-		_body = null
+func _physics_process(delta):
+	last_velocity = linear_velocity
+
+func _integrate_forces(state):
+	for i in range(state.get_contact_count()):
+		var collider = state.get_contact_collider_object(i)
+		if collider:
+			if collider.name == "FRom":
+				if abs(last_velocity.y) >= min_break_speed:
+					queue_free()

@@ -140,7 +140,7 @@ texture = ExtResource("2_fh5v5")
 15:2/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_iowgq"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 32768
 sources/0 = SubResource("TileSetAtlasSource_g1ni8")
 
 [sub_resource type="LabelSettings" id="LabelSettings_iowgq"]
@@ -154,6 +154,7 @@ size = Vector2(23, 161)
 script = ExtResource("1_fds0u")
 
 [node name="SkyTemplate" type="Sprite2D" parent="." unique_id=628814589]
+visible = false
 z_index = -100
 position = Vector2(1671.3754, 38.749977)
 scale = Vector2(14.502702, 9.080358)

@@ -7,6 +7,8 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_e1h8g"]
 
 [node name="MangoStatic" type="StaticBody2D" unique_id=1299835114]
+collision_layer = 4
+collision_mask = 7
 script = ExtResource("1_e1h8g")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=195524463]

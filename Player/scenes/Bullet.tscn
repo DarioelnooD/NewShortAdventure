@@ -10,6 +10,7 @@
 
 [node name="RigidBody2D" type="RigidBody2D" unique_id=2107441509]
 collision_layer = 2
+collision_mask = 32774
 script = ExtResource("1_lpn1l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1157692842]
@@ -23,6 +24,7 @@ mesh = SubResource("SphereMesh_lpn1l")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=2104146864]
 collision_layer = 2
+collision_mask = 32772
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1609196439]
 scale = Vector2(0.24608535, 0.25340202)
