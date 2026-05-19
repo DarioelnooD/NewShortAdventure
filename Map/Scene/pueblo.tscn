@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dfps858y8p86h" path="res://Map/Sprite/pueblo.gd" id="1_tn1cd"]
 [ext_resource type="Texture2D" uid="uid://cw3fvqtixuc2x" path="res://Map/Sprite/WhatsApp Image 2026-03-10 at 9.59.01 PM.jpeg" id="2_515e5"]
 [ext_resource type="PackedScene" uid="uid://dkj47x8n1761e" path="res://Player/scenes/p_layer_cut_out.tscn" id="4_515e5"]
+[ext_resource type="Script" uid="uid://cxyki80vkskan" path="res://Map/Script/tendero.gd" id="4_il1fd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jgwiv"]
 texture = ExtResource("2_515e5")
@@ -136,6 +137,8 @@ sources/0 = SubResource("TileSetAtlasSource_sdm13")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kn6gv"]
 size = Vector2(23, 161)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_tka3b"]
+
 [node name="Pueblo" type="Node2D" unique_id=16114700]
 script = ExtResource("1_tn1cd")
 
@@ -163,5 +166,113 @@ shape = SubResource("RectangleShape2D_kn6gv")
 position = Vector2(28, 529)
 floor_constant_speed = true
 floor_max_angle = 1.0471976
+
+[node name="Tendero" type="Area2D" parent="." unique_id=1581000029]
+position = Vector2(186, 515)
+scale = Vector2(0.30801448, 0.71442115)
+collision_layer = 8
+script = ExtResource("4_il1fd")
+
+[node name="Tendero" type="ColorRect" parent="Tendero" unique_id=861241000]
+offset_left = -6.4932003
+offset_right = 33.506798
+offset_bottom = 40.0
+scale = Vector2(0.9908424, 1.022531)
+color = Color(0.38039216, 1, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tendero" unique_id=998464218]
+position = Vector2(12.9864025, 16.796816)
+scale = Vector2(3.4484158, 1.9022644)
+shape = SubResource("CircleShape2D_tka3b")
+
+[node name="Control" type="Control" parent="Tendero" unique_id=1845190379]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -230.50864
+offset_top = -74.18593
+offset_right = -190.50864
+offset_bottom = -34.18593
+scale = Vector2(4.6678247, 2.3523242)
+
+[node name="ColorRect" type="ColorRect" parent="Tendero/Control" unique_id=1680464242]
+modulate = Color(0.96862745, 1, 0.9411765, 0.68235296)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.9803693, 0.9691927)
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Tendero/Control" unique_id=1288153338]
+layout_mode = 0
+offset_left = 2.7821121
+offset_top = 2.380188
+offset_right = 151.7821
+offset_bottom = 66.38019
+scale = Vector2(0.23221117, 0.21410234)
+
+[node name="HBoxContainer1" type="HBoxContainer" parent="Tendero/Control/VBoxContainer2" unique_id=464529080]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="ColorRect" type="ColorRect" parent="Tendero/Control/VBoxContainer2/HBoxContainer1" unique_id=223444560]
+clip_contents = true
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(1, 1, 0, 0)
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Tendero/Control/VBoxContainer2" unique_id=643258559]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Tendero/Control/VBoxContainer2/HBoxContainer2" unique_id=31242804]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(1, 1, 0, 0.23137255)
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Tendero/Control/VBoxContainer2" unique_id=235130587]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="ColorRect" type="ColorRect" parent="Tendero/Control/VBoxContainer2/HBoxContainer3" unique_id=18086097]
+clip_contents = true
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(1, 1, 0, 0)
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Tendero/Control/VBoxContainer2" unique_id=1509288927]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Tendero/Control/VBoxContainer2/HBoxContainer4" unique_id=1180280698]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(1, 1, 0, 0.23137255)
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Tendero/Control/VBoxContainer2" unique_id=1451651053]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="ColorRect" type="ColorRect" parent="Tendero/Control/VBoxContainer2/HBoxContainer5" unique_id=1468655927]
+clip_contents = true
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+color = Color(1, 1, 0, 0)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tendero/Control" unique_id=1374463689]
+layout_mode = 0
+offset_left = 2.7821152
+offset_top = 2.3801908
+offset_right = 151.78212
+offset_bottom = 52.38019
+scale = Vector2(0.23221117, 0.21410234)
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1773123108]
+offset_left = 157.0
+offset_top = 532.0
+offset_right = 197.0
+offset_bottom = 572.0
+scale = Vector2(1.6874163, 0.32394737)
 
 [connection signal="body_entered" from="forest" to="." method="_on_forest_body_entered"]

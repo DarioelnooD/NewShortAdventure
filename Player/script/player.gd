@@ -25,7 +25,6 @@ var deadZone = 1000
 var coyote_time := 0.15
 var coyote_timer := 0.0
 var fruit = null
-var MangoBackPack := 0.0
 
 var climb = false
 var oneShot = false
@@ -37,11 +36,14 @@ var MoveClimb : float = 0.1
 var SaveClimb : float = 0.5
 var shoot := false
 var power := 0.0
+var _body
+var menu: bool = false
 
 
 func _ready() -> void:
 	$Camera2D.zoom = Vector2(2,2)
 	stamine = TopClimb
+	
 	#$Camera2D.position = Vector2(0,0)
 	current_state = STATE.IDLE
 	$AnimationPlayer.animation_finished.connect(_on_animation_finished)
@@ -49,19 +51,10 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	detectar_arbol()
 	$base/ColorRect.size.y = stamine
-	
-	if climb == true:
-		speed = topSpeed / 3
-	else:
-		speed = topSpeed
-	
-	if stamine <= 0.05:
-		climb = false
-		oneShot = false
-	
+
+
 	if not is_on_floor() and climb == false:
 		velocity += get_gravity() * delta
-
 
 	if is_on_floor():
 		coyote_timer = coyote_time
@@ -70,13 +63,15 @@ func _physics_process(delta: float) -> void:
 			stamine += SaveClimb
 	else:
 		coyote_timer -= delta
-
-	MoveSet()
+	if !menu:
+		MoveSet()
 	CheckPoint(self.position)
+	#Inventory()
 	statemachine()
 	move_and_slide()
 
 func _process(delta: float) -> void:
+	$Saldo.text = str("$",Global.saldo)
 	delta = delta + 0
 	if $Body.scale.x < 0:
 		$CollisionShape2D/RayCast2D.position.x = -3
@@ -95,9 +90,7 @@ func MoveSet():
 		velocity.y = JUMP_VELOCITY
 		coyote_timer = 0
 
-	if Input.is_action_just_pressed("ui_accept") and fruit:
-		MangoBackPack += 1
-		fruit.queue_free()
+
 	
 	var left := Input.is_action_pressed("ui_left")
 	var right := Input.is_action_pressed("ui_right")
@@ -115,7 +108,15 @@ func MoveSet():
 		else:
 			direction = -1
 		#direction = velocity.x > 0: ? 1 : -1 # mantiene la dirección actual
-
+	if climb == true:
+		speed = topSpeed / 3
+	else:
+		speed = topSpeed
+	
+	if stamine <= 0.05:
+		climb = false
+		oneShot = false
+	
 	# Flip del sprite
 	if direction < 0:
 		$Body.scale.x = -0.029
@@ -132,7 +133,6 @@ func statemachine():
 	validation()
 	$Stamine.text = str(stamine)
 	$Power.text = str(power)
-	$Mangos.text = str("mangos: ",MangoBackPack)
 	match current_state:
 		STATE.IDLE:
 			topSpeed = 90
@@ -221,8 +221,27 @@ func statemachine():
 				current_state = STATE.ATTACK
 		STATE.ATTACK:
 			velocity.x = 0
-			if $AnimationPlayer.current_animation != "ATTACK":
-				$AnimationPlayer.play("ATTACK")
+			if _body and _body.has_method("menu"):
+				_body.menu()
+				menu = true
+			elif Input.is_action_just_pressed("ATTACK"):
+				menu = false
+				print("move")
+				current_state = STATE.IDLE
+				
+			if menu:
+				if Input.is_action_just_pressed("ui_down"):
+					_body.selec1()
+				if Input.is_action_just_pressed("ui_up"):
+					_body.selec_1()
+				
+				if Input.is_action_just_pressed("ATTACK"):
+					menu = false
+					current_state = STATE.IDLE
+					
+				#_physics_process(true)
+			#if $AnimationPlayer.current_animation != "ATTACK":
+				#$AnimationPlayer.play("ATTACK")
 		STATE.CLIMB:
 			velocity = Vector2.ZERO
 			JUMP_VELOCITY = -350
@@ -307,6 +326,8 @@ func _on_animation_finished(anim_name):
 	if anim_name == "ROLL":
 		current_state = STATE.WALK
 
+
+
 func _on_collect_body_entered(body: Node2D) -> void:
 	if body is Fruit or body is StaticFruit:
 		fruit = body
@@ -316,3 +337,13 @@ func _on_collect_body_exited(body: Node2D) -> void:
 	if body is Fruit or body is StaticFruit:
 		fruit = null
 		print("no fuit")
+
+func _on_collect_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+	if area is Area2D:
+		_body = area
+		print("body on: ", _body)
+
+func _on_collect_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
+	if area is Area2D:
+		_body = null
+		print("body off: ", _body)

@@ -11,13 +11,15 @@ config_version=5
 [application]
 
 config/name="NewShortAdventure"
+config/version="0.0.1"
 run/main_scene="uid://bxcbd744bhkpe"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://brewge6lsnji8"
 
 [autoload]
 
 Global="*uid://dyoo4qmh2s6qf"
+DataManager="*uid://dnq3mh5uytjrg"
 
 [file_customization]
 
@@ -68,6 +70,7 @@ AIM={
 2d_physics/layer_1="player"
 2d_physics/layer_2="Bullet"
 2d_physics/layer_3="Fruit"
+2d_physics/layer_4="Npc"
 2d_physics/layer_16="Floor"
 
 [physics]

@@ -3786,21 +3786,22 @@ scale = Vector2(0.4159375, 0.41453552)
 text = "100"
 
 [node name="collect" type="Area2D" parent="." unique_id=1954940788]
-visible = false
-collision_mask = 4
+collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="collect" unique_id=850279404]
 position = Vector2(-1, -1)
 shape = SubResource("RectangleShape2D_iwrfg")
 debug_color = Color(0.8352941, 0, 0.85882354, 0.078431375)
 
-[node name="Mangos" type="Label" parent="." unique_id=1748213377]
-offset_left = -41.0
-offset_top = -30.000004
-offset_right = 39.0
-offset_bottom = -7.000004
+[node name="Saldo" type="Label" parent="." unique_id=1748213377]
+offset_left = -116.0
+offset_top = -99.0
+offset_right = -36.0
+offset_bottom = -76.0
 scale = Vector2(0.29935884, 0.377156)
 text = "12mangos"
 
+[connection signal="area_shape_entered" from="collect" to="." method="_on_collect_area_shape_entered"]
+[connection signal="area_shape_exited" from="collect" to="." method="_on_collect_area_shape_exited"]
 [connection signal="body_entered" from="collect" to="." method="_on_collect_body_entered"]
 [connection signal="body_exited" from="collect" to="." method="_on_collect_body_exited"]
