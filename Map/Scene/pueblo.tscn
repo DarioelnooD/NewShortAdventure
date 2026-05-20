@@ -185,29 +185,28 @@ position = Vector2(12.9864025, 16.796816)
 scale = Vector2(3.4484158, 1.9022644)
 shape = SubResource("CircleShape2D_tka3b")
 
-[node name="Control" type="Control" parent="Tendero" unique_id=1845190379]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -230.50864
-offset_top = -74.18593
-offset_right = -190.50864
-offset_bottom = -34.18593
-scale = Vector2(4.6678247, 2.3523242)
+[node name="Control" type="PanelContainer" parent="Tendero" unique_id=499335176]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -87.658264
+offset_top = -146.97212
+offset_right = -57.658264
+offset_bottom = 19.027878
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.85, 0.85)
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="ColorRect" type="ColorRect" parent="Tendero/Control" unique_id=1680464242]
 modulate = Color(0.96862745, 1, 0.9411765, 0.68235296)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(0.9803693, 0.9691927)
+layout_mode = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Tendero/Control" unique_id=1288153338]
-layout_mode = 0
-offset_left = 2.7821121
-offset_top = 2.380188
-offset_right = 151.7821
-offset_bottom = 66.38019
-scale = Vector2(0.23221117, 0.21410234)
+layout_mode = 2
 
 [node name="HBoxContainer1" type="HBoxContainer" parent="Tendero/Control/VBoxContainer2" unique_id=464529080]
 layout_mode = 2
@@ -261,12 +260,9 @@ size_flags_horizontal = 3
 color = Color(1, 1, 0, 0)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Tendero/Control" unique_id=1374463689]
-layout_mode = 0
-offset_left = 2.7821152
-offset_top = 2.3801908
-offset_right = 151.78212
-offset_bottom = 52.38019
-scale = Vector2(0.23221117, 0.21410234)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1773123108]
 offset_left = 157.0

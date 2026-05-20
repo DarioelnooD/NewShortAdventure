@@ -43,15 +43,12 @@ var menu: bool = false
 func _ready() -> void:
 	$Camera2D.zoom = Vector2(2,2)
 	stamine = TopClimb
-	
 	#$Camera2D.position = Vector2(0,0)
 	current_state = STATE.IDLE
 	$AnimationPlayer.animation_finished.connect(_on_animation_finished)
 
 func _physics_process(delta: float) -> void:
-	detectar_arbol()
 	$base/ColorRect.size.y = stamine
-
 
 	if not is_on_floor() and climb == false:
 		velocity += get_gravity() * delta
@@ -65,12 +62,15 @@ func _physics_process(delta: float) -> void:
 		coyote_timer -= delta
 	if !menu:
 		MoveSet()
+		detectar_arbol()
 	CheckPoint(self.position)
 	#Inventory()
 	statemachine()
 	move_and_slide()
 
 func _process(delta: float) -> void:
+	if get_node(".").get_parent().name == "Pueblo":
+		$Camera2D.zoom = $Camera2D.zoom.lerp(Vector2(3.5, 3.5), 3.5 * delta)
 	$Saldo.text = str("$",Global.saldo)
 	delta = delta + 0
 	if $Body.scale.x < 0:
@@ -89,11 +89,9 @@ func MoveSet():
 		climb = false
 		velocity.y = JUMP_VELOCITY
 		coyote_timer = 0
-
-
 	
-	var left := Input.is_action_pressed("ui_left")
-	var right := Input.is_action_pressed("ui_right")
+	var left := Input.is_action_pressed("Left")
+	var right := Input.is_action_pressed("Right")
 
 	var direction := 0
 
@@ -137,7 +135,9 @@ func statemachine():
 		STATE.IDLE:
 			topSpeed = 90
 			$AnimationPlayer.play("IDLE")
-
+			
+			$Power.visible = false
+			
 			if velocity.x != 0:
 				current_state = STATE.WALK
 
@@ -230,9 +230,9 @@ func statemachine():
 				current_state = STATE.IDLE
 				
 			if menu:
-				if Input.is_action_just_pressed("ui_down"):
+				if Input.is_action_just_pressed("Down"):
 					_body.selec1()
-				if Input.is_action_just_pressed("ui_up"):
+				if Input.is_action_just_pressed("Up"):
 					_body.selec_1()
 				
 				if Input.is_action_just_pressed("ATTACK"):
@@ -245,8 +245,12 @@ func statemachine():
 		STATE.CLIMB:
 			velocity = Vector2.ZERO
 			JUMP_VELOCITY = -350
-			
+			stamine += -StaticClimb
+			#climb = true
 			$AnimationPlayer.play("CLIMB")
+			if stamine < 0:
+				current_state = STATE.IDLE
+				#climb = false
 			if Input.is_action_just_pressed("JUMP"):
 				velocity.y = JUMP_VELOCITY;
 				current_state = STATE.JUMP
@@ -254,6 +258,7 @@ func statemachine():
 			if $AnimationPlayer.current_animation != "ROLL":
 				$AnimationPlayer.play("ROLL")
 		STATE.SHOOT:
+			$Power.visible = true
 			$AnimationPlayer.play("Shoot")
 			var mouse_pos = get_global_mouse_position()
 			$Body/stomach.look_at(mouse_pos)
@@ -309,16 +314,17 @@ func CheckPoint(PositionFloor: Vector2):
 		save.pop_back()
 
 func detectar_arbol():
-	if Input.is_action_pressed("ui_up") and stamine > 0:
-		if oneShot == false:
+	if _body and _body.name == "Tree":
+		if Input.is_action_pressed("Up") and stamine > 0:
+			if oneShot == false:
+				velocity.y = 0
+				oneShot = true
+			climb = true
+			velocity.y += -1
+			stamine -= MoveClimb
+		elif climb and stamine:
 			velocity.y = 0
-			oneShot = true
-		climb = true
-		velocity.y += -1
-		stamine -= MoveClimb
-	elif climb and stamine:
-		velocity.y = 0
-		stamine += -StaticClimb
+			stamine += -StaticClimb
 
 func _on_animation_finished(anim_name):
 	if anim_name == "ATTACK":

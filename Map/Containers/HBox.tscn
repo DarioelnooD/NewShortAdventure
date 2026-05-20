@@ -11,6 +11,11 @@ grow_vertical = 2
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="." unique_id=869705354]
+[node name="Name" type="Label" parent="." unique_id=869705354]
 layout_mode = 2
 text = "hola buenos dias "
+
+[node name="value" type="Label" parent="." unique_id=707037672]
+modulate = Color(0.21568628, 0.9490196, 0, 1)
+layout_mode = 2
+text = "10500"

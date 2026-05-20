@@ -205,6 +205,7 @@ floor_max_angle = 1.0471976
 [node name="Tree" type="Area2D" parent="." unique_id=1540879288]
 position = Vector2(1564, 437.00003)
 scale = Vector2(0.626183, 0.6983968)
+collision_layer = 16
 
 [node name="ArbolitoPlaceHolder" type="Sprite2D" parent="Tree" unique_id=1710872794]
 texture = ExtResource("4_55eto")

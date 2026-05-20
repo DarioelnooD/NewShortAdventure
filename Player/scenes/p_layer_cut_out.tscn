@@ -3714,18 +3714,23 @@ texture = ExtResource("2_iwrfg")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=307361517]
 position = Vector2(-1, -37)
 scale = Vector2(31.294395, -92.90194)
-zoom = Vector2(4.67, 4.67)
+zoom = Vector2(4, 4)
 
 [node name="Label" type="Label" parent="." unique_id=1889988959]
-offset_left = -6.0
-offset_top = -40.0
-offset_right = 4.0
-offset_bottom = -17.0
-text = "0"
+offset_left = -9.0
+offset_top = -26.0
+offset_right = 32.0
+offset_bottom = -3.0
+scale = Vector2(0.39795974, 0.3380715)
+text = "Jump"
 
 [node name="Stamine" type="Label" parent="." unique_id=255785995]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = -26.0
+offset_top = -2.0
+offset_right = 14.0
+offset_bottom = 21.0
+scale = Vector2(0.27039582, 0.31445608)
+text = "20.5"
 
 [node name="position" type="Label" parent="." unique_id=1468254250]
 visible = false
@@ -3736,7 +3741,6 @@ offset_bottom = -9.0
 text = "1234"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=29832373]
-visible = false
 z_index = 1
 position = Vector2(-1, 0)
 shape = SubResource("CapsuleShape2D_nr32f")
@@ -3745,13 +3749,14 @@ shape = SubResource("CapsuleShape2D_nr32f")
 position = Vector2(3, -19)
 rotation = -1.5707964
 scale = Vector2(1, 0.31999964)
-target_position = Vector2(0, 20)
+target_position = Vector2(0, 21.875025)
 hit_from_inside = true
 
 [node name="Verificar" type="RayCast2D" parent="CollisionShape2D" unique_id=1368145505]
 position = Vector2(2, -27)
 rotation = -1.5707964
 scale = Vector2(1, 0.31999964)
+exclude_parent = false
 target_position = Vector2(0, 25.000029)
 hit_from_inside = true
 
@@ -3760,7 +3765,6 @@ root_node = NodePath("../Body")
 libraries/ = SubResource("AnimationLibrary_g7o8v")
 
 [node name="base" type="ColorRect" parent="." unique_id=1251842710]
-visible = false
 offset_left = -10.0
 offset_top = -9.0
 offset_right = 11.182571
@@ -3778,6 +3782,7 @@ scale = Vector2(0.8800726, 0.94980067)
 color = Color(0.09019608, 1, 0.48235294, 1)
 
 [node name="Power" type="Label" parent="." unique_id=558132703]
+visible = false
 offset_left = 13.0
 offset_top = -16.0
 offset_right = 53.0
@@ -3786,7 +3791,7 @@ scale = Vector2(0.4159375, 0.41453552)
 text = "100"
 
 [node name="collect" type="Area2D" parent="." unique_id=1954940788]
-collision_mask = 12
+collision_mask = 28
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="collect" unique_id=850279404]
 position = Vector2(-1, -1)
