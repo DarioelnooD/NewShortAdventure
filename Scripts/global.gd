@@ -1,5 +1,7 @@
 extends Node
 
+const DATA_PLAYER = "res://Scripts/DataPlayer.json"
+
 var Inicio := false
 
 var LastScene: PackedScene;
@@ -12,12 +14,40 @@ func LastPosition(position: Vector2 = Vector2(-1335,-15)):
 	print(savePosition)
 	return savePosition
 
+func GetLastPositionInDoor(name = ''):
+	if FileAccess.file_exists(DATA_PLAYER):
+		var file = FileAccess.open(DATA_PLAYER, FileAccess.READ)
+		var content = file.get_as_text()
+		
+		var data = JSON.parse_string(content)
+		if name != '':
+			if data.has("Position"):
+				for item in data["Position"]:
+					if item["name"] == name:
+						return item
+		else:
+			return data
 
-func Inventory(name: String = '', cantidad: int = 0):
-	var sal: int = 0
-	var sugar: int = 0
-	var Mangos := 0.0
-	
-	#if Input.is_action_just_pressed("ui_accept") and fruit:
-		#Mangos += 1
-		#fruit.queue_free()
+
+func PutLastPositionInDoor(name = "", x = 0, y = 0):
+	var data = GetLastPositionInDoor()
+	if name != "" and x != 0 and y != 0:
+		if !data.has("Position"):
+			data["Position"] = []
+		var exist = false
+		for i in range(data["Position"].size()):
+			if data["Position"][i]["name"] == name:
+				data["Position"][i]["x"] = x
+				data["Position"][i]["y"] = y
+				exist = true
+				break
+		# SI NO EXISTE LO CREA
+		if !exist:
+			data["Position"].append({
+				"name": name,
+				"x": x,
+				"y": y
+			})
+	var file_write = FileAccess.open(DATA_PLAYER, FileAccess.WRITE)
+	file_write.store_string(JSON.stringify(data))
+	print(data)

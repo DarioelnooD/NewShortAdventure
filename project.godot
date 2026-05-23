@@ -30,6 +30,10 @@ folder_colors={
 "res://Player/": "red"
 }
 
+[filesystem]
+
+import/blender/enabled=false
+
 [input]
 
 RUN={

@@ -43,6 +43,7 @@ var menu: bool = false
 func _ready() -> void:
 	$Camera2D.zoom = Vector2(2,2)
 	stamine = TopClimb
+	#Global.GetLastPositionInDoor().position
 	#$Camera2D.position = Vector2(0,0)
 	current_state = STATE.IDLE
 	$AnimationPlayer.animation_finished.connect(_on_animation_finished)
