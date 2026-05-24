@@ -43,7 +43,11 @@ var menu: bool = false
 func _ready() -> void:
 	$Camera2D.zoom = Vector2(2,2)
 	stamine = TopClimb
-	#Global.GetLastPositionInDoor().position
+	var target_scene = Global.lastPositionCheck()
+	if get_tree().current_scene.scene_file_path != target_scene:
+		get_tree().change_scene_to_file(target_scene)
+	print(Global.lastPositionCheck())
+	Global.lastPositionCheck()
 	#$Camera2D.position = Vector2(0,0)
 	current_state = STATE.IDLE
 	$AnimationPlayer.animation_finished.connect(_on_animation_finished)
@@ -308,7 +312,7 @@ func CheckPoint(PositionFloor: Vector2):
 			self.position = save[res]
 			if not is_on_floor():
 				res += 1
-	if is_on_floor():
+	if is_on_floor() and $SafeFloor/right.is_colliding() and $SafeFloor/left.is_colliding():
 		if save.is_empty() or save[0] != PositionFloor:
 			save.push_front(PositionFloor)
 	if save.size() > 3:

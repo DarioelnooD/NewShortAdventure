@@ -3806,6 +3806,20 @@ offset_bottom = -76.0
 scale = Vector2(0.29935884, 0.377156)
 text = "12mangos"
 
+[node name="SafeFloor" type="Node2D" parent="." unique_id=98124163]
+
+[node name="right" type="RayCast2D" parent="SafeFloor" unique_id=188196391]
+position = Vector2(5, 16)
+target_position = Vector2(0, 11)
+collision_mask = 32768
+hit_from_inside = true
+
+[node name="left" type="RayCast2D" parent="SafeFloor" unique_id=209125026]
+position = Vector2(-7, 16)
+target_position = Vector2(0, 11)
+collision_mask = 32768
+hit_from_inside = true
+
 [connection signal="area_shape_entered" from="collect" to="." method="_on_collect_area_shape_entered"]
 [connection signal="area_shape_exited" from="collect" to="." method="_on_collect_area_shape_exited"]
 [connection signal="body_entered" from="collect" to="." method="_on_collect_body_entered"]

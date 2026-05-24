@@ -4,6 +4,7 @@ var _Body: CharacterBody2D
 
 
 func _ready() -> void:
+	Global.SaveCurrentScene()  
 	if $PLayerCutOut:
 		_Body = $PLayerCutOut
 	else :

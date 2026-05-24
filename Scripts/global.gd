@@ -9,10 +9,10 @@ var savePosition : Vector2
 var saldo: float = 100
 #var _bodyPosition: Vector3 = Vector3.ZERO
 
-func LastPosition(position: Vector2 = Vector2(-1335,-15)):
-	savePosition = position;
-	print(savePosition)
-	return savePosition
+#func LastPosition(position: Vector2 = Vector2(-1335,-15)):
+	#savePosition = position;
+	#print(savePosition)
+	#return savePosition
 
 func GetLastPositionInDoor(name = ''):
 	if FileAccess.file_exists(DATA_PLAYER):
@@ -51,3 +51,18 @@ func PutLastPositionInDoor(name = "", x = 0, y = 0):
 	var file_write = FileAccess.open(DATA_PLAYER, FileAccess.WRITE)
 	file_write.store_string(JSON.stringify(data))
 	print(data)
+
+func lastPositionCheck():
+	var data = GetLastPositionInDoor()
+	if data["LastScene"]:
+		return data["LastScene"]
+	else:
+		return get_tree().current_scene.scene_file_path
+
+func SaveCurrentScene():
+	var current_path = get_tree().current_scene.scene_file_path
+	var data = GetLastPositionInDoor()
+	data["LastScene"] = current_path
+	var file = FileAccess.open(DATA_PLAYER, FileAccess.WRITE)
+	file.store_string(JSON.stringify(data))
+	file.close()
