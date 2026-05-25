@@ -52,17 +52,51 @@ func PutLastPositionInDoor(name = "", x = 0, y = 0):
 	file_write.store_string(JSON.stringify(data))
 	print(data)
 
-func lastPositionCheck():
+#"Inventary":[
+		#{
+			#"Name":"Mango",
+			#"Cantidad":0,
+			#"Estado":"fresco",
+			#"Calidad":"Hierro",
+			#"Slot":"0"
+		#}
+func SaveInventory(Name = "", Cantidad = 0, Estado = "", Calidad = "",Slot = 0):
 	var data = GetLastPositionInDoor()
-	if data["LastScene"]:
-		return data["LastScene"]
-	else:
-		return get_tree().current_scene.scene_file_path
+	if Name != "" and Cantidad != 0 and Slot != 0:
+		#if !data.has("Inventary"):
+			#data["Inventary"] = []
+		var exist = false
+		for i in range(data["Inventary"].size()):
+			if data["Inventary"][i]["Name"] == Name:
+				data["Inventary"][i]["Cantidad"] = Cantidad
+				data["Inventary"][i]["Estado"] = Estado
+				data["Inventary"][i]["Calidad"] = Calidad
+				data["Inventary"][i]["Slot"] = Slot
+				exist = true
+				break
+		if !exist:
+			data["Inventary"].append({
+				"Name": Name,
+				"Cantidad": Cantidad,
+				"Estado": Estado,
+				"Calidad": Calidad,
+				"Slot": Slot
+			})
+	var file_write = FileAccess.open(DATA_PLAYER, FileAccess.WRITE)
+	file_write.store_string(JSON.stringify(data))
+	print(data)
 
-func SaveCurrentScene():
-	var current_path = get_tree().current_scene.scene_file_path
-	var data = GetLastPositionInDoor()
-	data["LastScene"] = current_path
-	var file = FileAccess.open(DATA_PLAYER, FileAccess.WRITE)
-	file.store_string(JSON.stringify(data))
-	file.close()
+#func lastPositionCheck():
+	#var data = GetLastPositionInDoor()
+	#if data["LastScene"]:
+		#return data["LastScene"]
+	#else:
+		#return get_tree().current_scene.scene_file_path
+
+#func SaveCurrentScene():
+	#var current_path = get_tree().current_scene.scene_file_path
+	#var data = GetLastPositionInDoor()
+	#data["LastScene"] = current_path
+	#var file = FileAccess.open(DATA_PLAYER, FileAccess.WRITE)
+	#file.store_string(JSON.stringify(data))
+	#file.close()

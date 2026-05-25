@@ -43,12 +43,11 @@ var menu: bool = false
 func _ready() -> void:
 	$Camera2D.zoom = Vector2(2,2)
 	stamine = TopClimb
-	var target_scene = Global.lastPositionCheck()
-	if get_tree().current_scene.scene_file_path != target_scene:
-		get_tree().change_scene_to_file(target_scene)
-	print(Global.lastPositionCheck())
-	Global.lastPositionCheck()
-	#$Camera2D.position = Vector2(0,0)
+	#var target_scene = Global.lastPositionCheck()
+	#if get_tree().current_scene.scene_file_path != target_scene:
+		#get_tree().change_scene_to_file(target_scene)
+	#print(Global.lastPositionCheck())
+	#Global.lastPositionCheck()
 	current_state = STATE.IDLE
 	$AnimationPlayer.animation_finished.connect(_on_animation_finished)
 
@@ -233,7 +232,10 @@ func statemachine():
 				menu = false
 				print("move")
 				current_state = STATE.IDLE
-				
+			elif fruit:
+				Global.SaveInventory(fruit.name,0,'','',0)
+				print("guardado")
+				fruit.queue_free()
 			if menu:
 				if Input.is_action_just_pressed("Down"):
 					_body.selec1()
