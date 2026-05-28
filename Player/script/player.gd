@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var JUMP_VELOCITY = -250.0
+var jump_velocity = -250.0
 enum STATE {
 	IDLE,
 	RUNNING,
@@ -13,27 +13,27 @@ enum STATE {
 	SHOOT
 }
 
-@onready var Climb: RayCast2D = $CollisionShape2D/RayCast2D
+@onready var ray_climb: RayCast2D = $CollisionShape2D/RayCast2D
 @onready var f_rom: TileMapLayer = $"../Map/Back"
 const BULLET = preload("uid://dycbl14hyfvbc")
 
 var speed = 150.0
-var topSpeed = 150.0
+var top_speed = 150.0
 var current_state: STATE
 var save: Array = []
-var deadZone = 1000
+var dead_zone = 1000
 var coyote_time := 0.15
 var coyote_timer := 0.0
 var fruit = null
 
 var climb = false
-var oneShot = false
+var one_shot = false
 
 var stamine : float = 50.0
-var TopClimb : float = 20.0
-var StaticClimb : float = 0.07
-var MoveClimb : float = 0.1
-var SaveClimb : float = 0.5
+var top_climb : float = 20.0
+var stattic_climb : float = 0.07
+var move_climb : float = 0.1
+var save_climb : float = 0.5
 var shoot := false
 var power := 0.0
 var _body
@@ -49,12 +49,7 @@ func _ready():
 	$Book.visible = true
 	$Book.position = Vector2(-1, 494.0)
 	$Camera2D.zoom = Vector2(2,2)
-	stamine = TopClimb
-	#var target_scene = Global.lastPositionCheck()
-	#if get_tree().current_scene.scene_file_path != target_scene:
-		#get_tree().change_scene_to_file(target_scene)
-	#print(Global.lastPositionCheck())
-	#Global.lastPositionCheck()
+	stamine = top_climb
 	current_state = STATE.IDLE
 	$AnimationPlayer.animation_finished.connect(_on_animation_finished)
 
@@ -66,16 +61,16 @@ func _physics_process(delta: float) -> void:
 
 	if is_on_floor():
 		coyote_timer = coyote_time
-		oneShot = false
-		if stamine <= TopClimb:
-			stamine += SaveClimb
+		one_shot = false
+		if stamine <= top_climb:
+			stamine += save_climb
 	else:
 		coyote_timer -= delta
 	if !menu:
-		MoveSet()
+		move_set()
 		detectar_arbol()
-	CheckPoint(self.position)
-	Inventory(delta)
+	check_point(self.position)
+	inventory(delta)
 	statemachine()
 	move_and_slide()
 
@@ -99,10 +94,11 @@ func _process(delta: float) -> void:
 		target_book_position,
 		8.0 * delta
 	)
-func MoveSet():
+
+func move_set():
 	if Input.is_action_just_pressed("JUMP") and coyote_timer > 0 or Input.is_action_just_pressed("JUMP") and climb:
 		climb = false
-		velocity.y = JUMP_VELOCITY
+		velocity.y = jump_velocity
 		coyote_timer = 0
 	
 	var left := Input.is_action_pressed("Left")
@@ -122,13 +118,13 @@ func MoveSet():
 			direction = -1
 		#direction = velocity.x > 0: ? 1 : -1 # mantiene la dirección actual
 	if climb == true:
-		speed = topSpeed / 3
+		speed = top_speed / 3
 	else:
-		speed = topSpeed
+		speed = top_speed
 	
 	if stamine <= 0.05:
 		climb = false
-		oneShot = false
+		one_shot = false
 	
 	# Flip del sprite
 	if direction < 0:
@@ -136,7 +132,6 @@ func MoveSet():
 	elif direction > 0:
 		$Body.scale.x = 0.029
 
-# Movimiento
 	if direction != 0:
 		velocity.x = direction * speed
 	else:
@@ -148,7 +143,7 @@ func statemachine():
 	$Power.text = str(power)
 	match current_state:
 		STATE.IDLE:
-			topSpeed = 90
+			top_speed = 90
 			$AnimationPlayer.play("IDLE")
 			
 			$Power.visible = false
@@ -171,7 +166,7 @@ func statemachine():
 			if Input.is_action_just_pressed("AIM"):
 				current_state = STATE.SHOOT
 		STATE.RUNNING:
-			topSpeed = 200
+			top_speed = 200
 			$AnimationPlayer.play("RUN")
 
 			if !Input.is_action_pressed("RUN"):
@@ -193,10 +188,10 @@ func statemachine():
 				current_state = STATE.ATTACK
 		STATE.FALL:
 			$AnimationPlayer.play("JUMP")
-			JUMP_VELOCITY = -250
+			jump_velocity = -250
 			
 			# DETECCION DE BORDE
-			if Climb.is_colliding() and Input.is_action_pressed("JUMP") and !$CollisionShape2D/Verificar.is_colliding():
+			if ray_climb.is_colliding() and Input.is_action_pressed("JUMP") and !$CollisionShape2D/Verificar.is_colliding():
 				current_state = STATE.CLIMB
 
 			if is_on_floor() and velocity.x == 0:
@@ -214,7 +209,7 @@ func statemachine():
 			if velocity.y > 0:
 				current_state = STATE.FALL
 		STATE.WALK:
-			topSpeed = 90
+			top_speed = 90
 			$AnimationPlayer.play("WALK")
 
 			if velocity.y > 0:
@@ -245,7 +240,7 @@ func statemachine():
 				menu = true
 			if fruit and is_instance_valid(fruit):
 				$AnimationPlayer.play("COLLECT")
-				Global.SaveInventory(fruit.name,1,"Fresco",2)
+				Global.save_inventory(fruit.name,1,"Fresco",2)
 				fruit.queue_free()
 				fruit = null
 				return
@@ -265,15 +260,15 @@ func statemachine():
 				#$AnimationPlayer.play("ATTACK")
 		STATE.CLIMB:
 			velocity = Vector2.ZERO
-			JUMP_VELOCITY = -350
-			stamine += -StaticClimb
+			jump_velocity = -350
+			stamine += -stattic_climb
 			#climb = true
-			$AnimationPlayer.play("CLIMB")
+			$AnimationPlayer.play("climb")
 			if stamine < 0:
 				current_state = STATE.IDLE
 				#climb = false
 			if Input.is_action_just_pressed("JUMP"):
-				velocity.y = JUMP_VELOCITY;
+				velocity.y = jump_velocity;
 				current_state = STATE.JUMP
 		STATE.ROLL:
 			if $AnimationPlayer.current_animation != "ROLL":
@@ -314,54 +309,50 @@ func validation():
 	if current_state == STATE.ATTACK:
 		$Label.text = "ATTACK"
 	if current_state == STATE.CLIMB:
-		$Label.text = "CLIMB"
+		$Label.text = "climb"
 	if current_state == STATE.ROLL:
 		$Label.text = "ROLL"
 	if current_state == STATE.SHOOT:
 		$Label.text = "SHOOT"
 
-func CheckPoint(PositionFloor: Vector2):
+func check_point(position_floor: Vector2):
 	$position.text = str(save)
-	if self.position.y > deadZone:
+	if self.position.y > dead_zone:
 		var res = 0
 		if save.size() > 0:
 			self.position = save[res]
 			if not is_on_floor():
 				res += 1
 	if is_on_floor() and $SafeFloor/right.is_colliding() and $SafeFloor/left.is_colliding():
-		if save.is_empty() or save[0] != PositionFloor:
-			save.push_front(PositionFloor)
+		if save.is_empty() or save[0] != position_floor:
+			save.push_front(position_floor)
 	if save.size() > 3:
 		save.pop_back()
 
 func detectar_arbol():
 	if _body and _body.name == "Tree":
 		if Input.is_action_pressed("Up") and stamine > 0:
-			if oneShot == false:
+			if one_shot == false:
 				velocity.y = 0
-				oneShot = true
+				one_shot = true
 			climb = true
 			velocity.y += -1
-			stamine -= MoveClimb
+			stamine -= move_climb
 		elif climb and stamine:
 			velocity.y = 0
-			stamine += -StaticClimb
+			stamine += -stattic_climb
 
-func _on_animation_finished(anim_name):
-	if anim_name == "ATTACK":
-		current_state = STATE.IDLE
-	if anim_name == "ROLL":
-		current_state = STATE.WALK
-
-func stopAttack():
+func stop_attack():
 	current_state = STATE.IDLE
 
+func live():
+	print("live")
 
 ##########################################
 ##------------INVENTARIO----------------##
 ##########################################
 
-func Inventory(delta):
+func inventory(delta):
 	$Book.position = $Book.position.lerp(
 		target_book_position,
 		8.0 * delta
@@ -371,7 +362,7 @@ func Inventory(delta):
 		if book_open:
 			$Book.visible = true
 			target_book_position = Vector2(-1, -34)
-			inventory_cache = Global.GetInventorytoArray()
+			inventory_cache = Global.get_inventory_to_array()
 			for i in range(inventory_cache.size()):
 				var item = inventory_cache[i]
 				var slot_name = item["Slot"]
@@ -383,6 +374,7 @@ func Inventory(delta):
 			update_selected_item()
 		else:
 			target_book_position = Vector2(-1, 494.0)
+
 func _on_slot_click(event: InputEvent, index):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
@@ -461,10 +453,14 @@ func _input(event):
 					break
 
 ##########################################
-##------------INVENTARIO----------------##
+##----------//INVENTARIO//--------------##
 ##########################################
 
 
+
+##########################################
+##--------------Signal------------------##
+##########################################
 
 func _on_collect_body_entered(body: Node2D) -> void:
 	if body is Fruit or body is StaticFruit:
@@ -485,3 +481,13 @@ func _on_collect_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index
 	if area is Area2D:
 		_body = null
 		print("body off: ", _body)
+
+func _on_animation_finished(anim_name):
+	if anim_name == "ATTACK":
+		current_state = STATE.IDLE
+	if anim_name == "ROLL":
+		current_state = STATE.WALK
+
+##########################################
+##------------//Signal//----------------##
+##########################################

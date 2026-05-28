@@ -11,19 +11,19 @@ func _ready() -> void:
 		_Body = get_node("PlayerCut") as CharacterBody2D
 
 	if _Body:
-		var post = Global.GetLastPositionInDoor('forest')
+		var post = Global.get_last_position_in_door('forest')
 		if post != null:
 			_Body.position = Vector2(post["x"], post["y"])
 
 func _on_pueblo_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
 		#Global.LastPosition(body.position)
-		Global.PutLastPositionInDoor("forest",body.position.x - 5,body.position.y)
+		Global.put_last_position_in_door("forest",body.position.x - 5,body.position.y)
 		get_tree().change_scene_to_file("res://Map/Scene/pueblo.tscn")
 
 
 func _on_base_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
 		#Global.LastPosition(body.position)
-		Global.PutLastPositionInDoor("forest",body.position.x + 5,body.position.y)
+		Global.put_last_position_in_door("forest",body.position.x + 5,body.position.y)
 		get_tree().change_scene_to_file("res://Map/Scene/map_test.tscn")

@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bwfvhdhxmki1s" path="res://Player/Sprite/Machete.png" id="5_03j0d"]
 [ext_resource type="Texture2D" uid="uid://b33t8i57cblt2" path="res://icon.svg" id="5_48jby"]
 [ext_resource type="Texture2D" uid="uid://de0gu8qmdu6om" path="res://Imports/FullHeath.png" id="5_sm36e"]
-[ext_resource type="Script" uid="uid://c87xbdkm5yt2n" path="res://Player/Script/machete.gd" id="6_g4q1w"]
+[ext_resource type="Script" uid="uid://c87xbdkm5yt2n" path="res://Player/script/machete.gd" id="6_g4q1w"]
 [ext_resource type="Texture2D" uid="uid://claywbbse3gna" path="res://Player/Sprite/Vaina.png" id="6_ja273"]
 [ext_resource type="Texture2D" uid="uid://dsjnyk77ya3ec" path="res://Imports/Start.png" id="6_syvh5"]
 

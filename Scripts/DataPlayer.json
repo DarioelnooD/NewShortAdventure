@@ -1,1 +1,22 @@
-{"Inventary":[{"Calidad":3.0,"Cantidad":9.0,"Estado":"Fresco","Name":"Manog","Slot":"0x0"},{"Calidad":0.0,"Cantidad":2.0,"Estado":"Fresco","Name":"Mango","Slot":"0x1"},{"Calidad":3.0,"Cantidad":2.0,"Estado":"Fresco","Name":"Fresa","Slot":"0x2"},{"Calidad":3.0,"Cantidad":2.0,"Estado":"Fresco","Name":"Manog2","Slot":"0x3"},{"Calidad":2.0,"Cantidad":2.0,"Estado":"Fresco","Name":"Manog","Slot":"1x0"},{"Calidad":2.0,"Cantidad":1.0,"Estado":"Fresco","Name":"Manog2","Slot":"1x1"}],"Position":[{"name":"pueblo","x":24.4136257171631,"y":528.933532714844},{"name":"map_test","x":4370.88232421875,"y":704.996643066406},{"name":"forest","x":2472.81127929688,"y":560.933715820313}],"Saldo":2000.0,"Vida":5.0}
+{
+	"Inventary": [],
+	"Position": [
+		{
+			"name": "pueblo",
+			"x": 24.4136257171631,
+			"y": 528.933532714844
+		},
+		{
+			"name": "map_test",
+			"x": 4370.88232421875,
+			"y": 704.996643066406
+		},
+		{
+			"name": "forest",
+			"x": 2472.81127929688,
+			"y": 560.933715820313
+		}
+	],
+	"Saldo": 2000.0,
+	"Vida": 5.0
+}

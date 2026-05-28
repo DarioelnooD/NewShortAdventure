@@ -1,0 +1,35 @@
+{
+    "scene": 1,
+    "dialogs": [
+        {
+            "id": 1,
+            "name": "Diana",
+            "text": "Hola, soy un Diana. ¿Cómo estás?"
+        },
+        {
+            "id": 2,
+            "name": "Diana",
+            "text": "Tu eres el nuevo en el pueblo, ¿verdad? ,¡Bienvenido! Espero que te guste este lugar."
+        },
+        {
+            "id": 3,
+            "name": "Diana",
+            "text": "puedes ir a la tienda del inicio del pueblo, ahí puedes comprar ingredientes del diario vivir, y algunos extras"
+        },
+        {
+            "id": 4,
+            "name": "Diana",
+            "text": "ya conoces al gobernador ?, el es un tipo muy amable, siempre esta dispuesto a ayudar a los demás, puedes ir a hablar con el, seguro te dará algunos consejos para sobrevivir en este lugar"
+        },
+        {
+            "id": 5,
+            "name": "Diana",
+            "text": "si necesitas agua hay un arroyo en el bosque, el agua es potable y fresca, es un buen lugar para relajarte y disfrutar de la naturaleza"
+        },
+        {
+            "id": 6,
+            "name": "Diana",
+            "text": "este es mi hermano, Santiago. le veo mucho futuro, es inquieto y un poco bago, pero es un buen chico, siempre esta dispuesto a ayudar a los demás, es inteligente y tiene un gran corazón, seguro que te caerá bien"
+        }
+    ]
+}
