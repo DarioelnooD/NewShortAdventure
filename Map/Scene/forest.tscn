@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://blme2fe6soubq" path="res://Imports/ArbolitoPlaceHolder.png" id="4_55eto"]
 [ext_resource type="PackedScene" uid="uid://dkj47x8n1761e" path="res://Player/scenes/p_layer_cut_out.tscn" id="4_sdm13"]
 [ext_resource type="PackedScene" uid="uid://5ngtd7hr1xsp" path="res://Fruits/Scene/manog.tscn" id="6_6bbhi"]
+[ext_resource type="Script" uid="uid://bkelwo21m1gmc" path="res://Map/Script/Enemy.gd" id="7_iygwd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jgwiv"]
 texture = ExtResource("1_kn6gv")
@@ -145,6 +146,72 @@ size = Vector2(23, 161)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3go3m"]
 size = Vector2(26, 218)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qk3w3"]
+radius = 8.905182
+height = 25.367706
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iygwd"]
+size = Vector2(40, 39.444443)
+
+[sub_resource type="Animation" id="Animation_iygwd"]
+resource_name = "Damage"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.1, 0.13333334, 0.16666667, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"damage"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_qk3w3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qk3w3"]
+_data = {
+&"Damage": SubResource("Animation_iygwd"),
+&"RESET": SubResource("Animation_qk3w3")
+}
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_iygwd"]
+emission_shape_scale = Vector3(22.46, 24.91, 1)
+emission_shape = 2
+emission_sphere_radius = 1.0
+initial_velocity_min = 7.22
+initial_velocity_max = 115.52
+gravity = Vector3(0, 98, 0)
+
 [node name="Forest" type="Node2D" unique_id=16114700]
 script = ExtResource("1_jgwiv")
 
@@ -219,5 +286,52 @@ position = Vector2(1419, 545)
 [node name="Manog2" parent="." unique_id=314561037 instance=ExtResource("6_6bbhi")]
 position = Vector2(1258, 534)
 
+[node name="Enemy" type="RigidBody2D" parent="." unique_id=188906033]
+position = Vector2(813, 492)
+collision_layer = 32
+collision_mask = 32771
+script = ExtResource("7_iygwd")
+
+[node name="ColorRect" type="ColorRect" parent="Enemy" unique_id=1685503269]
+offset_left = -20.0
+offset_top = -19.444445
+offset_right = 20.0
+offset_bottom = 20.555555
+scale = Vector2(1.0118853, 1.5176957)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy" unique_id=1176606947]
+position = Vector2(0, 16.999987)
+scale = Vector2(1.7044343, 1.9277875)
+shape = SubResource("CapsuleShape2D_qk3w3")
+debug_color = Color(0.9975118, 0, 0.1742886, 0.41960785)
+
+[node name="live" type="Label" parent="Enemy" unique_id=503044242]
+offset_left = -23.0
+offset_top = -40.555557
+offset_right = 26.0
+offset_bottom = -17.555557
+text = "live`tn"
+
+[node name="DamageDetecte" type="Area2D" parent="Enemy" unique_id=1557132722]
+position = Vector2(0, 10)
+scale = Vector2(1.0118853, 1.5176957)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/DamageDetecte" unique_id=23061970]
+position = Vector2(0, 0.8333435)
+shape = SubResource("RectangleShape2D_iygwd")
+debug_color = Color(0.76646787, 0.44814312, 7.70092e-07, 0.41960785)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemy" unique_id=1465599158]
+libraries/ = SubResource("AnimationLibrary_qk3w3")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Enemy" unique_id=2085135289]
+position = Vector2(2, 13)
+emitting = false
+amount = 100
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_iygwd")
+
 [connection signal="body_entered" from="Base" to="." method="_on_base_body_entered"]
 [connection signal="body_entered" from="Pueblo" to="." method="_on_pueblo_body_entered"]
+[connection signal="body_entered" from="Enemy/DamageDetecte" to="Enemy" method="_on_damage_detecte_body_entered"]
+[connection signal="body_exited" from="Enemy/DamageDetecte" to="Enemy" method="_on_damage_detecte_body_exited"]

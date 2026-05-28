@@ -6,13 +6,21 @@ var Inicio := false
 
 var LastScene: PackedScene;
 var savePosition : Vector2
-var saldo: float = 100
+var saldo: float = GetSalgo()
 #var _bodyPosition: Vector3 = Vector3.ZERO
 
 #func LastPosition(position: Vector2 = Vector2(-1335,-15)):
 	#savePosition = position;
 	#print(savePosition)
 	#return savePosition
+
+func GetSalgo():
+	if FileAccess.file_exists(DATA_PLAYER):
+		var file = FileAccess.open(DATA_PLAYER, FileAccess.READ)
+		var content = file.get_as_text()
+		var data = JSON.parse_string(content)
+		return data["Saldo"]
+
 
 func GetLastPositionInDoor(name = ''):
 	if FileAccess.file_exists(DATA_PLAYER):
@@ -60,31 +68,55 @@ func PutLastPositionInDoor(name = "", x = 0, y = 0):
 			#"Calidad":"Hierro",
 			#"Slot":"0"
 		#}
-func SaveInventory(Name = "", Cantidad = 0, Estado = "", Calidad = "",Slot = 0):
+func SaveInventory(Name = "", Cantidad = 0, Estado = "", Calidad = 0):
 	var data = GetLastPositionInDoor()
-	if Name != "" and Cantidad != 0 and Slot != 0:
-		#if !data.has("Inventary"):
-			#data["Inventary"] = []
-		var exist = false
-		for i in range(data["Inventary"].size()):
-			if data["Inventary"][i]["Name"] == Name:
-				data["Inventary"][i]["Cantidad"] = Cantidad
-				data["Inventary"][i]["Estado"] = Estado
-				data["Inventary"][i]["Calidad"] = Calidad
-				data["Inventary"][i]["Slot"] = Slot
-				exist = true
+	if Name == "" or Cantidad <= 0:
+		return
+	if !data.has("Inventary"):
+		data["Inventary"] = []
+	var exist = false
+	for i in range(data["Inventary"].size()):
+		var item = data["Inventary"][i]
+		if item["Name"] == Name and item["Calidad"] == Calidad:
+			item["Cantidad"] += Cantidad
+			item["Estado"] = Estado
+			exist = true
+			break
+	if !exist:
+		var used_slots = []
+		for item in data["Inventary"]:
+			used_slots.append(item["Slot"])
+		var new_slot = ""
+		for row in range(4):
+			for col in range(4):
+				var slot_name = str(row) + "x" + str(col)
+				if !used_slots.has(slot_name):
+					new_slot = slot_name
+					break
+			if new_slot != "":
 				break
-		if !exist:
-			data["Inventary"].append({
-				"Name": Name,
-				"Cantidad": Cantidad,
-				"Estado": Estado,
-				"Calidad": Calidad,
-				"Slot": Slot
-			})
+		data["Inventary"].append({
+			"Name": Name,
+			"Cantidad": Cantidad,
+			"Estado": Estado,
+			"Calidad": Calidad,
+			"Slot": new_slot
+		})
 	var file_write = FileAccess.open(DATA_PLAYER, FileAccess.WRITE)
 	file_write.store_string(JSON.stringify(data))
-	print(data)
+
+func GetInventorytoArray(name = ''):
+	if FileAccess.file_exists(DATA_PLAYER):
+		var file = FileAccess.open(DATA_PLAYER, FileAccess.READ)
+		var content = file.get_as_text()
+		var data = JSON.parse_string(content)
+		if data.has("Inventary"):
+			if name != '':
+				for item in data["Inventary"]:
+					if item["name"] == name:
+						return item
+			return data["Inventary"]
+	return []
 
 #func lastPositionCheck():
 	#var data = GetLastPositionInDoor()

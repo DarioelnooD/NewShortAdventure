@@ -39,8 +39,15 @@ var power := 0.0
 var _body
 var menu: bool = false
 
+var selected_index := 0
+var inventory_cache := []
 
-func _ready() -> void:
+var book_open := false
+var target_book_position := Vector2(-1, 494.0)
+
+func _ready():
+	$Book.visible = true
+	$Book.position = Vector2(-1, 494.0)
 	$Camera2D.zoom = Vector2(2,2)
 	stamine = TopClimb
 	#var target_scene = Global.lastPositionCheck()
@@ -68,7 +75,7 @@ func _physics_process(delta: float) -> void:
 		MoveSet()
 		detectar_arbol()
 	CheckPoint(self.position)
-	#Inventory()
+	Inventory(delta)
 	statemachine()
 	move_and_slide()
 
@@ -87,7 +94,11 @@ func _process(delta: float) -> void:
 		$CollisionShape2D/RayCast2D.target_position.y = 15
 		$CollisionShape2D/Verificar.position.x = 2
 		$CollisionShape2D/Verificar.target_position.y = 25
-
+	
+	$Book.position = $Book.position.lerp(
+		target_book_position,
+		8.0 * delta
+	)
 func MoveSet():
 	if Input.is_action_just_pressed("JUMP") and coyote_timer > 0 or Input.is_action_just_pressed("JUMP") and climb:
 		climb = false
@@ -225,17 +236,20 @@ func statemachine():
 				current_state = STATE.ATTACK
 		STATE.ATTACK:
 			velocity.x = 0
+			if $AnimationPlayer.current_animation == "COLLECT":
+				return
+			if not fruit and not _body:
+				$AnimationPlayer.play("ATTACK")
 			if _body and _body.has_method("menu"):
 				_body.menu()
 				menu = true
-			elif Input.is_action_just_pressed("ATTACK"):
-				menu = false
-				print("move")
-				current_state = STATE.IDLE
-			elif fruit:
-				Global.SaveInventory(fruit.name,0,'','',0)
-				print("guardado")
+			if fruit and is_instance_valid(fruit):
+				$AnimationPlayer.play("COLLECT")
+				Global.SaveInventory(fruit.name,1,"Fresco",2)
 				fruit.queue_free()
+				fruit = null
+				return
+			
 			if menu:
 				if Input.is_action_just_pressed("Down"):
 					_body.selec1()
@@ -339,17 +353,128 @@ func _on_animation_finished(anim_name):
 	if anim_name == "ROLL":
 		current_state = STATE.WALK
 
+func stopAttack():
+	current_state = STATE.IDLE
+
+
+##########################################
+##------------INVENTARIO----------------##
+##########################################
+
+func Inventory(delta):
+	$Book.position = $Book.position.lerp(
+		target_book_position,
+		8.0 * delta
+	)
+	if Input.is_action_just_pressed("PAUSE"):
+		book_open = !book_open
+		if book_open:
+			$Book.visible = true
+			target_book_position = Vector2(-1, -34)
+			inventory_cache = Global.GetInventorytoArray()
+			for i in range(inventory_cache.size()):
+				var item = inventory_cache[i]
+				var slot_name = item["Slot"]
+				var slot = $"Book/Cuadrilla".get_node(slot_name)
+				if slot:
+					slot.texture = load("res://icon.svg")
+					slot.get_node("Cantidad").text = str(int(item["Cantidad"]))
+			selected_index = 0
+			update_selected_item()
+		else:
+			target_book_position = Vector2(-1, 494.0)
+func _on_slot_click(event: InputEvent, index):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			selected_index = index
+			update_selected_item()
+
+func update_selected_item():
+
+	if inventory_cache.is_empty():
+		return
+
+	selected_index = clamp(selected_index, 0, inventory_cache.size() - 1)
+
+	var item = inventory_cache[selected_index]
+
+	$Book/DetailItem/ItemCount.text = str(int(item["Cantidad"]))
+	$Book/DetailItem/Title.text = str(item["Name"])
+	$Book/DetailItem/State.text = str(item["Estado"])
+
+	update_cursor()
+	update_quality(int(item["Calidad"]))
+
+func update_quality(value):
+
+	$Book/DetailItem/Calidad/Start.visible = value >= 0
+	$Book/DetailItem/Calidad/Start2.visible = value >= 1
+	$Book/DetailItem/Calidad/Start3.visible = value >= 2
+	$Book/DetailItem/Calidad/Start4.visible = value >= 3
+
+	match value:
+		0:
+			$Book/DetailItem/Calidad.modulate = Color.WHITE
+		1:
+			$Book/DetailItem/Calidad.modulate = Color("#979797")
+		2:
+			$Book/DetailItem/Calidad.modulate = Color("#ff9871")
+		3:
+			$Book/DetailItem/Calidad.modulate = Color("#e9c63e")
+
+func update_cursor():
+	if inventory_cache.is_empty():
+		return
+	if !$Book.has_node("Selector"):
+		return
+	var item = inventory_cache[selected_index]
+	var slot_name = item["Slot"]
+	if !$"Book/Cuadrilla".has_node(slot_name):
+		return
+	var slot = $"Book/Cuadrilla".get_node(slot_name)
+	if slot:
+		$Book/Selector.global_position = slot.global_position
+
+func _input(event):
+	if !$Book.visible:
+		return
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			for i in range(inventory_cache.size()):
+				var item = inventory_cache[i]
+				var slot_name = item["Slot"]
+				if !$"Book/Cuadrilla".has_node(slot_name):
+					continue
+				var slot = $"Book/Cuadrilla".get_node(slot_name)
+				if !slot:
+					continue
+				if !slot.texture:
+					continue
+				var texture_size = slot.texture.get_size()
+				var rect = Rect2(
+					slot.global_position - texture_size / 2,
+					texture_size
+				)
+				if rect.has_point(event.position):
+					selected_index = i
+					update_selected_item()
+					break
+
+##########################################
+##------------INVENTARIO----------------##
+##########################################
+
 
 
 func _on_collect_body_entered(body: Node2D) -> void:
 	if body is Fruit or body is StaticFruit:
 		fruit = body
-		print("fuit")
+		print("fruit")
 
 func _on_collect_body_exited(body: Node2D) -> void:
 	if body is Fruit or body is StaticFruit:
 		fruit = null
-		print("no fuit")
+		print("no fruit")
 
 func _on_collect_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	if area is Area2D:

@@ -3,7 +3,7 @@ extends Node2D
 var _Body: CharacterBody2D
 
 func _ready() -> void:
-	Global.SaveCurrentScene()  
+	#Global.SaveCurrentScene()  
 	if $PLayerCutOut:
 		_Body = $PLayerCutOut
 	else :

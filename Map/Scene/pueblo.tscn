@@ -3,7 +3,8 @@
 [ext_resource type="Script" uid="uid://dfps858y8p86h" path="res://Map/Sprite/pueblo.gd" id="1_tn1cd"]
 [ext_resource type="Texture2D" uid="uid://cw3fvqtixuc2x" path="res://Map/Sprite/WhatsApp Image 2026-03-10 at 9.59.01 PM.jpeg" id="2_515e5"]
 [ext_resource type="PackedScene" uid="uid://dkj47x8n1761e" path="res://Player/scenes/p_layer_cut_out.tscn" id="4_515e5"]
-[ext_resource type="Script" path="res://Map/Script/tendero.gd" id="4_il1fd"]
+[ext_resource type="Script" uid="uid://cxyki80vkskan" path="res://Map/Script/tendero.gd" id="4_il1fd"]
+[ext_resource type="PackedScene" uid="uid://c5f8bk57qypb4" path="res://Npc`s/Scene/Npc.tscn" id="5_il1fd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jgwiv"]
 texture = ExtResource("2_515e5")
@@ -270,5 +271,8 @@ offset_top = 532.0
 offset_right = 197.0
 offset_bottom = 572.0
 scale = Vector2(1.6874163, 0.32394737)
+
+[node name="Npc" parent="." unique_id=1830366603 instance=ExtResource("5_il1fd")]
+position = Vector2(249, 425)
 
 [connection signal="body_entered" from="forest" to="." method="_on_forest_body_entered"]
