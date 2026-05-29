@@ -38,6 +38,7 @@ var shoot := false
 var power := 0.0
 var _body
 var menu: bool = false
+var live = Global.get_live()
 
 var selected_index := 0
 var inventory_cache := []
@@ -46,12 +47,19 @@ var book_open := false
 var target_book_position := Vector2(-1, 494.0)
 
 func _ready():
+	connect_inventory_slots()
 	$Book.visible = true
 	$Book.position = Vector2(-1, 494.0)
 	$Camera2D.zoom = Vector2(2,2)
 	stamine = top_climb
 	current_state = STATE.IDLE
 	$AnimationPlayer.animation_finished.connect(_on_animation_finished)
+	var scene = get_tree().current_scene.name
+	if scene == "Forest":
+		dead_zone = 3000
+	else:
+		dead_zone = 1000
+		
 
 func _physics_process(delta: float) -> void:
 	$base/ColorRect.size.y = stamine
@@ -73,6 +81,7 @@ func _physics_process(delta: float) -> void:
 	inventory(delta)
 	statemachine()
 	move_and_slide()
+	stadistic_player()
 
 func _process(delta: float) -> void:
 	if get_node(".").get_parent().name == "Pueblo":
@@ -345,8 +354,22 @@ func detectar_arbol():
 func stop_attack():
 	current_state = STATE.IDLE
 
-func live():
-	print("live")
+func stadistic_player():
+	var hearts = [
+		$Book/HBoxContainer/FullHeath,
+		$Book/HBoxContainer/FullHeath2,
+		$Book/HBoxContainer/FullHeath3,
+		$Book/HBoxContainer/FullHeath4,
+		$Book/HBoxContainer/FullHeath5
+	]
+	for i in range(hearts.size()):
+
+		if i < live:
+			hearts[i].texture = preload("uid://de0gu8qmdu6om")
+		else:
+			hearts[i].texture = preload("uid://b3o0v5cn1cnme")
+	#for i in [1,2,3,4,5]:
+		#$Book/HBoxContainer/FullHeath{{i}}.texture = "res://Imports/FullHeath.png"
 
 ##########################################
 ##------------INVENTARIO----------------##
@@ -357,29 +380,52 @@ func inventory(delta):
 		target_book_position,
 		8.0 * delta
 	)
+
 	if Input.is_action_just_pressed("PAUSE"):
 		book_open = !book_open
+
 		if book_open:
 			$Book.visible = true
 			target_book_position = Vector2(-1, -34)
+
 			inventory_cache = Global.get_inventory_to_array()
+
 			for i in range(inventory_cache.size()):
 				var item = inventory_cache[i]
 				var slot_name = item["Slot"]
+
+				if !$"Book/Cuadrilla".has_node(slot_name):
+					continue
+
 				var slot = $"Book/Cuadrilla".get_node(slot_name)
-				if slot:
-					slot.texture = load("res://icon.svg")
-					slot.get_node("Cantidad").text = str(int(item["Cantidad"]))
+
+				#slot.texture = load("res://icon.svg")
+				slot.texture = load(item["Image"])
+				slot.get_node("Cantidad").text = str(int(item["Cantidad"]))
+
 			selected_index = 0
 			update_selected_item()
+
 		else:
 			target_book_position = Vector2(-1, 494.0)
 
-func _on_slot_click(event: InputEvent, index):
+			await get_tree().create_timer(0.2).timeout
+			$Book.visible = false
+
+func connect_inventory_slots():
+	for child in $"Book/Cuadrilla".get_children():
+		child.gui_input.connect(_on_slot_gui_input.bind(child))
+
+func _on_slot_gui_input(event: InputEvent, slot):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			selected_index = index
-			update_selected_item()
+
+			for i in range(inventory_cache.size()):
+
+				if inventory_cache[i]["Slot"] == slot.name:
+					selected_index = i
+					update_selected_item()
+					return
 
 func update_selected_item():
 
@@ -415,42 +461,47 @@ func update_quality(value):
 			$Book/DetailItem/Calidad.modulate = Color("#e9c63e")
 
 func update_cursor():
+
 	if inventory_cache.is_empty():
 		return
+
 	if !$Book.has_node("Selector"):
 		return
+
 	var item = inventory_cache[selected_index]
 	var slot_name = item["Slot"]
+
 	if !$"Book/Cuadrilla".has_node(slot_name):
 		return
-	var slot = $"Book/Cuadrilla".get_node(slot_name)
-	if slot:
-		$Book/Selector.global_position = slot.global_position
 
-func _input(event):
-	if !$Book.visible:
-		return
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			for i in range(inventory_cache.size()):
-				var item = inventory_cache[i]
-				var slot_name = item["Slot"]
-				if !$"Book/Cuadrilla".has_node(slot_name):
-					continue
-				var slot = $"Book/Cuadrilla".get_node(slot_name)
-				if !slot:
-					continue
-				if !slot.texture:
-					continue
-				var texture_size = slot.texture.get_size()
-				var rect = Rect2(
-					slot.global_position - texture_size / 2,
-					texture_size
-				)
-				if rect.has_point(event.position):
-					selected_index = i
-					update_selected_item()
-					break
+	var slot = $"Book/Cuadrilla".get_node(slot_name)
+
+	$Book/Selector.global_position = slot.global_position
+
+#func _input(event):
+	#if !$Book.visible:
+		#return
+	#if event is InputEventMouseButton:
+		#if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			#for i in range(inventory_cache.size()):
+				#var item = inventory_cache[i]
+				#var slot_name = item["Slot"]
+				#if !$"Book/Cuadrilla".has_node(slot_name):
+					#continue
+				#var slot = $"Book/Cuadrilla".get_node(slot_name)
+				#if !slot:
+					#continue
+				#if !slot.texture:
+					#continue
+				#var texture_size = slot.texture.get_size()
+				#var rect = Rect2(
+					#slot.global_position - texture_size / 2,
+					#texture_size
+				#)
+				#if rect.has_point(event.position):
+					#selected_index = i
+					#update_selected_item()
+					#break
 
 ##########################################
 ##----------//INVENTARIO//--------------##
