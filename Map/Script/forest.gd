@@ -2,6 +2,10 @@ extends Node2D
 
 var _Body: CharacterBody2D
 
+#func _process(delta: float) -> void:
+	#if Input.is_action_just_pressed("JUMP"):
+		#$Puente/T4toT5.node_a = NodePath()
+		#$Puente/T4toT5.node_b = NodePath()
 
 func _ready() -> void:
 	#Global.SaveCurrentScene()  

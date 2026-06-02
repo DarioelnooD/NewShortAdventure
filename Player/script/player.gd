@@ -400,7 +400,10 @@ func inventory(delta):
 				var slot = $"Book/Cuadrilla".get_node(slot_name)
 
 				#slot.texture = load("res://icon.svg")
-				slot.texture = load(item["Image"])
+				if item["Image"] != "":
+					slot.texture = load(item["Image"])
+				else:
+					slot.texture = load("res://icon.svg")
 				slot.get_node("Cantidad").text = str(int(item["Cantidad"]))
 
 			selected_index = 0
