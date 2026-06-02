@@ -4667,6 +4667,8 @@ position = Vector2(8.924447, 215.5027)
 position = Vector2(179.15439, -80.78465)
 rotation = 3.1197624
 scale = Vector2(1.6260883, -2.5734134)
+collision_layer = 64
+collision_mask = 32
 script = ExtResource("6_g4q1w")
 
 [node name="Machete" type="Sprite2D" parent="Body/stomach/Chest/LeftArmTop/LeftArmBottom/Hand/Machete" unique_id=1994306936]

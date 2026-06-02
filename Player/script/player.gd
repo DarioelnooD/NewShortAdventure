@@ -287,6 +287,18 @@ func statemachine():
 			$AnimationPlayer.play("Shoot")
 			var mouse_pos = get_global_mouse_position()
 			$Body/stomach.look_at(mouse_pos)
+			
+			# Dirección al mouse
+			var dir = mouse_pos - $Body/stomach.global_position
+			var angle = dir.angle()
+			# Ajustar ángulo cuando está volteado
+			if $Body.scale.x < 0:
+				angle += PI
+			# Limitar apuntado hacia abajo
+			var max_down = deg_to_rad(60) # máximo 60° abajo
+			if angle > max_down:
+				angle = max_down
+			
 			if Input.is_action_just_pressed("AIM"):
 				current_state = STATE.IDLE
 			if Input.is_action_pressed("SHOOT"):
@@ -370,6 +382,8 @@ func stadistic_player():
 			hearts[i].texture = preload("uid://b3o0v5cn1cnme")
 	#for i in [1,2,3,4,5]:
 		#$Book/HBoxContainer/FullHeath{{i}}.texture = "res://Imports/FullHeath.png"
+
+
 
 ##########################################
 ##------------INVENTARIO----------------##

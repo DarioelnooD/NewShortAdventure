@@ -104,6 +104,7 @@ PAUSE={
 2d_physics/layer_4="Npc"
 2d_physics/layer_5="Tree"
 2d_physics/layer_6="Enemy"
+2d_physics/layer_7="Machete"
 2d_physics/layer_16="Floor"
 
 [physics]
