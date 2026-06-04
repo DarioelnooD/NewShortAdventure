@@ -177,6 +177,19 @@ color = Color(0.11372549, 0.1254902, 1, 0.13725491)
 
 [node name="Node2D" type="Node2D" parent="." unique_id=1323578622]
 
+[node name="SkyTemplate2" type="Sprite2D" parent="Node2D" unique_id=1088804680]
+z_index = -11
+position = Vector2(26.5, 480.5)
+scale = Vector2(6.8012953, 5.2821426)
+texture = ExtResource("1_iowgq")
+
+[node name="SkyTemplate3" type="Sprite2D" parent="Node2D" unique_id=1124502019]
+z_index = -11
+position = Vector2(3175.5, 480.5)
+scale = Vector2(6.8012953, 5.2821426)
+texture = ExtResource("1_iowgq")
+flip_h = true
+
 [node name="Back" type="TileMapLayer" parent="Node2D" unique_id=1695716004]
 modulate = Color(0.581033, 0.58103293, 0.5810329, 1)
 z_index = -10
@@ -254,36 +267,65 @@ position = Vector2(4390, 631)
 position = Vector2(-1.5, 7.5)
 shape = SubResource("RectangleShape2D_iowgq")
 
+[node name="Tree6" type="Sprite2D" parent="Viaje" unique_id=219732068]
+z_index = -5
+position = Vector2(106.00001, -42)
+scale = Vector2(0.43287027, 0.4564815)
+texture = ExtResource("6_mg86x")
+flip_h = true
+
+[node name="Tree" type="Sprite2D" parent="Viaje" unique_id=2109518130]
+position = Vector2(15, -103)
+scale = Vector2(0.35024145, 0.45463216)
+texture = ExtResource("6_mg86x")
+
+[node name="Tree4" type="Sprite2D" parent="Viaje" unique_id=1851518547]
+z_index = -10
+position = Vector2(-86, -97)
+scale = Vector2(0.3839495, 0.42579904)
+texture = ExtResource("7_gm2te")
+
+[node name="Tree3" type="Sprite2D" parent="Viaje" unique_id=973573394]
+z_index = 10
+position = Vector2(-32.99951, 60.00006)
+scale = Vector2(0.40328398, 0.40912968)
+texture = ExtResource("8_xh35e")
+flip_h = true
+
+[node name="Tree9" type="Sprite2D" parent="Viaje" unique_id=1424490009]
+z_index = 10
+position = Vector2(167.99998, 130)
+scale = Vector2(0.56308806, 0.59413296)
+texture = ExtResource("8_xh35e")
+
+[node name="Tree2" type="Sprite2D" parent="Viaje" unique_id=1331981246]
+z_index = -5
+position = Vector2(-607, -1)
+scale = Vector2(0.16990715, 0.23703705)
+texture = ExtResource("6_mg86x")
+
+[node name="Tree5" type="Sprite2D" parent="Viaje" unique_id=1029369895]
+z_index = 10
+position = Vector2(-334, 55.00006)
+scale = Vector2(0.32962963, 0.23888887)
+texture = ExtResource("7_gm2te")
+
+[node name="Tree7" type="Sprite2D" parent="Viaje" unique_id=17520587]
+z_index = -6
+position = Vector2(224.99998, -84.999985)
+scale = Vector2(0.5269524, 0.52730167)
+texture = ExtResource("7_gm2te")
+flip_h = true
+
+[node name="Tree8" type="Sprite2D" parent="Viaje" unique_id=515427982]
+z_index = -4
+position = Vector2(352.99997, -18.999985)
+scale = Vector2(0.5269524, 0.52730167)
+texture = ExtResource("7_gm2te")
+
 [node name="PLayerCutOut" parent="." unique_id=478286377 instance=ExtResource("5_fds0u")]
 position = Vector2(-1335, -15)
 floor_constant_speed = true
 floor_max_angle = 1.0471976
-
-[node name="Tree" type="Sprite2D" parent="." unique_id=2109518130]
-position = Vector2(4405, 528)
-scale = Vector2(0.35024145, 0.45463216)
-texture = ExtResource("6_mg86x")
-
-[node name="Tree4" type="Sprite2D" parent="." unique_id=1851518547]
-z_index = -10
-position = Vector2(4304, 534)
-scale = Vector2(0.3839495, 0.42579904)
-texture = ExtResource("7_gm2te")
-
-[node name="FiltroOpacidad" type="ColorRect" parent="Tree4" unique_id=485394790]
-modulate = Color(1, 1, 1, 0.41568628)
-offset_left = -16700.113
-offset_top = -2883.9895
-offset_right = -16624.664
-offset_bottom = -2843.2285
-scale = Vector2(226.88776, 104.94435)
-color = Color(0.24840015, 0.24840018, 0.24840015, 1)
-
-[node name="Tree3" type="Sprite2D" parent="." unique_id=973573394]
-z_index = 10
-position = Vector2(4357.0005, 691.00006)
-scale = Vector2(0.40328398, 0.40912968)
-texture = ExtResource("8_xh35e")
-flip_h = true
 
 [connection signal="body_entered" from="Viaje" to="." method="_on_viaje_body_entered"]

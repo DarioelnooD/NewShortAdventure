@@ -237,30 +237,6 @@ size = Vector2(35, 6)
 [node name="Forest" type="Node2D" unique_id=16114700]
 script = ExtResource("1_jgwiv")
 
-[node name="Tree(2)" type="Sprite2D" parent="." unique_id=804089558]
-z_index = -10
-position = Vector2(-1064, 1331.9999)
-scale = Vector2(0.22361115, 0.23449074)
-texture = ExtResource("2_qk3w3")
-
-[node name="Tree4" type="Sprite2D" parent="." unique_id=1047648867]
-z_index = 10
-position = Vector2(-375, 1386)
-scale = Vector2(0.14272302, 0.21849938)
-texture = ExtResource("14_msq41")
-
-[node name="Tree5" type="Sprite2D" parent="." unique_id=1091259261]
-z_index = 10
-position = Vector2(-779, 1455)
-scale = Vector2(0.14272302, 0.21849938)
-texture = ExtResource("14_msq41")
-
-[node name="Tree3" type="Sprite2D" parent="." unique_id=602785944]
-z_index = -10
-position = Vector2(-596, 1539.0001)
-scale = Vector2(0.412177, 0.4075381)
-texture = ExtResource("13_ixca2")
-
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1893767124]
 offset_left = 1584.0
 offset_top = 672.0
@@ -302,6 +278,65 @@ position = Vector2(-864, 418)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Base" unique_id=530624057]
 position = Vector2(-211, 941)
 shape = SubResource("RectangleShape2D_kn6gv")
+
+[node name="Tree(2)" type="Sprite2D" parent="Base" unique_id=804089558]
+z_index = -10
+position = Vector2(-200, 913.9999)
+scale = Vector2(0.22361115, 0.23449074)
+texture = ExtResource("2_qk3w3")
+
+[node name="Tree4" type="Sprite2D" parent="Base" unique_id=1047648867]
+z_index = 10
+position = Vector2(489, 968)
+scale = Vector2(0.14272302, 0.21849938)
+texture = ExtResource("14_msq41")
+
+[node name="Tree5" type="Sprite2D" parent="Base" unique_id=1091259261]
+z_index = 10
+position = Vector2(85, 1037)
+scale = Vector2(0.14272302, 0.21849938)
+texture = ExtResource("14_msq41")
+
+[node name="Tree3" type="Sprite2D" parent="Base" unique_id=602785944]
+z_index = -10
+position = Vector2(268, 1121.0001)
+scale = Vector2(0.412177, 0.4075381)
+texture = ExtResource("13_ixca2")
+
+[node name="Tree6" type="Sprite2D" parent="Base" unique_id=1003358159]
+z_index = -10
+position = Vector2(751.99994, 833)
+scale = Vector2(0.44166666, 0.4888889)
+texture = ExtResource("2_qk3w3")
+
+[node name="Tree7" type="Sprite2D" parent="Base" unique_id=1417827797]
+z_index = -5
+position = Vector2(1057, 817.0001)
+scale = Vector2(0.34891042, 0.42758998)
+texture = ExtResource("13_ixca2")
+flip_h = true
+
+[node name="Tree8" type="Sprite2D" parent="Base" unique_id=1978861266]
+position = Vector2(931, 860)
+scale = Vector2(0.25627702, 0.3098318)
+texture = ExtResource("10_jc00b")
+
+[node name="Tree9" type="Sprite2D" parent="Base" unique_id=1320253010]
+position = Vector2(665, 945)
+scale = Vector2(0.25627702, 0.3098318)
+texture = ExtResource("10_jc00b")
+
+[node name="Tree10" type="Sprite2D" parent="Base" unique_id=1040395474]
+z_index = -10
+position = Vector2(23.999939, 895.0001)
+scale = Vector2(0.4085772, 0.43917996)
+texture = ExtResource("2_qk3w3")
+
+[node name="Tree11" type="Sprite2D" parent="Base" unique_id=18014609]
+z_index = -5
+position = Vector2(-41, 1007)
+scale = Vector2(0.17711058, 0.2216303)
+texture = ExtResource("10_jc00b")
 
 [node name="Pueblo" type="Area2D" parent="." unique_id=2015923525]
 position = Vector2(2488, 368)
@@ -603,15 +638,6 @@ position = Vector2(-453, 1505)
 rotation = -0.5638469
 node_a = NodePath("../Tabla7")
 node_b = NodePath("../Der")
-
-[node name="FiltroOpacidad" type="ColorRect" parent="." unique_id=588134894]
-modulate = Color(1, 1, 1, 0.41568628)
-offset_left = -1332.0
-offset_top = -20.0
-offset_right = -1292.0
-offset_bottom = 20.0
-scale = Vector2(115.69879, 48.120243)
-color = Color(0.24840015, 0.24840018, 0.24840015, 1)
 
 [node name="PruebaDeCespet1" type="Sprite2D" parent="." unique_id=1589145985]
 z_index = 1
