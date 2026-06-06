@@ -18,6 +18,7 @@ func damage():
 
 func _on_damage_detecte_body_entered(body: Node2D) -> void:
 	if body is Machete:
+		damage()
 		_body = body
 
 func _on_damage_detecte_body_exited(body: Node2D) -> void:

@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://5ngtd7hr1xsp"]
+[gd_scene format=3 uid="uid://qvh7e60i0tsn"]
 
-[ext_resource type="Script" uid="uid://7aqb8ral04ix" path="res://Fruits/Script/mango.gd" id="1_0j3d8"]
-[ext_resource type="Texture2D" uid="uid://6bnp4vvv8k8r" path="res://Fruits/Sprites/Mango.png" id="2_weymr"]
-[ext_resource type="Texture2D" uid="uid://q5dq4noatj1m" path="res://Imports/SELECTED.png" id="3_h41g0"]
+[ext_resource type="Script" uid="uid://cjr7xnynv7lvh" path="res://Fruits/Script/Guanabana.gd" id="1_2crwc"]
+[ext_resource type="Texture2D" uid="uid://8xay8n45n2ct" path="res://Fruits/Sprites/Guanabana.png" id="2_2crwc"]
+[ext_resource type="Texture2D" uid="uid://q5dq4noatj1m" path="res://Imports/SELECTED.png" id="3_8kqyf"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_56ayh"]
 
@@ -11,10 +11,10 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_0j3d8"]
 radius = 11.0
 
-[node name="Manog" type="RigidBody2D" unique_id=965687467]
+[node name="Guanabana" type="RigidBody2D" unique_id=965687467]
 collision_layer = 4
 collision_mask = 32775
-script = ExtResource("1_0j3d8")
+script = ExtResource("1_2crwc")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1198195112]
 position = Vector2(1.1920929e-07, 2.2737368e-13)
@@ -39,14 +39,15 @@ text = "velocidad"
 shape = SubResource("CircleShape2D_0j3d8")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=236729197]
-position = Vector2(0, 2.2737368e-13)
-scale = Vector2(0.22251575, 0.22118337)
-texture = ExtResource("2_weymr")
+position = Vector2(1.0000001, -3.0000002)
+rotation = -0.7575622
+scale = Vector2(0.21317565, 0.2116142)
+texture = ExtResource("2_2crwc")
 
 [node name="Selector" type="Sprite2D" parent="." unique_id=1692032799]
 visible = false
 scale = Vector2(0.055, 0.055)
-texture = ExtResource("3_h41g0")
+texture = ExtResource("3_8kqyf")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

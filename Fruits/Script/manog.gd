@@ -10,3 +10,6 @@ func Fruit() -> void:
 	rigid.global_position = global_position
 	get_parent().add_child(rigid)
 	queue_free()
+
+func Selecte():
+	$Selector.visibility = !$Selector.visibility

@@ -10,6 +10,8 @@ enum STATE {
 	ATTACK,
 	CLIMB,
 	ROLL,
+	CROUCH,
+	SHEATHE,
 	SHOOT
 }
 
@@ -46,8 +48,16 @@ var inventory_cache := []
 var book_open := false
 var target_book_position := Vector2(-1, 494.0)
 
+var has_machete := true      
+var machete := false         
+
+##########################################
+##----------------GODOT-----------------##
+##########################################
+
 func _ready():
 	connect_inventory_slots()
+	update_machete()
 	$Book.visible = true
 	$Book.position = Vector2(-1, 494.0)
 	$Camera2D.zoom = Vector2(2,2)
@@ -59,7 +69,6 @@ func _ready():
 		dead_zone = 3000
 	else:
 		dead_zone = 1000
-		
 
 func _physics_process(delta: float) -> void:
 	$base/ColorRect.size.y = stamine
@@ -86,7 +95,7 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	if get_node(".").get_parent().name == "Pueblo":
 		$Camera2D.zoom = $Camera2D.zoom.lerp(Vector2(3.5, 3.5), 3.5 * delta)
-	$Saldo.text = str("$",Global.saldo)
+	
 	delta = delta + 0
 	if $Body.scale.x < 0:
 		$CollisionShape2D/RayCast2D.position.x = -3
@@ -104,11 +113,25 @@ func _process(delta: float) -> void:
 		8.0 * delta
 	)
 
+##########################################
+##--------------//GODOT//----------------##
+##########################################
+
+
+func update_machete():
+	$Body/stomach/Chest/LeftArmTop/LeftArmBottom/Hand/Sprite2D/Machete.visible = machete
+	$Body/stomach/Machete.visible = has_machete and !machete
+
 func move_set():
 	if Input.is_action_just_pressed("JUMP") and coyote_timer > 0 or Input.is_action_just_pressed("JUMP") and climb:
 		climb = false
 		velocity.y = jump_velocity
 		coyote_timer = 0
+		
+	if machete:
+		speed = speed - 5
+	else:
+		speed = top_speed
 	
 	var left := Input.is_action_pressed("Left")
 	var right := Input.is_action_pressed("Right")
@@ -130,10 +153,23 @@ func move_set():
 		speed = top_speed / 3
 	else:
 		speed = top_speed
-	
-	if stamine <= 0.05:
-		climb = false
-		one_shot = false
+		
+	if machete:
+		#$Body/stomach/Chest/LeftArmTop/LeftArmBottom/Hand/Sprite2D/Machete.visible = true
+		$Body/stomach/Chest/LeftArmTop/LeftArmBottom/Hand/Sprite2D/Machete.collision_layer = 7
+		#$Body/stomach/Machete.visible = false
+		$Body/stomach/Machete.collision_layer = 32
+		#print("hay machete")
+	else:
+		#$Body/stomach/Chest/LeftArmTop/LeftArmBottom/Hand/Sprite2D/Machete.visible = false
+		$Body/stomach/Chest/LeftArmTop/LeftArmBottom/Hand/Sprite2D/Machete.collision_layer = 32
+		#$Body/stomach/Machete.visible = true
+		$Body/stomach/Machete.collision_layer = 32
+		#print("no machete")
+
+		if stamine <= 0.05:
+			climb = false
+			one_shot = false
 	
 	# Flip del sprite
 	if direction < 0:
@@ -148,8 +184,6 @@ func move_set():
 
 func statemachine():
 	validation()
-	$Stamine.text = str(stamine)
-	$Power.text = str(power)
 	match current_state:
 		STATE.IDLE:
 			top_speed = 90
@@ -165,15 +199,24 @@ func statemachine():
 
 			if Input.is_action_just_pressed("JUMP"):
 				current_state = STATE.JUMP
-
-			if Input.is_action_just_pressed("ATTACK"):
+				
+			if Input.is_action_just_pressed("ATTACK"): 
 				current_state = STATE.ATTACK
-
+			
 			if velocity.y > 0:
 				current_state = STATE.FALL
 			
 			if Input.is_action_just_pressed("AIM"):
 				current_state = STATE.SHOOT
+			
+			if Input.is_action_just_pressed("CROUCH"):
+				current_state = STATE.CROUCH
+			
+			if current_state == STATE.IDLE:
+				if $Timer.is_stopped():
+					$Timer.start(3.0)
+			else:
+				$Timer.stop()
 		STATE.RUNNING:
 			top_speed = 200
 			$AnimationPlayer.play("RUN")
@@ -193,7 +236,7 @@ func statemachine():
 			if Input.is_action_just_pressed("JUMP"):
 				current_state = STATE.JUMP
 
-			if Input.is_action_just_pressed("ATTACK"):
+			if Input.is_action_just_pressed("ATTACK") and machete or Input.is_action_just_pressed("ATTACK") and _body or Input.is_action_just_pressed("ATTACK") and fruit: 
 				current_state = STATE.ATTACK
 		STATE.FALL:
 			$AnimationPlayer.play("JUMP")
@@ -235,21 +278,31 @@ func statemachine():
 
 			if Input.is_action_just_pressed("JUMP"):
 				current_state = STATE.JUMP
-
-			if Input.is_action_just_pressed("ATTACK"):
+			
+			if Input.is_action_just_pressed("ATTACK") and machete or Input.is_action_just_pressed("ATTACK") and _body or Input.is_action_just_pressed("ATTACK") and fruit: 
 				current_state = STATE.ATTACK
 		STATE.ATTACK:
 			velocity.x = 0
 			if $AnimationPlayer.current_animation == "COLLECT":
 				return
-			if not fruit and not _body:
+			
+			if not fruit and not _body and machete:
 				$AnimationPlayer.play("ATTACK")
+				
 			if _body and _body.has_method("menu"):
 				_body.menu()
 				menu = true
-			if fruit and is_instance_valid(fruit):
+			
+			if fruit and is_instance_valid(fruit) and !machete:
 				$AnimationPlayer.play("COLLECT")
-				Global.save_inventory(fruit.name,1,"Fresco",2)
+				var item = fruit.data()
+				Global.save_inventory(
+					item["Nombre"],
+					1,
+					item["Estado"],
+					item["Calidad"],
+					item["Image"]
+				)
 				fruit.queue_free()
 				fruit = null
 				return
@@ -267,12 +320,16 @@ func statemachine():
 				#_physics_process(true)
 			#if $AnimationPlayer.current_animation != "ATTACK":
 				#$AnimationPlayer.play("ATTACK")
+			#current_state = STATE.IDLE
+			
+			if !machete and menu == false: 
+				current_state = STATE.SHEATHE
 		STATE.CLIMB:
 			velocity = Vector2.ZERO
 			jump_velocity = -350
 			stamine += -stattic_climb
 			#climb = true
-			$AnimationPlayer.play("climb")
+			$AnimationPlayer.play("CLIMB")
 			if stamine < 0:
 				current_state = STATE.IDLE
 				#climb = false
@@ -282,6 +339,11 @@ func statemachine():
 		STATE.ROLL:
 			if $AnimationPlayer.current_animation != "ROLL":
 				$AnimationPlayer.play("ROLL")
+		STATE.CROUCH:
+			$AnimationPlayer.play("CROUCH")
+			velocity.x = 0
+			if Input.is_action_just_pressed("CROUCH"):
+				current_state = STATE.IDLE
 		STATE.SHOOT:
 			$Power.visible = true
 			$AnimationPlayer.play("Shoot")
@@ -315,26 +377,11 @@ func statemachine():
 				get_tree().current_scene.add_child(bullet)
 				power = 0
 				shoot = false
-
-func validation():
-	if current_state == STATE.IDLE:
-		$Label.text = "IDLE"
-	if current_state == STATE.RUNNING:
-		$Label.text = "RUNNING"
-	if current_state == STATE.FALL:
-		$Label.text = "FALL"
-	if current_state == STATE.JUMP:
-		$Label.text = "JUMP"
-	if current_state == STATE.WALK:
-		$Label.text = "WALK"
-	if current_state == STATE.ATTACK:
-		$Label.text = "ATTACK"
-	if current_state == STATE.CLIMB:
-		$Label.text = "climb"
-	if current_state == STATE.ROLL:
-		$Label.text = "ROLL"
-	if current_state == STATE.SHOOT:
-		$Label.text = "SHOOT"
+		STATE.SHEATHE:
+			if !machete:
+				$AnimationPlayer.play_backwards("UNSHEATHE")
+			else:
+				$AnimationPlayer.play("SHEATHE")
 
 func check_point(position_floor: Vector2):
 	$position.text = str(save)
@@ -366,22 +413,43 @@ func detectar_arbol():
 func stop_attack():
 	current_state = STATE.IDLE
 
-func stadistic_player():
-	var hearts = [
-		$Book/HBoxContainer/FullHeath,
-		$Book/HBoxContainer/FullHeath2,
-		$Book/HBoxContainer/FullHeath3,
-		$Book/HBoxContainer/FullHeath4,
-		$Book/HBoxContainer/FullHeath5
-	]
-	for i in range(hearts.size()):
 
-		if i < live:
-			hearts[i].texture = preload("uid://de0gu8qmdu6om")
-		else:
-			hearts[i].texture = preload("uid://b3o0v5cn1cnme")
-	#for i in [1,2,3,4,5]:
-		#$Book/HBoxContainer/FullHeath{{i}}.texture = "res://Imports/FullHeath.png"
+
+##########################################
+##----------------DEBUG-----------------##
+##########################################
+
+func validation():
+	
+	$Stamine.text = str(stamine)
+	$Power.text = str(power)
+	$Book/Saldo.text = str("$",Global.saldo)
+	
+	if current_state == STATE.IDLE:
+		$Label.text = "IDLE"
+	if current_state == STATE.RUNNING:
+		$Label.text = "RUNNING"
+	if current_state == STATE.FALL:
+		$Label.text = "FALL"
+	if current_state == STATE.JUMP:
+		$Label.text = "JUMP"
+	if current_state == STATE.WALK:
+		$Label.text = "WALK"
+	if current_state == STATE.ATTACK:
+		$Label.text = "ATTACK"
+	if current_state == STATE.CLIMB:
+		$Label.text = "climb"
+	if current_state == STATE.ROLL:
+		$Label.text = "ROLL"
+	if current_state == STATE.SHOOT:
+		$Label.text = "SHOOT"
+	if current_state == STATE.SHEATHE:
+		$Label.text = "SHEATHE:"
+
+##########################################
+##--------------//DEBUG//---------------##
+##########################################
+
 
 
 
@@ -413,8 +481,7 @@ func inventory(delta):
 
 				var slot = $"Book/Cuadrilla".get_node(slot_name)
 
-				#slot.texture = load("res://icon.svg")
-				if item["Image"] != "":
+				if item.has("Image") and item["Image"] != "":
 					slot.texture = load(item["Image"])
 				else:
 					slot.texture = load("res://icon.svg")
@@ -456,17 +523,19 @@ func update_selected_item():
 	$Book/DetailItem/ItemCount.text = str(int(item["Cantidad"]))
 	$Book/DetailItem/Title.text = str(item["Name"])
 	$Book/DetailItem/State.text = str(item["Estado"])
-
+	if item.has("Image") and item["Image"] != "":
+		$Book/DetailItem/Item.texture = load(item["Image"])
+	else:
+		$Book/DetailItem/Item.texture = load("res://icon.svg")
+	
 	update_cursor()
 	update_quality(int(item["Calidad"]))
 
 func update_quality(value):
-
 	$Book/DetailItem/Calidad/Start.visible = value >= 0
 	$Book/DetailItem/Calidad/Start2.visible = value >= 1
 	$Book/DetailItem/Calidad/Start3.visible = value >= 2
 	$Book/DetailItem/Calidad/Start4.visible = value >= 3
-
 	match value:
 		0:
 			$Book/DetailItem/Calidad.modulate = Color.WHITE
@@ -495,34 +564,27 @@ func update_cursor():
 
 	$Book/Selector.global_position = slot.global_position
 
-#func _input(event):
-	#if !$Book.visible:
-		#return
-	#if event is InputEventMouseButton:
-		#if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			#for i in range(inventory_cache.size()):
-				#var item = inventory_cache[i]
-				#var slot_name = item["Slot"]
-				#if !$"Book/Cuadrilla".has_node(slot_name):
-					#continue
-				#var slot = $"Book/Cuadrilla".get_node(slot_name)
-				#if !slot:
-					#continue
-				#if !slot.texture:
-					#continue
-				#var texture_size = slot.texture.get_size()
-				#var rect = Rect2(
-					#slot.global_position - texture_size / 2,
-					#texture_size
-				#)
-				#if rect.has_point(event.position):
-					#selected_index = i
-					#update_selected_item()
-					#break
+func stadistic_player():
+	var hearts = [
+		$Book/HBoxContainer/FullHeath,
+		$Book/HBoxContainer/FullHeath2,
+		$Book/HBoxContainer/FullHeath3,
+		$Book/HBoxContainer/FullHeath4,
+		$Book/HBoxContainer/FullHeath5
+	]
+	for i in range(hearts.size()):
+
+		if i < live:
+			hearts[i].texture = preload("uid://de0gu8qmdu6om")
+		else:
+			hearts[i].texture = preload("uid://b3o0v5cn1cnme")
+	#for i in [1,2,3,4,5]:
+		#$Book/HBoxContainer/FullHeath{{i}}.texture = "res://Imports/FullHeath.png"
 
 ##########################################
 ##----------//INVENTARIO//--------------##
 ##########################################
+
 
 
 
@@ -532,11 +594,13 @@ func update_cursor():
 
 func _on_collect_body_entered(body: Node2D) -> void:
 	if body is Fruit or body is StaticFruit:
+		body.Selecte();
 		fruit = body
 		print("fruit")
 
 func _on_collect_body_exited(body: Node2D) -> void:
 	if body is Fruit or body is StaticFruit:
+		body.UnSelector();
 		fruit = null
 		print("no fruit")
 
@@ -555,6 +619,17 @@ func _on_animation_finished(anim_name):
 		current_state = STATE.IDLE
 	if anim_name == "ROLL":
 		current_state = STATE.WALK
+	if anim_name == "SHEATHE":
+		machete = false
+		update_machete()
+	if anim_name == "UNSHEATHE":
+		machete = true
+		update_machete()
+	current_state = STATE.IDLE
+
+func _on_timer_timeout():
+	if current_state == STATE.IDLE and machete:
+		current_state = STATE.SHEATHE
 
 ##########################################
 ##------------//Signal//----------------##

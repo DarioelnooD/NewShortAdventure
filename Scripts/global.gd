@@ -60,7 +60,7 @@ func put_last_position_in_door(name = "", x = 0, y = 0):
 	file_write.store_string(JSON.stringify(data))
 	print(data)
 
-func save_inventory(name = "", cantidad = 0, estado = "", calidad = 0):
+func save_inventory(name = "", cantidad = 0, estado = "", calidad = 0,Image = ""):
 	var data = get_last_position_in_door()
 	if name == "" or cantidad <= 0:
 		return
@@ -72,6 +72,7 @@ func save_inventory(name = "", cantidad = 0, estado = "", calidad = 0):
 		if  item["Name"] == clear_name(name) and item["Calidad"] == calidad:
 			item["Cantidad"] += cantidad
 			item["Estado"] = estado
+			item["Image"] = Image
 			exist = true
 			break
 	if !exist:
@@ -92,7 +93,8 @@ func save_inventory(name = "", cantidad = 0, estado = "", calidad = 0):
 			"Cantidad": cantidad,
 			"Estado": estado,
 			"Calidad": calidad,
-			"Slot": new_slot
+			"Slot": new_slot,
+			"Image": Image
 		})
 	var file_write = FileAccess.open(DATA_PLAYER, FileAccess.WRITE)
 	file_write.store_string(JSON.stringify(data))

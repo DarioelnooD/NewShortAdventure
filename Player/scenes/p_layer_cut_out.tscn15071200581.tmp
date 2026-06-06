@@ -16,11 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://claywbbse3gna" path="res://Player/Sprite/Vaina.png" id="6_ja273"]
 [ext_resource type="Texture2D" uid="uid://dsjnyk77ya3ec" path="res://Imports/Start.png" id="6_syvh5"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_2nkdj"]
-font_color = Color(0, 1, 0, 1)
-outline_size = 9
-outline_color = Color(0.20784314, 0.3647059, 0.2627451, 1)
-
 [sub_resource type="LabelSettings" id="LabelSettings_ma2e5"]
 font_color = Color(0.28235295, 0.09803922, 0, 1)
 outline_size = 5
@@ -5817,19 +5812,11 @@ collision_mask = 32768
 script = ExtResource("1_iwrfg")
 
 [node name="Book" type="Sprite2D" parent="." unique_id=1499193976]
+visible = false
 z_index = 10
 position = Vector2(-0.99999976, -34.000004)
 scale = Vector2(0.38671792, 0.51956534)
 texture = ExtResource("2_g4q1w")
-
-[node name="Saldo" type="Label" parent="Book" unique_id=1748213377]
-offset_left = 108.6063
-offset_top = -123.17989
-offset_right = 188.6063
-offset_bottom = -100.17989
-scale = Vector2(0.762069, 0.9831941)
-text = "$ 10.000"
-label_settings = SubResource("LabelSettings_2nkdj")
 
 [node name="Pulgares" type="Sprite2D" parent="Book" unique_id=1900458797]
 z_index = 2
@@ -5959,105 +5946,103 @@ scale = Vector2(1.426591, 0.851308)
 texture = ExtResource("3_a5oeh")
 
 [node name="0x0" type="TextureRect" parent="Book/Cuadrilla" unique_id=668726977]
-offset_left = -238.038
-offset_top = -106.26
-offset_right = -110.037994
-offset_bottom = 21.739998
+offset_left = -225.80342
+offset_top = -92.0151
+offset_right = -225.80342
+offset_bottom = -92.0151
 scale = Vector2(0.19421181, 0.21212494)
-size_flags_horizontal = 4
-size_flags_vertical = 4
 
 [node name="Cantidad" type="Label" parent="Book/Cuadrilla/0x0" unique_id=1112158360]
 layout_mode = 0
-offset_left = 96.344604
-offset_top = 63.94747
-offset_right = 136.3446
-offset_bottom = 86.94747
+offset_left = 31.999977
+offset_top = 7.1111164
+offset_right = 71.999985
+offset_bottom = 30.111116
 scale = Vector2(2.7349596, 3.0247245)
 text = "1"
 label_settings = SubResource("LabelSettings_ma2e5")
 
 [node name="0x1" type="TextureRect" parent="Book/Cuadrilla" unique_id=1119766792]
-offset_left = -210.264
-offset_top = -106.26
-offset_right = -210.264
-offset_bottom = -106.26
+offset_left = -198.873
+offset_top = -91.937
+offset_right = -198.873
+offset_bottom = -91.937
 scale = Vector2(0.19421181, 0.21212494)
 
 [node name="Cantidad" type="Label" parent="Book/Cuadrilla/0x1" unique_id=545842508]
 layout_mode = 0
-offset_left = 96.039
-offset_top = 63.947
-offset_right = 136.03944
-offset_bottom = 86.947
+offset_left = 37.825
+offset_top = 6.743
+offset_right = 77.82501
+offset_bottom = 29.743
 scale = Vector2(2.7349596, 3.0247245)
 text = "1"
 label_settings = SubResource("LabelSettings_ma2e5")
 
 [node name="0x2" type="TextureRect" parent="Book/Cuadrilla" unique_id=1646446321]
-offset_left = -184.887
-offset_top = -106.26029
-offset_right = -56.886993
-offset_bottom = 21.739708
+offset_left = -172.223
+offset_top = -91.937
+offset_right = -172.223
+offset_bottom = -91.937
 scale = Vector2(0.19421181, 0.21212494)
 
 [node name="Cantidad" type="Label" parent="Book/Cuadrilla/0x2" unique_id=1418638325]
 layout_mode = 0
-offset_left = 96.587
-offset_top = 63.949
-offset_right = 136.58731
-offset_bottom = 86.949005
+offset_left = 29.109
+offset_top = 6.743
+offset_right = 69.10902
+offset_bottom = 29.743
 scale = Vector2(2.7349596, 3.0247245)
 text = "1"
 label_settings = SubResource("LabelSettings_ma2e5")
 
 [node name="0x3" type="TextureRect" parent="Book/Cuadrilla" unique_id=799322250]
-offset_left = -159.51035
-offset_top = -106.26029
-offset_right = -159.51035
-offset_bottom = -106.26029
+offset_left = -145.978
+offset_top = -91.937
+offset_right = -145.978
+offset_bottom = -91.937
 scale = Vector2(0.19421181, 0.21212494)
 
 [node name="Cantidad" type="Label" parent="Book/Cuadrilla/0x3" unique_id=47267401]
 layout_mode = 0
-offset_left = 96.575
-offset_top = 63.949
-offset_right = 136.57489
-offset_bottom = 86.949005
+offset_left = 22.393
+offset_top = 6.743
+offset_right = 62.392998
+offset_bottom = 29.743
 scale = Vector2(2.7349596, 3.0247245)
 text = "1"
 label_settings = SubResource("LabelSettings_ma2e5")
 
 [node name="0x4" type="TextureRect" parent="Book/Cuadrilla" unique_id=1834633933]
-offset_left = -134.13371
-offset_top = -106.26029
-offset_right = -134.13371
-offset_bottom = -106.26029
+offset_left = -119.818
+offset_top = -91.937
+offset_right = -119.818
+offset_bottom = -91.937
 scale = Vector2(0.19421181, 0.21212494)
 
 [node name="Cantidad" type="Label" parent="Book/Cuadrilla/0x4" unique_id=1631978994]
 layout_mode = 0
-offset_left = 111.99844
-offset_top = 63.948853
-offset_right = 151.99844
-offset_bottom = 86.94885
+offset_left = 37.245
+offset_top = 6.743
+offset_right = 77.244995
+offset_bottom = 29.743
 scale = Vector2(2.7349596, 3.0247245)
 text = "1"
 label_settings = SubResource("LabelSettings_ma2e5")
 
 [node name="1x1" type="TextureRect" parent="Book/Cuadrilla" unique_id=438969474]
-offset_left = -237.868
-offset_top = -79.13
-offset_right = -109.868
-offset_bottom = 48.870003
+offset_left = -225.80342
+offset_top = -61.84621
+offset_right = -225.80342
+offset_bottom = -61.84621
 scale = Vector2(0.19421181, 0.21212494)
 
 [node name="Cantidad" type="Label" parent="Book/Cuadrilla/1x1" unique_id=490618856]
 layout_mode = 0
-offset_left = 95.874
-offset_top = 63.949
-offset_right = 135.87427
-offset_bottom = 86.949005
+offset_left = 32.51477
+offset_top = 18.042189
+offset_right = 72.51477
+offset_bottom = 41.04219
 scale = Vector2(2.7349596, 3.0247245)
 text = "1"
 label_settings = SubResource("LabelSettings_ma2e5")
@@ -6345,6 +6330,7 @@ scale = Vector2(1.6910336, 2.4051337)
 skew = -0.16100323
 collision_layer = 64
 collision_mask = 32
+script = ExtResource("6_g4q1w")
 
 [node name="Machete" type="Sprite2D" parent="Body/stomach/Machete" unique_id=486734315]
 position = Vector2(-119.356064, -47.953556)
@@ -6637,6 +6623,14 @@ position = Vector2(-1, -1)
 shape = SubResource("RectangleShape2D_iwrfg")
 debug_color = Color(0.8352941, 0, 0.85882354, 0.078431375)
 
+[node name="Saldo" type="Label" parent="." unique_id=1748213377]
+offset_left = -138.0
+offset_top = -113.0
+offset_right = -58.0
+offset_bottom = -90.0
+scale = Vector2(0.29935884, 0.377156)
+text = "12mangos"
+
 [node name="SafeFloor" type="Node2D" parent="." unique_id=98124163]
 
 [node name="right" type="RayCast2D" parent="SafeFloor" unique_id=188196391]
@@ -6652,7 +6646,7 @@ collision_mask = 32768
 hit_from_inside = true
 
 [node name="Timer" type="Timer" parent="." unique_id=1052194384]
-wait_time = 3.0
+wait_time = 10.0
 autostart = true
 
 [connection signal="area_shape_entered" from="collect" to="." method="_on_collect_area_shape_entered"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcg0ml2c30o6k"
-path="res://.godot/imported/Fresa.png-0b43442bbb89c478d9c2d2ce603666b5.ctex"
+uid="uid://q5dq4noatj1m"
+path="res://.godot/imported/SELECTED.png-7da8938964ab7a65d9801a13ab3e3472.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Fruits/Sprites/Fresa.png"
-dest_files=["res://.godot/imported/Fresa.png-0b43442bbb89c478d9c2d2ce603666b5.ctex"]
+source_file="res://Imports/SELECTED.png"
+dest_files=["res://.godot/imported/SELECTED.png-7da8938964ab7a65d9801a13ab3e3472.ctex"]
 
 [params]
 
