@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dycbl14hyfvbc"]
 
-[ext_resource type="Script" uid="uid://cdcguv8umbjyl" path="res://Player/Sprite/bullet.gd" id="1_lpn1l"]
+[ext_resource type="Script" uid="uid://cdcguv8umbjyl" path="res://Player/script/bullet.gd" id="1_lpn1l"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6wsyo"]
 

@@ -22,7 +22,6 @@ func get_live():
 		var data = JSON.parse_string(content)
 		return data["Vida"]
 
-
 func get_last_position_in_door(name = ''):
 	if FileAccess.file_exists(DATA_PLAYER):
 		var file = FileAccess.open(DATA_PLAYER, FileAccess.READ)

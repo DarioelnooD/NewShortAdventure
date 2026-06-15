@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 var jump_velocity = -250.0
+var climb_step = 0
+
 enum STATE {
 	IDLE,
 	RUNNING,
@@ -14,10 +16,28 @@ enum STATE {
 	SHEATHE,
 	SHOOT
 }
+enum CLIMB_LIMB {
+	LEFT_FOOT,
+	RIGHT_HAND,
+	RIGHT_FOOT,
+	LEFT_HAND
+}
 
 @onready var ray_climb: RayCast2D = $CollisionShape2D/RayCast2D
 @onready var f_rom: TileMapLayer = $"../Map/Back"
 const BULLET = preload("uid://dycbl14hyfvbc")
+
+var LeftHand 
+var RightHand 
+var LeftFoot 
+var RightFoot
+
+var TopLeftHand
+
+var MR: Area2D = null
+var ML: Area2D = null
+var FR: Area2D = null
+var FL: Area2D = null
 
 var speed = 150.0
 var top_speed = 150.0
@@ -38,7 +58,7 @@ var move_climb : float = 0.1
 var save_climb : float = 0.5
 var shoot := false
 var power := 0.0
-var _body
+var _area
 var menu: bool = false
 var live = Global.get_live()
 
@@ -50,6 +70,7 @@ var target_book_position := Vector2(-1, 494.0)
 
 var has_machete := true      
 var machete := false         
+@export var QuitWindows = false
 
 ##########################################
 ##----------------GODOT-----------------##
@@ -58,6 +79,8 @@ var machete := false
 func _ready():
 	connect_inventory_slots()
 	update_machete()
+	limbsControl()
+	
 	$Book.visible = true
 	$Book.position = Vector2(-1, 494.0)
 	$Camera2D.zoom = Vector2(2,2)
@@ -92,9 +115,16 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	stadistic_player()
 
+@onready var Nl = $"../Node2D/MeshInstance2D"
+
 func _process(delta: float) -> void:
 	if get_node(".").get_parent().name == "Pueblo":
 		$Camera2D.zoom = $Camera2D.zoom.lerp(Vector2(3.5, 3.5), 3.5 * delta)
+	DebugOption()
+	#print(Nl)
+
+	#if MR and ML and Input.is_action_pressed("ui_up") or FR and FL and Input.is_action_pressed("ui_up"):
+		#current_state = STATE.CLIMB
 	
 	delta = delta + 0
 	if $Body.scale.x < 0:
@@ -236,7 +266,7 @@ func statemachine():
 			if Input.is_action_just_pressed("JUMP"):
 				current_state = STATE.JUMP
 
-			if Input.is_action_just_pressed("ATTACK") and machete or Input.is_action_just_pressed("ATTACK") and _body or Input.is_action_just_pressed("ATTACK") and fruit: 
+			if Input.is_action_just_pressed("ATTACK") and machete or Input.is_action_just_pressed("ATTACK") and _area or Input.is_action_just_pressed("ATTACK") and fruit: 
 				current_state = STATE.ATTACK
 		STATE.FALL:
 			$AnimationPlayer.play("JUMP")
@@ -279,18 +309,18 @@ func statemachine():
 			if Input.is_action_just_pressed("JUMP"):
 				current_state = STATE.JUMP
 			
-			if Input.is_action_just_pressed("ATTACK") and machete or Input.is_action_just_pressed("ATTACK") and _body or Input.is_action_just_pressed("ATTACK") and fruit: 
+			if Input.is_action_just_pressed("ATTACK") and machete or Input.is_action_just_pressed("ATTACK") and _area or Input.is_action_just_pressed("ATTACK") and fruit: 
 				current_state = STATE.ATTACK
 		STATE.ATTACK:
 			velocity.x = 0
 			if $AnimationPlayer.current_animation == "COLLECT":
 				return
 			
-			if not fruit and not _body and machete:
+			if not fruit and not _area and machete:
 				$AnimationPlayer.play("ATTACK")
 				
-			if _body and _body.has_method("menu"):
-				_body.menu()
+			if _area and _area.has_method("menu"):
+				_area.menu()
 				menu = true
 			
 			if fruit and is_instance_valid(fruit) and !machete:
@@ -309,9 +339,9 @@ func statemachine():
 			
 			if menu:
 				if Input.is_action_just_pressed("Down"):
-					_body.selec1()
+					_area.selec1()
 				if Input.is_action_just_pressed("Up"):
-					_body.selec_1()
+					_area.selec_1()
 				
 				if Input.is_action_just_pressed("ATTACK"):
 					menu = false
@@ -346,35 +376,45 @@ func statemachine():
 				current_state = STATE.IDLE
 		STATE.SHOOT:
 			$Power.visible = true
+			machete = false
+			update_machete()
+			
 			$AnimationPlayer.play("Shoot")
+			
+			# 1. OBTENER POSICIONES
 			var mouse_pos = get_global_mouse_position()
-			$Body/stomach.look_at(mouse_pos)
+			var mouse_local = $Body/stomach.get_local_mouse_position()
+			var angle_to_mouse = mouse_local.angle()
+			var limit = deg_to_rad(45)
+
+			# 2. ROTACIÓN FLUIDA DE PECHO Y ESTÓMAGO
+			$Body/stomach/Chest.rotation = clamp(angle_to_mouse, -limit, limit)
+			var excess = angle_to_mouse - $Body/stomach/Chest.rotation
+
+			if abs(excess) > 0.001:
+				$Body/stomach.rotation += excess * 0.1
 			
-			# Dirección al mouse
-			var dir = mouse_pos - $Body/stomach.global_position
-			var angle = dir.angle()
-			# Ajustar ángulo cuando está volteado
-			if $Body.scale.x < 0:
-				angle += PI
-			# Limitar apuntado hacia abajo
-			var max_down = deg_to_rad(60) # máximo 60° abajo
-			if angle > max_down:
-				angle = max_down
-			
+			# 3. CONTROL DE INPUTS Y DISPARO
 			if Input.is_action_just_pressed("AIM"):
 				current_state = STATE.IDLE
+				
 			if Input.is_action_pressed("SHOOT"):
 				shoot = true
 				if power < 1000:
 					power += 10
 			elif shoot:
 				var bullet = BULLET.instantiate()
-				var direction = (
-					get_global_mouse_position() - global_position
-				).normalized()
-				bullet.global_position = $Body/stomach/Chest/LeftArmTop/LeftArmBottom/Hand.global_position
+				
+				# Guardamos la posición de la mano para usarla en ambos cálculos
+				var hand_pos = $Body/stomach/Chest/LeftArmTop/LeftArmBottom/Hand.global_position
+				
+				# Calculamos la dirección real desde la mano al mouse
+				var direction = (mouse_pos - hand_pos).normalized()
+				
+				bullet.global_position = hand_pos
 				bullet.apply_impulse(direction * power)
 				get_tree().current_scene.add_child(bullet)
+				
 				power = 0
 				shoot = false
 		STATE.SHEATHE:
@@ -398,22 +438,40 @@ func check_point(position_floor: Vector2):
 		save.pop_back()
 
 func detectar_arbol():
-	if _body and _body.name == "Tree":
-		if Input.is_action_pressed("Up") and stamine > 0:
+	if _area and _area.name == "Tree" or _area and _area.has_meta("Tree"):
+		if Input.is_action_pressed("Up") and stamine > 0 and _area != null:
 			if one_shot == false:
 				velocity.y = 0
 				one_shot = true
 			climb = true
-			velocity.y += -1
+			if velocity.y > -10:
+				velocity.y += -1
 			stamine -= move_climb
 		elif climb and stamine:
 			velocity.y = 0
 			stamine += -stattic_climb
+	else:
+		return
 
-func stop_attack():
-	current_state = STATE.IDLE
+func limbsControl():
+	LeftHand = $Body/stomach/Chest/LeftArmTop/LeftArmBottom/Hand/LeftHand
+	TopLeftHand = $Body/stomach/Chest/LeftArmTop
+	#/LeftArmBottom/Hand/LeftHand
+	RightHand = $Body/stomach/Chest/RightArmTop/RightArmBottom/Hand/RightHand
+	LeftFoot = $Body/Chip/LeftLegTop/LeftArmBottom/foot/LeftFoot
+	RightFoot = $Body/Chip/RightLegTop/RightArmBottom/foot/RightFoot
 
-
+	LeftHand.collision_layer = 1
+	LeftHand.collision_mask = 5
+	
+	RightHand.collision_layer = 1
+	RightHand.collision_mask = 5
+	
+	LeftFoot.collision_layer = 1
+	LeftFoot.collision_mask = 5
+	
+	RightFoot.collision_layer = 1
+	RightFoot.collision_mask = 5
 
 ##########################################
 ##----------------DEBUG-----------------##
@@ -445,6 +503,10 @@ func validation():
 		$Label.text = "SHOOT"
 	if current_state == STATE.SHEATHE:
 		$Label.text = "SHEATHE:"
+
+func DebugOption():
+	if QuitWindows:
+		get_tree().quit()
 
 ##########################################
 ##--------------//DEBUG//---------------##
@@ -606,13 +668,13 @@ func _on_collect_body_exited(body: Node2D) -> void:
 
 func _on_collect_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	if area is Area2D:
-		_body = area
-		print("body on: ", _body)
+		_area = area
+		print("body on: ", _area)
 
 func _on_collect_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	if area is Area2D:
-		_body = null
-		print("body off: ", _body)
+		_area = null
+		print("body off: ", _area)
 
 func _on_animation_finished(anim_name):
 	if anim_name == "ATTACK":
@@ -630,6 +692,53 @@ func _on_animation_finished(anim_name):
 func _on_timer_timeout():
 	if current_state == STATE.IDLE and machete:
 		current_state = STATE.SHEATHE
+
+func stop_attack():
+	current_state = STATE.IDLE
+
+###################
+##-----LIMBS-----##
+###################
+
+func _on_right_hand_area_entered(area: Area2D) -> void:
+	if area and area.name.contains("Tree") or area and area.has_meta("Tree"):
+		MR = area
+		print("mano derecha")
+
+func _on_right_hand_area_exited(area: Area2D) -> void:
+	if area and area.name.contains("Tree") or area and area.has_meta("Tree"):
+		MR = null
+
+func _on_left_hand_area_entered(area: Area2D) -> void:
+	if area and area.name.contains("Tree") or area and area.has_meta("Tree"):
+		ML = area
+		print("mano izquierdo")
+
+func _on_left_hand_area_exited(area: Area2D) -> void:
+	if area and area.name.contains("Tree") or area and area.has_meta("Tree"):
+		ML = null
+
+func _on_right_foot_area_entered(area: Area2D) -> void:
+	if area and area.name.contains("Tree") or area and area.has_meta("Tree"):
+		FR = area
+		print("pie derecho")
+
+func _on_right_foot_area_exited(area: Area2D) -> void:
+	if area and area.name.contains("Tree") or area and area.has_meta("Tree"):
+		FR = null
+
+func _on_left_foot_area_entered(area: Area2D) -> void:
+	if area and area.name.contains("Tree") or area and area.has_meta("Tree"):
+		FL = area
+		print("pie izquierdo")
+
+func _on_left_foot_area_exited(area: Area2D) -> void:
+	if area and area.name.contains("Tree") or area and area.has_meta("Tree"):
+		FL = null
+
+###################
+##----/LIMBS/----##
+###################
 
 ##########################################
 ##------------//Signal//----------------##

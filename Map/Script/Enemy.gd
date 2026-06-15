@@ -17,7 +17,7 @@ func damage():
 	live -= 10
 
 func _on_damage_detecte_body_entered(body: Node2D) -> void:
-	if body is Machete:
+	if body is StaticBody2D:
 		damage()
 		_body = body
 

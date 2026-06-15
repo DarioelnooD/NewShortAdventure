@@ -2,20 +2,20 @@
 
 [ext_resource type="Script" uid="uid://lrrgym5t5wf3" path="res://Map/Script/forest.gd" id="1_jgwiv"]
 [ext_resource type="Texture2D" uid="uid://cw3fvqtixuc2x" path="res://Map/Sprite/WhatsApp Image 2026-03-10 at 9.59.01 PM.jpeg" id="1_kn6gv"]
-[ext_resource type="Texture2D" uid="uid://dty2obg5ac6kq" path="res://Imports/tree.png" id="2_qk3w3"]
+[ext_resource type="Texture2D" uid="uid://dty2obg5ac6kq" path="res://Trees/Sprites/tree.png" id="2_qk3w3"]
 [ext_resource type="PackedScene" uid="uid://djnbnrh6864h" path="res://Fruits/Scene/MangoStatic.tscn" id="3_55eto"]
-[ext_resource type="Texture2D" uid="uid://blme2fe6soubq" path="res://Imports/ArbolitoPlaceHolder.png" id="4_55eto"]
+[ext_resource type="Texture2D" uid="uid://blme2fe6soubq" path="res://Trees/Sprites/ArbolitoPlaceHolder.png" id="4_55eto"]
 [ext_resource type="PackedScene" uid="uid://dkj47x8n1761e" path="res://Player/scenes/p_layer_cut_out.tscn" id="4_sdm13"]
 [ext_resource type="PackedScene" uid="uid://5ngtd7hr1xsp" path="res://Fruits/Scene/manog.tscn" id="6_6bbhi"]
+[ext_resource type="PackedScene" uid="uid://bj0p0y5sivu27" path="res://Trees/Scenes/GuanabanaTree.tscn" id="7_dqupq"]
 [ext_resource type="Script" uid="uid://bkelwo21m1gmc" path="res://Map/Script/Enemy.gd" id="7_iygwd"]
-[ext_resource type="Texture2D" uid="uid://ctld5gjjcqerl" path="res://Imports/Tree5.png" id="7_tw6ja"]
 [ext_resource type="PackedScene" uid="uid://qvh7e60i0tsn" path="res://Fruits/Scene/Guanabana.tscn" id="8_dqupq"]
 [ext_resource type="Texture2D" uid="uid://cbd4i10ryu0sr" path="res://Imports/FlashLitgh.png" id="9_50a85"]
 [ext_resource type="Texture2D" uid="uid://r6psrb128qp2" path="res://Imports/primerosPostesPuenteFront.png" id="10_hyipq"]
-[ext_resource type="Texture2D" uid="uid://ctesar1gn2kcs" path="res://Imports/tree2.png" id="10_jc00b"]
+[ext_resource type="Texture2D" uid="uid://ctesar1gn2kcs" path="res://Trees/Sprites/tree2.png" id="10_jc00b"]
 [ext_resource type="Texture2D" uid="uid://c27cj83k6h3y" path="res://Imports/primerosPostesPuenteBack.png" id="12_ixca2"]
-[ext_resource type="Texture2D" uid="uid://d2c7ybughuwts" path="res://Imports/Tree3.png" id="13_ixca2"]
-[ext_resource type="Texture2D" uid="uid://bfn3vvx8dxssn" path="res://Imports/Tree4.png" id="14_msq41"]
+[ext_resource type="Texture2D" uid="uid://d2c7ybughuwts" path="res://Trees/Sprites/Tree3.png" id="13_ixca2"]
+[ext_resource type="Texture2D" uid="uid://bfn3vvx8dxssn" path="res://Trees/Sprites/Tree4.png" id="14_msq41"]
 [ext_resource type="Texture2D" uid="uid://eovjo72g0cc5" path="res://Imports/Prueba_de_Cespet1.png" id="15_pc4yx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jgwiv"]
@@ -311,19 +311,23 @@ position = Vector2(751.99994, 833)
 scale = Vector2(0.44166666, 0.4888889)
 texture = ExtResource("2_qk3w3")
 
-[node name="Tree12" type="Sprite2D" parent="Base" unique_id=1006992919]
-position = Vector2(575, 969)
-scale = Vector2(0.21690758, 0.22464326)
-texture = ExtResource("7_tw6ja")
+[node name="GuanabanaTree" parent="Base" unique_id=173980537 instance=ExtResource("7_dqupq")]
+position = Vector2(568.00006, 956)
+scale = Vector2(0.34326482, 0.32321456)
+collision_layer = 16
+metadata/Tree = true
 
-[node name="Guanabana" parent="Base/Tree12" unique_id=965687467 instance=ExtResource("8_dqupq")]
-position = Vector2(142.91809, 329.41113)
+[node name="Guanabana" parent="Base/GuanabanaTree" unique_id=965687467 instance=ExtResource("8_dqupq")]
+position = Vector2(107.78845, 281.54654)
+scale = Vector2(0.6318957, 0.69502825)
 
-[node name="Guanabana2" parent="Base/Tree12" unique_id=1442556596 instance=ExtResource("8_dqupq")]
-position = Vector2(-129.08728, 351.66846)
+[node name="Guanabana2" parent="Base/GuanabanaTree" unique_id=1442556596 instance=ExtResource("8_dqupq")]
+position = Vector2(-64.09064, 297.01578)
+scale = Vector2(0.6318957, 0.69502825)
 
-[node name="Guanabana3" parent="Base/Tree12" unique_id=1394094010 instance=ExtResource("8_dqupq")]
-position = Vector2(-4.6102295, 338.31396)
+[node name="Guanabana3" parent="Base/GuanabanaTree" unique_id=1394094010 instance=ExtResource("8_dqupq")]
+position = Vector2(14.565857, 287.73404)
+scale = Vector2(0.6318957, 0.69502825)
 
 [node name="Tree7" type="Sprite2D" parent="Base" unique_id=1417827797]
 z_index = -5

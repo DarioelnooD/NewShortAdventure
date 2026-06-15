@@ -5,9 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://dv8ifpexxu628" path="res://Map/Sprite/SkyTemplate.webp" id="1_iowgq"]
 [ext_resource type="Texture2D" uid="uid://cw3fvqtixuc2x" path="res://Map/Sprite/WhatsApp Image 2026-03-10 at 9.59.01 PM.jpeg" id="2_fh5v5"]
 [ext_resource type="PackedScene" uid="uid://dkj47x8n1761e" path="res://Player/scenes/p_layer_cut_out.tscn" id="5_fds0u"]
-[ext_resource type="Texture2D" uid="uid://dty2obg5ac6kq" path="res://Imports/tree.png" id="6_mg86x"]
-[ext_resource type="Texture2D" uid="uid://bfn3vvx8dxssn" path="res://Imports/Tree4.png" id="7_gm2te"]
-[ext_resource type="Texture2D" uid="uid://d2c7ybughuwts" path="res://Imports/Tree3.png" id="8_xh35e"]
+[ext_resource type="Texture2D" uid="uid://dty2obg5ac6kq" path="res://Trees/Sprites/tree.png" id="6_mg86x"]
+[ext_resource type="Texture2D" uid="uid://bfn3vvx8dxssn" path="res://Trees/Sprites/Tree4.png" id="7_gm2te"]
+[ext_resource type="Texture2D" uid="uid://d2c7ybughuwts" path="res://Trees/Sprites/Tree3.png" id="8_xh35e"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iowgq"]
 texture = ExtResource("2_fh5v5")

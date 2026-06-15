@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://cnotd6hyigsgb"]
+
+[ext_resource type="PackedScene" uid="uid://bj0p0y5sivu27" path="res://Trees/Scenes/GuanabanaTree.tscn" id="1_mkrf8"]
+[ext_resource type="PackedScene" uid="uid://dkj47x8n1761e" path="res://Player/scenes/p_layer_cut_out.tscn" id="2_logde"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ibe6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mkrf8"]
+
+[node name="Node2D" type="Node2D" unique_id=1171765495]
+
+[node name="GuanabanaTree" parent="." unique_id=173980537 instance=ExtResource("1_mkrf8")]
+position = Vector2(352, 212)
+
+[node name="base" type="StaticBody2D" parent="." unique_id=199393625]
+position = Vector2(568, 723)
+scale = Vector2(73.47323, 16.37876)
+collision_layer = 32768
+
+[node name="ColorRect" type="ColorRect" parent="base" unique_id=1574524032]
+offset_left = -10.000002
+offset_top = -10.0
+offset_right = 26.318708
+offset_bottom = 33.784008
+scale = Vector2(0.5506804, 0.4567878)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="base" unique_id=891698465]
+shape = SubResource("RectangleShape2D_6ibe6")
+
+[node name="PLayerCutOut" parent="." unique_id=264839427 instance=ExtResource("2_logde")]
+position = Vector2(406, 505)
+
+[node name="Node2D" type="Node2D" parent="." unique_id=378252090]
+position = Vector2(530, 504)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Node2D" unique_id=1851198202]
+scale = Vector2(5.3147597, 5.857299)
+mesh = SubResource("BoxMesh_mkrf8")

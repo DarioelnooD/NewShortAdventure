@@ -12,4 +12,7 @@ func Fruit() -> void:
 	queue_free()
 
 func Selecte():
-	$Selector.visibility = !$Selector.visibility
+	$Selector.visible = true
+
+func UnSelector():
+	$Selector.visible = false

@@ -28,7 +28,8 @@ folder_colors={
 "res://Imports/": "orange",
 "res://Map/": "teal",
 "res://Npc`s/": "pink",
-"res://Player/": "red"
+"res://Player/": "red",
+"res://Trees/": "yellow"
 }
 
 [filesystem]

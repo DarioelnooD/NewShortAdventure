@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfn3vvx8dxssn"
-path="res://.godot/imported/Tree4.png-455668ee44272b200b4e3c40a42193ba.ctex"
+uid="uid://c0slwqcg460s2"
+path="res://.godot/imported/libroSpiteSheet.png-32aca2678d84597e32a80076170fe349.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Imports/Tree4.png"
-dest_files=["res://.godot/imported/Tree4.png-455668ee44272b200b4e3c40a42193ba.ctex"]
+source_file="res://Player/Sprite/placeholder/libroSpiteSheet.png"
+dest_files=["res://.godot/imported/libroSpiteSheet.png-32aca2678d84597e32a80076170fe349.ctex"]
 
 [params]
 

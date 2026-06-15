@@ -17,10 +17,14 @@ func _physics_process(delta):
 
 func data():
 	return {
-		"Nombre": "Fruta",
+		"Nombre": "nombre",
+		"Tipo": "tipo",
+		"Tiempo_crecimiento": "tiempo_crecimiento",
 		"Estado": "Fresco",
-		"Calidad": 1,
-		"Image": ""
+		"Calidad": 3,
+		"Descripcion": "descripcion",
+		"Precio_Base": "precio",
+		"Image": "sprite_path",
 	}
 
 func _integrate_forces(state):

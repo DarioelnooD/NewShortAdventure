@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://67vuwyqjnko0"
-path="res://.godot/imported/RollSpriteSheet.png-aa8ad356165ecc8e2a39bf0a1fea800d.ctex"
+uid="uid://xiil23t78t1y"
+path="res://.godot/imported/PlaceholderAnimationBook.png-f8e4d1a12461c6df546f97dd5f5326d9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Player/Sprite/RollSpriteSheet.png"
-dest_files=["res://.godot/imported/RollSpriteSheet.png-aa8ad356165ecc8e2a39bf0a1fea800d.ctex"]
+source_file="res://Imports/PlaceholderAnimationBook.png"
+dest_files=["res://.godot/imported/PlaceholderAnimationBook.png-f8e4d1a12461c6df546f97dd5f5326d9.ctex"]
 
 [params]
 

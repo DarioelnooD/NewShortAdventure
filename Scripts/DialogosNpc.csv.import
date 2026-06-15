@@ -1,0 +1,16 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://ced0i2lw5m5tm"
+
+[deps]
+
+source_file="res://Scripts/DialogosNpc.csv"
+
+[params]
+
+compress=0
+delimiter=1
+unescape_keys=false
+unescape_translations=true
