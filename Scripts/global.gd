@@ -1,12 +1,21 @@
 extends Node
 
 const DATA_PLAYER = "res://Scripts/DataPlayer.json"
+enum language {
+	DIalogo_eS,
+	DIalogo_eN
+}
 
 var inicio := false
 
 var last_scene: PackedScene;
+var ultima_escena
 var save_position : Vector2
 var saldo: float = get_saldo()
+var lenguaje: language = language.DIalogo_eS;
+
+func _ready() -> void:
+	pass
 
 func get_saldo():
 	if FileAccess.file_exists(DATA_PLAYER):

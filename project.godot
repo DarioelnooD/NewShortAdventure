@@ -13,7 +13,7 @@ config_version=5
 config/name="NewShortAdventure"
 config/version="0.0.1"
 run/main_scene="uid://bxcbd744bhkpe"
-config/features=PackedStringArray("4.6", "Forward Plus")
+config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="uid://brewge6lsnji8"
 
 [autoload]
@@ -24,6 +24,7 @@ DataManager="*uid://dnq3mh5uytjrg"
 [file_customization]
 
 folder_colors={
+"res://Assets/": "gray",
 "res://Fruits/": "yellow",
 "res://Imports/": "orange",
 "res://Map/": "teal",
@@ -111,6 +112,7 @@ CROUCH={
 2d_physics/layer_5="Tree"
 2d_physics/layer_6="Enemy"
 2d_physics/layer_7="Machete"
+2d_physics/layer_8="NPC"
 2d_physics/layer_16="Floor"
 
 [physics]

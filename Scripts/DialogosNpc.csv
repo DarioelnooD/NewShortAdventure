@@ -1,22 +1,8 @@
-BASE DE DATOS DE ÍTEMS,,,,,,
-Id,Nombre,Tipo,TiempoCreciento(Dias),Descripcion,Precio Base,SPRITE
-1,Cilantro,Neutra,4,"Crece rapidísimo, ideal para ganar dinero rápido a mitad de año.", $200.00 ,-
-2,Lechuga,Desfogue,6,Le sienta bien el clima despejado de esta época., $500.00 ,-
-3,Habichuela,Florecimiento,7, Aprovecha la humedad de la transición a las lluvias.," $1,200.00 ",-
-4,Tomate Chonto,Desfogue,10,El sol de esta estación evita que los tomates se dañen., $700.00 ,-
-5,Zanahoria,Cosecha,11,Necesita la tierra húmeda de la época de lluvias mayores., $300.00 ,-
-6,Papa Criolla,Cosecha,12,Un clásico del Oriente antioqueño que madura bajo las lluvias., $600.00 ,-
-7,Maíz Capio,Florecimiento,14,Se siembra a mitad de la Época de Florecimiento y se cosecha a principios de la Época Neutra., $500.00 ,-
-8,Fríjol Cargamanto,Desfogue,14,Se seca perfectamente bajo el sol de esta temporada.," $2,500.00 ",-
-9,Yuca,Neutra,26,Se siembra a finales de la Época de Cosecha y se desentierra en la Época de Desfogue.," $3,000.00 ",-
-10,Uchuva,Neutra,15,Produce frutos cada 4 días durante esta estación," $5,000.00 ",-
-11,Mora de Castilla,Desfogue,20,Da las moras más dulces en el calor de esta época," $1,500.00 ",-
-12,Lulo,Florecimiento,24,Época de Florecimiento y se extiende hasta la Época Neutra.," $1,500.00 ",-
-13,Tomate de Árbol,Cosecha,28,Da frutos medianos continuamente en los días lluviosos," $1,600.00 ",-
-14,Granadilla,Cosecha,22,Requiere una estructura de enredadera," $1,000.00 ",-
-15,Maracuyá,Neutra,20,El sol de esta época le da su toque ácido y jugoso.," $1,300.00 ",-
-16,Guanábana,Florecimiento,45,deja caer frutos gigantes a finales de año.," $5,000.00 ",res://Fruits/Sprites/Guanabana.png
-17,Aguacate Hass,Cosecha,60,Cosecha principal del año en el juego, $500.00 ,-
-18,Plátano Hartón,Desfogue,30,"Sembres cuando lo siembres, tarda exactamente una estación en dar su único gran racimo, luego el tallo muere y debes plantar otro"," $5,000.00 ",-
-19,Cafe,Cosecha,25,"Se mantiene verde el resto del año, pero sus cerezas rojas solo se pueden recolectar durante toda la 2. Época de Cosecha (Cada 3 días)."," $2,000.00 ",-
-20,Mango Tomy,Neutra,60,"Durante estos 30 días, el árbol dejará caer mangos maduros al suelo"," $2,000.00 ",res://Fruits/Sprites/Mango.png
+BASE DE DATOS DE ÍTEMS,,,,
+Id,Nombre,DIalogo_eS,DIalogo_eN,Emocion
+1,Alvaro,hola,hello,Happy
+2,Alvaro,por la tarde el bosque ya da mal yu yu,"by the afternoon, the forest already gives off creepy vibes / gets eerie",Meh
+3,Alvaro,"mi hermana decidio ir al bosque por la noche, y ya hace un mes que no la veo","my sister decided to go to the forest at night, and I haven't seen her for a month now",Sad
+4,Alvaro,a lo mejor le gusto el pueblo vecino ,maybe she liked the neighboring town,Sad
+5,Alvaro,y no se despidio,and didn't say goodbye,Angry
+6,Alvaro,espero este bien ,I hope she's okay,Meh

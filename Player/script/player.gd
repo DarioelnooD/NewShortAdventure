@@ -22,6 +22,12 @@ enum CLIMB_LIMB {
 	RIGHT_FOOT,
 	LEFT_HAND
 }
+enum STATE_BOOK {
+	INVENTORY,
+	SETTINGS,
+	SHOP,
+	MAP
+}
 
 @onready var ray_climb: RayCast2D = $CollisionShape2D/RayCast2D
 @onready var f_rom: TileMapLayer = $"../Map/Back"
@@ -42,6 +48,7 @@ var FL: Area2D = null
 var speed = 150.0
 var top_speed = 150.0
 var current_state: STATE
+var current_state_book: STATE_BOOK
 var save: Array = []
 var dead_zone = 1000
 var coyote_time := 0.15
@@ -61,13 +68,14 @@ var power := 0.0
 var _area
 var menu: bool = false
 var live = Global.get_live()
-
+var NPC:CharacterBody2D;
 var selected_index := 0
 var inventory_cache := []
 
 var book_open := false
 var target_book_position := Vector2(-1, 494.0)
 
+var talking := false
 var has_machete := true      
 var machete := false         
 @export var QuitWindows = false
@@ -81,11 +89,13 @@ func _ready():
 	update_machete()
 	limbsControl()
 	
+	Global.ultima_escena = get_tree().current_scene.scene_file_path
 	$Book.visible = true
 	$Book.position = Vector2(-1, 494.0)
 	$Camera2D.zoom = Vector2(2,2)
 	stamine = top_climb
 	current_state = STATE.IDLE
+	#current_state = STATE.CLIMB
 	$AnimationPlayer.animation_finished.connect(_on_animation_finished)
 	var scene = get_tree().current_scene.name
 	if scene == "Forest":
@@ -115,17 +125,11 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	stadistic_player()
 
-@onready var Nl = $"../Node2D/MeshInstance2D"
-
 func _process(delta: float) -> void:
 	if get_node(".").get_parent().name == "Pueblo":
 		$Camera2D.zoom = $Camera2D.zoom.lerp(Vector2(3.5, 3.5), 3.5 * delta)
 	DebugOption()
-	#print(Nl)
 
-	#if MR and ML and Input.is_action_pressed("ui_up") or FR and FL and Input.is_action_pressed("ui_up"):
-		#current_state = STATE.CLIMB
-	
 	delta = delta + 0
 	if $Body.scale.x < 0:
 		$CollisionShape2D/RayCast2D.position.x = -3
@@ -144,7 +148,7 @@ func _process(delta: float) -> void:
 	)
 
 ##########################################
-##--------------//GODOT//----------------##
+##--------------//GODOT//---------------##
 ##########################################
 
 
@@ -153,6 +157,10 @@ func update_machete():
 	$Body/stomach/Machete.visible = has_machete and !machete
 
 func move_set():
+	if talking:
+		velocity.x = 0
+		return
+	
 	if Input.is_action_just_pressed("JUMP") and coyote_timer > 0 or Input.is_action_just_pressed("JUMP") and climb:
 		climb = false
 		velocity.y = jump_velocity
@@ -202,10 +210,11 @@ func move_set():
 			one_shot = false
 	
 	# Flip del sprite
-	if direction < 0:
-		$Body.scale.x = -0.029
-	elif direction > 0:
-		$Body.scale.x = 0.029
+	if !climb:
+		if direction < 0:
+			$Body.scale.x = -0.029
+		elif direction > 0:
+			$Body.scale.x = 0.029
 
 	if direction != 0:
 		velocity.x = direction * speed
@@ -232,7 +241,7 @@ func statemachine():
 				
 			if Input.is_action_just_pressed("ATTACK"): 
 				current_state = STATE.ATTACK
-			
+				
 			if velocity.y > 0:
 				current_state = STATE.FALL
 			
@@ -323,6 +332,19 @@ func statemachine():
 				_area.menu()
 				menu = true
 			
+			if NPC and NPC.has_method("dialog"):
+				if !talking:
+					talking = true
+					if machete:
+						machete = false
+						menu = true
+					NPC.dialog()
+				elif Input.is_action_just_pressed("ATTACK"):
+					NPC.dialog()
+					if not NPC.is_dialog:
+						talking = false
+						menu = false
+				
 			if fruit and is_instance_valid(fruit) and !machete:
 				$AnimationPlayer.play("COLLECT")
 				var item = fruit.data()
@@ -352,20 +374,29 @@ func statemachine():
 				#$AnimationPlayer.play("ATTACK")
 			#current_state = STATE.IDLE
 			
-			if !machete and menu == false: 
+			if !machete and menu == false and !talking: 
 				current_state = STATE.SHEATHE
 		STATE.CLIMB:
-			velocity = Vector2.ZERO
-			jump_velocity = -350
-			stamine += -stattic_climb
-			#climb = true
-			$AnimationPlayer.play("CLIMB")
-			if stamine < 0:
-				current_state = STATE.IDLE
-				#climb = false
+				
+			if Input.is_action_pressed("Up"):
+				position.y -= 0.5
+
+			if Input.is_action_pressed("Down"):
+				position.y += 0.5
+			
 			if Input.is_action_just_pressed("JUMP"):
-				velocity.y = jump_velocity;
 				current_state = STATE.JUMP
+			climb = true
+			
+			if MR:
+				var target_r = get_closest_hold_point(MR, $Body/stomach/Chest/RightArmTop.global_position)
+				$Body/stomach/Chest/RightArmTop.look_at(target_r)
+				$Body/stomach/Chest/RightArmTop/RightArmBottom.look_at(target_r)
+				
+			if ML:
+				var target_l = get_closest_hold_point(ML, $Body/stomach/Chest/LeftArmTop.global_position)
+				$Body/stomach/Chest/LeftArmTop.look_at(target_l)
+				$Body/stomach/Chest/LeftArmTop/LeftArmBottom.look_at(target_l)
 		STATE.ROLL:
 			if $AnimationPlayer.current_animation != "ROLL":
 				$AnimationPlayer.play("ROLL")
@@ -473,6 +504,17 @@ func limbsControl():
 	RightFoot.collision_layer = 1
 	RightFoot.collision_mask = 5
 
+func get_closest_hold_point(node: Node, hand_position: Vector2) -> Vector2:
+	var hold_points = node.get_node("HoldPoints")
+	var closest_pos = hold_points.get_children()[0].global_position
+	var closest_dist = hand_position.distance_to(closest_pos)
+	for point in hold_points.get_children():
+		var dist = hand_position.distance_to(point.global_position)
+		if dist < closest_dist:
+			closest_dist = dist
+			closest_pos = point.global_position
+	return closest_pos
+
 ##########################################
 ##----------------DEBUG-----------------##
 ##########################################
@@ -481,7 +523,7 @@ func validation():
 	
 	$Stamine.text = str(stamine)
 	$Power.text = str(power)
-	$Book/Saldo.text = str("$",Global.saldo)
+	$Book/Inventario/Saldo.text = str("$",Global.saldo)
 	
 	if current_state == STATE.IDLE:
 		$Label.text = "IDLE"
@@ -508,6 +550,22 @@ func DebugOption():
 	if QuitWindows:
 		get_tree().quit()
 
+@export var zoom_speed := 0.1
+@export var min_zoom := 0.5
+@export var max_zoom := 14.0
+
+func _unhandled_input(event):
+	if event is InputEventMouseButton and event.pressed:
+
+		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			var z = $Camera2D.zoom.x - zoom_speed
+			z = clamp(z, min_zoom, max_zoom)
+			$Camera2D.zoom = Vector2(z, z)
+
+		elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			var z = $Camera2D.zoom.x + zoom_speed
+			z = clamp(z, min_zoom, max_zoom)
+			$Camera2D.zoom = Vector2(z, z)
 ##########################################
 ##--------------//DEBUG//---------------##
 ##########################################
@@ -520,6 +578,7 @@ func DebugOption():
 ##########################################
 
 func inventory(delta):
+	state_machine_book()
 	$Book.position = $Book.position.lerp(
 		target_book_position,
 		8.0 * delta
@@ -538,10 +597,10 @@ func inventory(delta):
 				var item = inventory_cache[i]
 				var slot_name = item["Slot"]
 
-				if !$"Book/Cuadrilla".has_node(slot_name):
+				if !$Book/Inventario/Cuadrilla.has_node(slot_name):
 					continue
 
-				var slot = $"Book/Cuadrilla".get_node(slot_name)
+				var slot = $Book/Inventario/Cuadrilla.get_node(slot_name)
 
 				if item.has("Image") and item["Image"] != "":
 					slot.texture = load(item["Image"])
@@ -559,7 +618,7 @@ func inventory(delta):
 			$Book.visible = false
 
 func connect_inventory_slots():
-	for child in $"Book/Cuadrilla".get_children():
+	for child in $"Book/Inventario/Cuadrilla".get_children():
 		child.gui_input.connect(_on_slot_gui_input.bind(child))
 
 func _on_slot_gui_input(event: InputEvent, slot):
@@ -582,31 +641,31 @@ func update_selected_item():
 
 	var item = inventory_cache[selected_index]
 
-	$Book/DetailItem/ItemCount.text = str(int(item["Cantidad"]))
-	$Book/DetailItem/Title.text = str(item["Name"])
-	$Book/DetailItem/State.text = str(item["Estado"])
+	$Book/Inventario/DetailItem/ItemCount.text = str(int(item["Cantidad"]))
+	$Book/Inventario/DetailItem/Title.text = str(item["Name"])
+	$Book/Inventario/DetailItem/State.text = str(item["Estado"])
 	if item.has("Image") and item["Image"] != "":
-		$Book/DetailItem/Item.texture = load(item["Image"])
+		$Book/Inventario/DetailItem/Item.texture = load(item["Image"])
 	else:
-		$Book/DetailItem/Item.texture = load("res://icon.svg")
+		$Book/Inventario/DetailItem/Item.texture = load("res://icon.svg")
 	
 	update_cursor()
 	update_quality(int(item["Calidad"]))
 
 func update_quality(value):
-	$Book/DetailItem/Calidad/Start.visible = value >= 0
-	$Book/DetailItem/Calidad/Start2.visible = value >= 1
-	$Book/DetailItem/Calidad/Start3.visible = value >= 2
-	$Book/DetailItem/Calidad/Start4.visible = value >= 3
+	$Book/Inventario/DetailItem/Calidad/Start.visible = value >= 0
+	$Book/Inventario/DetailItem/Calidad/Start2.visible = value >= 1
+	$Book/Inventario/DetailItem/Calidad/Start3.visible = value >= 2
+	$Book/Inventario/DetailItem/Calidad/Start4.visible = value >= 3
 	match value:
 		0:
-			$Book/DetailItem/Calidad.modulate = Color.WHITE
+			$Book/Inventario/DetailItem/Calidad.modulate = Color.WHITE
 		1:
-			$Book/DetailItem/Calidad.modulate = Color("#979797")
+			$Book/Inventario/DetailItem/Calidad.modulate = Color("#979797")
 		2:
-			$Book/DetailItem/Calidad.modulate = Color("#ff9871")
+			$Book/Inventario/DetailItem/Calidad.modulate = Color("#ff9871")
 		3:
-			$Book/DetailItem/Calidad.modulate = Color("#e9c63e")
+			$Book/Inventario/DetailItem/Calidad.modulate = Color("#e9c63e")
 
 func update_cursor():
 
@@ -619,20 +678,20 @@ func update_cursor():
 	var item = inventory_cache[selected_index]
 	var slot_name = item["Slot"]
 
-	if !$"Book/Cuadrilla".has_node(slot_name):
+	if !$"Book/Inventario/Cuadrilla".has_node(slot_name):
 		return
 
-	var slot = $"Book/Cuadrilla".get_node(slot_name)
+	var slot = $"Book/Inventario/Cuadrilla".get_node(slot_name)
 
-	$Book/Selector.global_position = slot.global_position
+	$Book/Inventario/Selector.global_position = slot.global_position
 
 func stadistic_player():
 	var hearts = [
-		$Book/HBoxContainer/FullHeath,
-		$Book/HBoxContainer/FullHeath2,
-		$Book/HBoxContainer/FullHeath3,
-		$Book/HBoxContainer/FullHeath4,
-		$Book/HBoxContainer/FullHeath5
+		$Book/Inventario/HBoxContainer/FullHeath,
+		$Book/Inventario/HBoxContainer/FullHeath2,
+		$Book/Inventario/HBoxContainer/FullHeath3,
+		$Book/Inventario/HBoxContainer/FullHeath4,
+		$Book/Inventario/HBoxContainer/FullHeath5
 	]
 	for i in range(hearts.size()):
 
@@ -643,6 +702,35 @@ func stadistic_player():
 	#for i in [1,2,3,4,5]:
 		#$Book/HBoxContainer/FullHeath{{i}}.texture = "res://Imports/FullHeath.png"
 
+func state_machine_book():
+	match current_state_book:
+		STATE_BOOK.INVENTORY:
+			$Book/Inventario.visible = true
+			$Book/Map.visible = false
+			$Book/Shop.visible = false
+			$Book/Settings.visible = false
+			#$Book/AnimationPlayer.play_backwards("ChangePage")
+			
+		STATE_BOOK.SETTINGS:
+			$Book/Inventario.visible = false
+			$Book/Map.visible = false
+			$Book/Shop.visible = false
+			$Book/Settings.visible = true
+			#$Book/AnimationPlayer.play("ChangePage")
+
+		STATE_BOOK.SHOP:
+			$Book/Inventario.visible = false
+			$Book/Map.visible = false
+			$Book/Shop.visible = true
+			$Book/Settings.visible = false
+			#$Book/AnimationPlayer.play("ChangePage")
+
+		STATE_BOOK.MAP:
+			$Book/Inventario.visible = false
+			$Book/Map.visible = true
+			$Book/Shop.visible = false
+			$Book/Settings.visible = false
+			#$Book/AnimationPlayer.play("ChangePage")
 ##########################################
 ##----------//INVENTARIO//--------------##
 ##########################################
@@ -659,22 +747,33 @@ func _on_collect_body_entered(body: Node2D) -> void:
 		body.Selecte();
 		fruit = body
 		print("fruit")
+	
+	elif body is CharacterBody2D:
+		if body.has_method("Bocadillo"): body.Bocadillo()
+		NPC = body
 
 func _on_collect_body_exited(body: Node2D) -> void:
 	if body is Fruit or body is StaticFruit:
 		body.UnSelector();
 		fruit = null
 		print("no fruit")
+	elif body is CharacterBody2D:
+		if body.has_method("Bocadillo"): body.Bocadillo()
+		NPC = body
+	
+	elif body is CharacterBody2D:
+		if body.has_method("Bocadillo"): body.Bocadillo()
+		NPC = body
 
 func _on_collect_area_shape_entered(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	if area is Area2D:
 		_area = area
-		print("body on: ", _area)
+		print("area on: ", _area)
 
 func _on_collect_area_shape_exited(area_rid: RID, area: Area2D, area_shape_index: int, local_shape_index: int) -> void:
 	if area is Area2D:
 		_area = null
-		print("body off: ", _area)
+		print("area off: ", _area)
 
 func _on_animation_finished(anim_name):
 	if anim_name == "ATTACK":
@@ -690,7 +789,7 @@ func _on_animation_finished(anim_name):
 	current_state = STATE.IDLE
 
 func _on_timer_timeout():
-	if current_state == STATE.IDLE and machete:
+	if current_state == STATE.IDLE and machete and !talking:
 		current_state = STATE.SHEATHE
 
 func stop_attack():
@@ -739,6 +838,18 @@ func _on_left_foot_area_exited(area: Area2D) -> void:
 ###################
 ##----/LIMBS/----##
 ###################
+
+func _on_map_tip_pressed() -> void:
+	current_state_book = STATE_BOOK.MAP
+
+func _on_invent_trip_pressed() -> void:
+	current_state_book = STATE_BOOK.INVENTORY
+	
+func _on_shop_t_ip_pressed() -> void:
+	current_state_book = STATE_BOOK.SHOP
+
+func _on_settings_t_ip_pressed() -> void:
+	current_state_book = STATE_BOOK.SETTINGS
 
 ##########################################
 ##------------//Signal//----------------##

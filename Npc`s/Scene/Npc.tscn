@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dhg6gbuclx85e" path="res://Npc`s/Scripts/npc.gd" id="1_vjjn0"]
 [ext_resource type="Texture2D" uid="uid://duanensc8x13m" path="res://Imports/NpcWomen.png" id="2_w2y2r"]
 [ext_resource type="Texture2D" uid="uid://djcgymbpjyrh8" path="res://Player/Sprite/placeholder/AnteBrazoDerecho.png" id="4_ai2vx"]
+[ext_resource type="Texture2D" uid="uid://di14dsqldd0v8" path="res://Npc`s/Sprites/Burbuja.png" id="5_biusv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nr32f"]
 radius = 4.0
@@ -3530,8 +3531,19 @@ size = Vector2(26, 32)
 
 [node name="Npc" type="CharacterBody2D" unique_id=1268576929]
 z_index = 2
+collision_layer = 128
 collision_mask = 32768
 script = ExtResource("1_vjjn0")
+
+[node name="DialogoBox" type="RichTextLabel" parent="." unique_id=345678901]
+offset_left = -32.0
+offset_top = -46.0
+offset_right = 168.0
+offset_bottom = 4.0
+scale = Vector2(0.31850344, 0.38705692)
+bbcode_enabled = true
+text = "[b]Hola[/b]"
+fit_content = true
 
 [node name="Body" type="Node2D" parent="." unique_id=29846416]
 position = Vector2(-1, -8)
@@ -3740,3 +3752,9 @@ position = Vector2(-7, 16)
 target_position = Vector2(0, 11)
 collision_mask = 32768
 hit_from_inside = true
+
+[node name="Burbuja" type="Sprite2D" parent="." unique_id=1432811627]
+visible = false
+position = Vector2(8.000001, -17)
+scale = Vector2(0.041666668, 0.04508199)
+texture = ExtResource("5_biusv")

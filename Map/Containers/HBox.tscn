@@ -19,3 +19,7 @@ text = "hola buenos dias "
 modulate = Color(0.21568628, 0.9490196, 0, 1)
 layout_mode = 2
 text = "10500"
+
+[node name="Stock" type="Label" parent="." unique_id=805404333]
+layout_mode = 2
+text = "x999"

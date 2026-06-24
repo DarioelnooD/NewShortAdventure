@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bj0p0y5sivu27" path="res://Trees/Scenes/GuanabanaTree.tscn" id="1_mkrf8"]
 [ext_resource type="PackedScene" uid="uid://dkj47x8n1761e" path="res://Player/scenes/p_layer_cut_out.tscn" id="2_logde"]
+[ext_resource type="Script" uid="uid://dfrs6lim0n8mv" path="res://Map/Script/bloque_2.gd" id="3_logde"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6ibe6"]
 
@@ -30,9 +31,18 @@ shape = SubResource("RectangleShape2D_6ibe6")
 [node name="PLayerCutOut" parent="." unique_id=264839427 instance=ExtResource("2_logde")]
 position = Vector2(406, 505)
 
-[node name="Node2D" type="Node2D" parent="." unique_id=378252090]
+[node name="Bloque 1" type="Node2D" parent="." unique_id=378252090]
 position = Vector2(530, 504)
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Node2D" unique_id=1851198202]
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Bloque 1" unique_id=1851198202]
 scale = Vector2(5.3147597, 5.857299)
+mesh = SubResource("BoxMesh_mkrf8")
+
+[node name="Bloque 2" type="Node2D" parent="." unique_id=1760950130]
+position = Vector2(500, 525)
+script = ExtResource("3_logde")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Bloque 2" unique_id=1420141799]
+rotation = 0.43640867
+scale = Vector2(13.486016, 15.42302)
 mesh = SubResource("BoxMesh_mkrf8")

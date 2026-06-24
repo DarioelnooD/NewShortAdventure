@@ -1,16 +1,20 @@
 extends StaticFruit
 
 var item: String = "16"
+var object;
+
+func _ready():
+	object = DataManager.load_csv_data("res://Scripts/PriceFruit.csv")
 
 func data():
-	if DataManager.item_database.has(item):
+	if object.has(item):
 		return {
-			"Nombre": DataManager.item_database[item].nombre,
-			"Tipo": DataManager.item_database[item].tipo_epoca,
-			"Tiempo_crecimiento": DataManager.item_database[item].tiempo_crecimiento,
+			"Nombre": object[item].Nombre,
+			"Tipo": object[item].Tipo,
+			"Tiempo_crecimiento": object[item].TiempoCreciento_dias,
 			"Estado": "Fresco",
 			"Calidad": 3,
-			"Descripcion": DataManager.item_database[item].descripcion,
-			"Precio_Base": DataManager.item_database[item].precio,
-			"Image": DataManager.item_database[item].sprite_path,
+			"Descripcion": object[item].Descripcion,
+			"Precio_Base": int(object[item].Precio_Base),
+			"Image": object[item].SPRITE
 		}
