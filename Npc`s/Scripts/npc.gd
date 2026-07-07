@@ -4,8 +4,13 @@ var direction = 20
 var is_dialog = false
 var object
 var id = 0
-var lastDirection: int = 20
 
+var lastDirection: int = 20
+var WepointIndex: int = 0
+var min_distance = 0.2
+
+@export var speed: float
+@export var Wepoint: Array[Marker2D]
 @onready var dialog_box: RichTextLabel = $DialogoBox
 
 func _ready() -> void:
@@ -26,10 +31,10 @@ func _physics_process(delta: float) -> void:
 	else:
 		direction = lastDirection
 	
-	if direction < 0:
-		$Body.scale.x = -0.029
-	elif direction > 0:
-		$Body.scale.x = 0.029
+	#if direction < 0:
+		#$Body.scale.x = -0.029
+	#elif direction > 0:
+		#$Body.scale.x = 0.029
 	
 	if velocity.x != 0 and !is_dialog:
 		$AnimationPlayer.play("WALK")
@@ -40,11 +45,22 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func move():
-	if not $SafeFloor/right.is_colliding():
-		direction = -20
+	var wepo = Wepoint[WepointIndex].global_position
+	var direction = wepo - self.global_position
+	var distance = direction.length()
 	
-	if not $SafeFloor/left.is_colliding():
-		direction = 20
+	if distance < min_distance:
+		WepointIndex += 1
+		
+		if WepointIndex >= Wepoint.size():
+			WepointIndex = 0
+			
+		return 
+
+	direction = direction.normalized()
+	velocity = direction * speed
+	
+	move_and_slide()
 
 func dialog():
 	is_dialog = true

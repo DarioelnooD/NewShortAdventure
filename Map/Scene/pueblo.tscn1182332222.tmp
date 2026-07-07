@@ -281,7 +281,7 @@ scale = Vector2(1.6874163, 0.32394737)
 
 [node name="Npc" parent="." unique_id=1830366603 node_paths=PackedStringArray("Wepoint") instance=ExtResource("5_il1fd")]
 position = Vector2(317, 391)
-speed = 20.0
+speed = 200.0
 Wepoint = [NodePath("../MarketList/Marker2D"), NodePath("../MarketList/Marker2D2")]
 
 [node name="Puestico" type="Area2D" parent="." unique_id=139240011]
