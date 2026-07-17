@@ -1,0 +1,135 @@
+[gd_scene format=3 uid="uid://blce1yqv3wkhk"]
+
+[ext_resource type="Texture2D" uid="uid://6bnp4vvv8k8r" path="res://Fruits/Sprites/Mango.png" id="1_2hdwp"]
+[ext_resource type="Script" uid="uid://dur1k0jqellx3" path="res://ItemBook.gd" id="1_to5g4"]
+[ext_resource type="Texture2D" uid="uid://q5dq4noatj1m" path="res://Imports/SELECTED.png" id="3_0wyrc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(40, 40)
+
+[sub_resource type="Animation" id="Animation_0wyrc"]
+resource_name = "IDLE"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Selected:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -1.5258789e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Selected:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_hgpll"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Selected:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -1.5258789e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Selected:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_3xcu3"]
+resource_name = "SELECTED"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Selected:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.2831855]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Selected:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -1.5258789e-05), Vector2(0, -1.5258789e-05)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c1yyw"]
+_data = {
+&"IDLE": SubResource("Animation_0wyrc"),
+&"RESET": SubResource("Animation_hgpll"),
+&"SELECTED": SubResource("Animation_3xcu3")
+}
+
+[node name="ItemBook" type="Area2D" unique_id=1065095895]
+z_index = 1
+script = ExtResource("1_to5g4")
+metadata/Item = true
+metadata/take = false
+metadata/Index = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=661160683]
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1204474305]
+offset_left = -19.999998
+offset_top = -19.999998
+offset_right = 108.0
+offset_bottom = 108.0
+scale = Vector2(0.31060618, 0.31305397)
+texture = ExtResource("1_2hdwp")
+
+[node name="Label" type="Label" parent="." unique_id=312879845]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "0"
+
+[node name="Selected" type="Sprite2D" parent="." unique_id=1044424334]
+visible = false
+modulate = Color(0.9246261, 0.316711, 5.7756904e-07, 1)
+position = Vector2(0, -1.5258789e-05)
+scale = Vector2(0.07768583, 0.085678995)
+texture = ExtResource("3_0wyrc")
+
+[node name="Selected2" type="Sprite2D" parent="Selected" unique_id=1895970626]
+modulate = Color(0.9246261, 0.316711, 5.7756904e-07, 1)
+rotation = -0.7887171
+texture = ExtResource("3_0wyrc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1817004094]
+libraries/ = SubResource("AnimationLibrary_c1yyw")

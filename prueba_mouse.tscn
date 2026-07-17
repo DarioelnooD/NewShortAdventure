@@ -1,0 +1,407 @@
+[gd_scene format=3 uid="uid://ch0kcsbu568m"]
+
+[ext_resource type="Script" uid="uid://dhlo7gaaopllh" path="res://PruebaDeMouse.gd" id="1_aqmm8"]
+[ext_resource type="Script" uid="uid://bbdx0i7jq6oa3" path="res://SlotsPrue.gd" id="2_1fxka"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_g4v7s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_57qmd"]
+size = Vector2(40, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yf5fn"]
+size = Vector2(277, 284)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1fxka"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_yf5fn"]
+
+[node name="PruebaMouse" type="Node2D" unique_id=479737174]
+script = ExtResource("1_aqmm8")
+
+[node name="Node" type="Node" parent="." unique_id=683250178]
+
+[node name="1x1" type="Area2D" parent="Node" unique_id=773719113]
+position = Vector2(288, 184)
+script = ExtResource("2_1fxka")
+
+[node name="TextureRect" type="TextureRect" parent="Node/1x1" unique_id=1940816526]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_g4v7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/1x1" unique_id=1837401885]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_57qmd")
+
+[node name="1x2" type="Area2D" parent="Node" unique_id=155127639]
+position = Vector2(340, 184)
+script = ExtResource("2_1fxka")
+
+[node name="TextureRect" type="TextureRect" parent="Node/1x2" unique_id=213064381]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_g4v7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/1x2" unique_id=659364999]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_57qmd")
+
+[node name="1x3" type="Area2D" parent="Node" unique_id=785148317]
+position = Vector2(393, 184)
+script = ExtResource("2_1fxka")
+
+[node name="TextureRect" type="TextureRect" parent="Node/1x3" unique_id=415424321]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_g4v7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/1x3" unique_id=1731789195]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_57qmd")
+
+[node name="1x4" type="Area2D" parent="Node" unique_id=691886650]
+position = Vector2(446, 184)
+script = ExtResource("2_1fxka")
+
+[node name="TextureRect" type="TextureRect" parent="Node/1x4" unique_id=1183122410]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_g4v7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/1x4" unique_id=1566763582]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_57qmd")
+
+[node name="1x5" type="Area2D" parent="Node" unique_id=1011791912]
+position = Vector2(498, 184)
+script = ExtResource("2_1fxka")
+
+[node name="TextureRect" type="TextureRect" parent="Node/1x5" unique_id=129404867]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_g4v7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/1x5" unique_id=1929491521]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_57qmd")
+
+[node name="2x1" type="Area2D" parent="Node" unique_id=863284934]
+position = Vector2(287, 238)
+script = ExtResource("2_1fxka")
+
+[node name="TextureRect" type="TextureRect" parent="Node/2x1" unique_id=1552646481]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_g4v7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/2x1" unique_id=1381279318]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_57qmd")
+
+[node name="2x2" type="Area2D" parent="Node" unique_id=115844316]
+position = Vector2(339, 238)
+script = ExtResource("2_1fxka")
+
+[node name="TextureRect" type="TextureRect" parent="Node/2x2" unique_id=1797867114]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_g4v7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/2x2" unique_id=1216321980]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_57qmd")
+
+[node name="2x3" type="Area2D" parent="Node" unique_id=585594176]
+position = Vector2(392, 238)
+script = ExtResource("2_1fxka")
+
+[node name="TextureRect" type="TextureRect" parent="Node/2x3" unique_id=242622148]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_g4v7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/2x3" unique_id=1726381318]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_57qmd")
+
+[node name="2x4" type="Area2D" parent="Node" unique_id=790064663]
+position = Vector2(445, 238)
+script = ExtResource("2_1fxka")
+
+[node name="TextureRect" type="TextureRect" parent="Node/2x4" unique_id=953366720]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_g4v7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/2x4" unique_id=544837560]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_57qmd")
+
+[node name="2x5" type="Area2D" parent="Node" unique_id=244502570]
+position = Vector2(497, 238)
+script = ExtResource("2_1fxka")
+
+[node name="TextureRect" type="TextureRect" parent="Node/2x5" unique_id=422995793]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_g4v7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/2x5" unique_id=285287353]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_57qmd")
+
+[node name="3x1" type="Area2D" parent="Node" unique_id=1820187262]
+position = Vector2(287, 292)
+script = ExtResource("2_1fxka")
+
+[node name="TextureRect" type="TextureRect" parent="Node/3x1" unique_id=356848045]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_g4v7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/3x1" unique_id=381585621]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_57qmd")
+
+[node name="3x2" type="Area2D" parent="Node" unique_id=1522067985]
+position = Vector2(339, 292)
+script = ExtResource("2_1fxka")
+
+[node name="TextureRect" type="TextureRect" parent="Node/3x2" unique_id=1145105492]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_g4v7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/3x2" unique_id=2100951260]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_57qmd")
+
+[node name="3x3" type="Area2D" parent="Node" unique_id=1969813857]
+position = Vector2(392, 292)
+script = ExtResource("2_1fxka")
+
+[node name="TextureRect" type="TextureRect" parent="Node/3x3" unique_id=626086350]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_g4v7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/3x3" unique_id=436249637]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_57qmd")
+
+[node name="3x4" type="Area2D" parent="Node" unique_id=457632066]
+position = Vector2(445, 292)
+script = ExtResource("2_1fxka")
+
+[node name="TextureRect" type="TextureRect" parent="Node/3x4" unique_id=1285761747]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_g4v7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/3x4" unique_id=811955623]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_57qmd")
+
+[node name="3x5" type="Area2D" parent="Node" unique_id=1804795463]
+position = Vector2(497, 292)
+script = ExtResource("2_1fxka")
+
+[node name="TextureRect" type="TextureRect" parent="Node/3x5" unique_id=1786825224]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_g4v7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/3x5" unique_id=783051113]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_57qmd")
+
+[node name="4x1" type="Area2D" parent="Node" unique_id=1337742661]
+position = Vector2(289, 346)
+script = ExtResource("2_1fxka")
+
+[node name="TextureRect" type="TextureRect" parent="Node/4x1" unique_id=59651539]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_g4v7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/4x1" unique_id=2146985942]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_57qmd")
+
+[node name="4x2" type="Area2D" parent="Node" unique_id=1549823262]
+position = Vector2(341, 346)
+script = ExtResource("2_1fxka")
+
+[node name="TextureRect" type="TextureRect" parent="Node/4x2" unique_id=1100043349]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_g4v7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/4x2" unique_id=1768056774]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_57qmd")
+
+[node name="4x3" type="Area2D" parent="Node" unique_id=1304341574]
+position = Vector2(394, 346)
+script = ExtResource("2_1fxka")
+
+[node name="TextureRect" type="TextureRect" parent="Node/4x3" unique_id=1756120952]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_g4v7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/4x3" unique_id=558485591]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_57qmd")
+
+[node name="4x4" type="Area2D" parent="Node" unique_id=1070745276]
+position = Vector2(447, 346)
+script = ExtResource("2_1fxka")
+
+[node name="TextureRect" type="TextureRect" parent="Node/4x4" unique_id=348916609]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_g4v7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/4x4" unique_id=391250141]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_57qmd")
+
+[node name="4x5" type="Area2D" parent="Node" unique_id=324073950]
+position = Vector2(499, 346)
+script = ExtResource("2_1fxka")
+
+[node name="TextureRect" type="TextureRect" parent="Node/4x5" unique_id=2042085269]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_g4v7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/4x5" unique_id=345985436]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_57qmd")
+
+[node name="5x1" type="Area2D" parent="Node" unique_id=984202145]
+position = Vector2(291, 398)
+script = ExtResource("2_1fxka")
+
+[node name="TextureRect" type="TextureRect" parent="Node/5x1" unique_id=1819294399]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_g4v7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/5x1" unique_id=2105483800]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_57qmd")
+
+[node name="5x2" type="Area2D" parent="Node" unique_id=1528709082]
+position = Vector2(343, 398)
+script = ExtResource("2_1fxka")
+
+[node name="TextureRect" type="TextureRect" parent="Node/5x2" unique_id=1386169762]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_g4v7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/5x2" unique_id=1944473224]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_57qmd")
+
+[node name="5x3" type="Area2D" parent="Node" unique_id=1883101556]
+position = Vector2(396, 398)
+script = ExtResource("2_1fxka")
+
+[node name="TextureRect" type="TextureRect" parent="Node/5x3" unique_id=1885038332]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_g4v7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/5x3" unique_id=952213953]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_57qmd")
+
+[node name="5x4" type="Area2D" parent="Node" unique_id=1836061344]
+position = Vector2(449, 398)
+script = ExtResource("2_1fxka")
+
+[node name="TextureRect" type="TextureRect" parent="Node/5x4" unique_id=864343838]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_g4v7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/5x4" unique_id=1454972143]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_57qmd")
+
+[node name="5x5" type="Area2D" parent="Node" unique_id=1567669787]
+position = Vector2(501, 398)
+script = ExtResource("2_1fxka")
+
+[node name="TextureRect" type="TextureRect" parent="Node/5x5" unique_id=156221820]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ViewportTexture_g4v7s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node/5x5" unique_id=848168228]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_57qmd")
+
+[node name="Limit" type="Area2D" parent="." unique_id=319158026]
+position = Vector2(556, 301)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Limit" unique_id=890873817]
+position = Vector2(-142.5, 11)
+shape = SubResource("RectangleShape2D_yf5fn")
+
+[node name="ColorRect" type="ColorRect" parent="Limit" unique_id=887990890]
+offset_left = -314.0
+offset_top = -163.0
+offset_right = 316.0
+offset_bottom = 205.0
+color = Color(0.7872891, 0.890908, 0, 1)
+
+[node name="inventory" type="ColorRect" parent="Limit/ColorRect" unique_id=1036376450]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 34.0
+offset_right = 309.0
+offset_bottom = 314.0
+color = Color(0.8199198, 0.80544436, 7.70092e-07, 1)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1093383197]
+z_index = 10
+position = Vector2(565, 320)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=837787573]
+shape = SubResource("CircleShape2D_1fxka")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1717092253]
+position = Vector2(577, 324)
+
+[node name="Label" type="Label" parent="." unique_id=1484475775]
+offset_left = 795.0
+offset_top = 158.0
+offset_right = 835.0
+offset_bottom = 181.0
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=134048575]
+offset_left = 632.00006
+offset_top = 190.99998
+offset_right = 672.00006
+offset_bottom = 230.99998
+scale = Vector2(3.9161592, 3.8315997)
+texture = SubResource("ViewportTexture_yf5fn")
+
+[connection signal="area_entered" from="Node/1x1" to="Node/1x1" method="_on_area_entered"]
+[connection signal="area_exited" from="Node/1x1" to="Node/1x1" method="_on_area_exited"]
+[connection signal="area_entered" from="Node/2x1" to="Node/2x1" method="_on_area_entered"]
+[connection signal="area_exited" from="Node/2x1" to="Node/2x1" method="_on_area_exited"]
+[connection signal="area_entered" from="Node/3x1" to="Node/3x1" method="_on_area_entered"]
+[connection signal="area_exited" from="Node/3x1" to="Node/3x1" method="_on_area_exited"]
+[connection signal="area_entered" from="Node/4x1" to="Node/4x1" method="_on_area_entered"]
+[connection signal="area_exited" from="Node/4x1" to="Node/4x1" method="_on_area_exited"]
+[connection signal="area_entered" from="Node/5x1" to="Node/5x1" method="_on_area_entered"]
+[connection signal="area_exited" from="Node/5x1" to="Node/5x1" method="_on_area_exited"]
+[connection signal="area_entered" from="Limit" to="." method="_on_limit_area_entered"]
+[connection signal="area_exited" from="Limit" to="." method="_on_limit_area_exited"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

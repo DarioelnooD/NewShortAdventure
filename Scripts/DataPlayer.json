@@ -1,1 +1,80 @@
-{"Inventary":[{"Calidad":3.0,"Cantidad":17.0,"Estado":"Fresco","Image":"res://Fruits/Sprites/Guanabana.png","Name":"Guanábana","Slot":"0x0"},{"Calidad":1.0,"Cantidad":7.0,"Estado":"Fresco","Image":"res://Fruits/Sprites/Mango.png","Name":"Mango","Slot":"0x1"},{"Calidad":3.0,"Cantidad":9.0,"Estado":"Fresco","Image":"res://Fruits/Sprites/Mango.png","Name":"Mango Tomy","Slot":"0x2"},{"Calidad":"1","Cantidad":5.0,"Estado":"N/a","Image":"res://Assets/Items/agua_de_panela.png","Name":"Agua de Panela","Slot":"0x3"},{"Calidad":"1","Cantidad":1.0,"Estado":"N/a","Image":"res://Assets/Items/hierbabuena.png","Name":"Hierbabuena","Slot":"1x0"},{"Calidad":"1","Cantidad":1.0,"Estado":"N/a","Image":"res://Assets/Items/hielo_artesanal.png","Name":"Hielo Artesanal","Slot":"1x1"},{"Calidad":"1","Cantidad":1.0,"Estado":"N/a","Image":"res://Assets/Items/leche_entera.png","Name":"Leche Entera","Slot":"1x2"},{"Calidad":"1","Cantidad":1,"Estado":"N/a","Image":"res://Assets/Items/miel_de_abeja.png","Name":"Miel de Abeja","Slot":"1x3"}],"Position":[{"name":"pueblo","x":27.5917491912842,"y":528.925231933594},{"name":"map_test","x":4371.08544921875,"y":704.996276855469},{"name":"forest","x":2472.47802734375,"y":560.933837890625}],"Saldo":2000.0,"Vida":3.0,"lenguage":"DIalogo_eN"}
+{
+	"Inventary": [
+		{
+			"Calidad": 3.0,
+			"Cantidad": 17.0,
+			"Estado": "Fresco",
+			"Image": "res://Fruits/Sprites/Guanabana.png",
+			"Name": "Guanábana",
+			"Slot": "0x0"
+		},
+		{
+			"Calidad": 1.0,
+			"Cantidad": 7.0,
+			"Estado": "Fresco",
+			"Image": "res://Fruits/Sprites/Mango.png",
+			"Name": "Mango",
+			"Slot": "0x1"
+		},
+		{
+			"Calidad": 3.0,
+			"Cantidad": 9.0,
+			"Estado": "Fresco",
+			"Image": "res://Fruits/Sprites/Mango.png",
+			"Name": "Mango Tomy",
+			"Slot": "0x2"
+		},
+		{
+			"Calidad": 1,
+			"Cantidad": 5.0,
+			"Estado": "N/a",
+			"Image": "res://Assets/Items/agua_de_panela.png",
+			"Name": "Agua de Panela",
+			"Slot": "0x3"
+		},
+		{
+			"Calidad": 1,
+			"Cantidad": 1.0,
+			"Estado": "N/a",
+			"Image": "res://Assets/Items/hielo_artesanal.png",
+			"Name": "Hielo Artesanal",
+			"Slot": "1x1"
+		},
+		{
+			"Calidad": 1,
+			"Cantidad": 1.0,
+			"Estado": "N/a",
+			"Image": "res://Assets/Items/leche_entera.png",
+			"Name": "Leche Entera",
+			"Slot": "1x2"
+		},
+		{
+			"Calidad": 1,
+			"Cantidad": 1,
+			"Estado": "N/a",
+			"Image": "res://Assets/Items/miel_de_abeja.png",
+			"Name": "Miel de Abeja",
+			"Slot": "1x3"
+		}
+	],
+	"Position": [
+		{
+			"name": "pueblo",
+			"x": 27.5917491912842,
+			"y": 528.925231933594
+		},
+		{
+			"name": "map_test",
+			"x": 4371.08544921875,
+			"y": 704.996276855469
+		},
+		{
+			"name": "forest",
+			"x": 2472.47802734375,
+			"y": 560.933837890625
+		}
+	],
+	"Saldo": 2000.0,
+	"Vida": 3.0,
+	"lenguage": "DIalogo_eN"
+}

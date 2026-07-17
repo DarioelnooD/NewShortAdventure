@@ -668,7 +668,6 @@ func update_quality(value):
 			$Book/Inventario/DetailItem/Calidad.modulate = Color("#e9c63e")
 
 func update_cursor():
-
 	if inventory_cache.is_empty():
 		return
 
