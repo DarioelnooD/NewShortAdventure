@@ -35,7 +35,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	$Area2D.global_position = get_global_mouse_position()
 
-	if _area and Input.is_action_just_pressed("ATTACK"):
+	if _area and Input.is_action_just_pressed("ATTACK") and not take:
 		var target_slot = _area.get_meta("Index")
 		
 		for inv_item in inventory:
@@ -43,30 +43,56 @@ func _process(delta: float) -> void:
 				items = inv_item 
 				break
 				
-		take = !take
+		take = true
 		_area.set_meta("Take", take)
-	
-	if take:
-		if _area and _area.has_node("AnimationPlayer"): _area.get_node("AnimationPlayer").play("SELECTED")
 		
-	else:
-		if _area and _area.has_node("AnimationPlayer"): _area.get_node("AnimationPlayer").play("IDLE")
-
-	if limit and Input.is_action_just_pressed("ATTACK"):
-		limit.queue_free()
+	elif Input.is_action_just_released("ATTACK") and take:
 		take = false
+		if _area:
+			_area.set_meta("Take", take)
+			
+		if limit:
+			limit.queue_free()
+			limit = null 
 
-	if take and _area :
+	if take:
+		if _area and _area.has_node("AnimationPlayer"): 
+			_area.get_node("AnimationPlayer").play("SELECTED")
+	else:
+		if _area and _area.has_node("AnimationPlayer"): 
+			_area.get_node("AnimationPlayer").play("IDLE")
+
+	if take and _area:
 		_area.global_position = $Area2D.global_position
-	elif !take and _area:
-		_area.global_position = _area.global_position
 	
 	update_selected_item()
-
 
 func update_selected_item():
 	if items and items["Image"]: 
 		$TextureRect.texture = load(items["Image"])
+		$NOmbre.text = str(items["Name"])
+		
+		if items["Cantidad"] > 1: $Cantidad.text = "Unidades" 
+		else: $Cantidad.text = "Unidad"
+		
+		$Cantidad/Cantidad.text = str( int(items["Cantidad"]) )
+		$Estado/Estado.text = str(items["Estado"])
+		update_quality(int(items["Calidad"]))
+
+func update_quality(value):
+	$Stars/Star.visible = value >= 0
+	$Stars/Star2.visible = value >= 1
+	$Stars/Star3.visible = value >= 2
+	$Stars/Star4.visible = value >= 3
+	match value:
+		0:
+			$Stars.modulate = Color.WHITE
+		1:
+			$Stars.modulate = Color("#979797")
+		2:
+			$Stars.modulate = Color("#ff9871")
+		3:
+			$Stars.modulate = Color("#e9c63e")
 
 
 

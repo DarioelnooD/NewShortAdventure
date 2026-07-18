@@ -2,6 +2,11 @@
 
 [ext_resource type="Script" uid="uid://dhlo7gaaopllh" path="res://PruebaDeMouse.gd" id="1_aqmm8"]
 [ext_resource type="Script" uid="uid://bbdx0i7jq6oa3" path="res://SlotsPrue.gd" id="2_1fxka"]
+[ext_resource type="Texture2D" uid="uid://xiil23t78t1y" path="res://Imports/PlaceholderAnimationBook.png" id="2_jakag"]
+[ext_resource type="Shader" uid="uid://u2mdatamlwnn" path="res://prueba_mouse.gdshader" id="4_88ay8"]
+[ext_resource type="Texture2D" uid="uid://5t0yx6jn4ya7" path="res://Assets/Items/agua_con_gas.png" id="4_t0gvn"]
+[ext_resource type="LabelSettings" uid="uid://5fduly8bs47x" path="res://Scripts/label_settings_book.tres" id="5_14jcw"]
+[ext_resource type="Texture2D" uid="uid://dsjnyk77ya3ec" path="res://Imports/Star.png" id="6_14jcw"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_g4v7s"]
 
@@ -9,19 +14,35 @@
 size = Vector2(40, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yf5fn"]
-size = Vector2(277, 284)
+size = Vector2(286.0123, 348.72766)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1fxka"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_yf5fn"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wt1l0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_14jcw"]
+shader = ExtResource("4_88ay8")
+shader_parameter/scale = Vector2(30, 30)
+shader_parameter/strength = 2.0
+shader_parameter/fps = 3.0
+shader_parameter/noise = SubResource("NoiseTexture2D_wt1l0")
 
 [node name="PruebaMouse" type="Node2D" unique_id=479737174]
 script = ExtResource("1_aqmm8")
 
+[node name="PlaceholderAnimationBook" type="Sprite2D" parent="." unique_id=1841343131]
+position = Vector2(635.99994, 224)
+scale = Vector2(17.195953, 13.76653)
+texture = ExtResource("2_jakag")
+hframes = 7
+vframes = 7
+frame = 13
+
 [node name="Node" type="Node" parent="." unique_id=683250178]
 
 [node name="1x1" type="Area2D" parent="Node" unique_id=773719113]
-position = Vector2(288, 184)
+position = Vector2(315.00003, 114.00001)
+scale = Vector2(0.92548925, 0.9395582)
 script = ExtResource("2_1fxka")
 
 [node name="TextureRect" type="TextureRect" parent="Node/1x1" unique_id=1940816526]
@@ -34,7 +55,8 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_57qmd")
 
 [node name="1x2" type="Area2D" parent="Node" unique_id=155127639]
-position = Vector2(340, 184)
+position = Vector2(365.00003, 114)
+scale = Vector2(0.92548925, 0.9501415)
 script = ExtResource("2_1fxka")
 
 [node name="TextureRect" type="TextureRect" parent="Node/1x2" unique_id=213064381]
@@ -47,7 +69,8 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_57qmd")
 
 [node name="1x3" type="Area2D" parent="Node" unique_id=785148317]
-position = Vector2(393, 184)
+position = Vector2(415, 114.00001)
+scale = Vector2(0.92548925, 0.949175)
 script = ExtResource("2_1fxka")
 
 [node name="TextureRect" type="TextureRect" parent="Node/1x3" unique_id=415424321]
@@ -60,7 +83,8 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_57qmd")
 
 [node name="1x4" type="Area2D" parent="Node" unique_id=691886650]
-position = Vector2(446, 184)
+position = Vector2(465.00003, 114)
+scale = Vector2(0.9290154, 0.9490647)
 script = ExtResource("2_1fxka")
 
 [node name="TextureRect" type="TextureRect" parent="Node/1x4" unique_id=1183122410]
@@ -73,7 +97,8 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_57qmd")
 
 [node name="1x5" type="Area2D" parent="Node" unique_id=1011791912]
-position = Vector2(498, 184)
+position = Vector2(515.00006, 114)
+scale = Vector2(0.92548925, 0.9608951)
 script = ExtResource("2_1fxka")
 
 [node name="TextureRect" type="TextureRect" parent="Node/1x5" unique_id=129404867]
@@ -86,7 +111,8 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_57qmd")
 
 [node name="2x1" type="Area2D" parent="Node" unique_id=863284934]
-position = Vector2(287, 238)
+position = Vector2(315.00003, 168.00002)
+scale = Vector2(0.92548925, 0.9395582)
 script = ExtResource("2_1fxka")
 
 [node name="TextureRect" type="TextureRect" parent="Node/2x1" unique_id=1552646481]
@@ -99,7 +125,8 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_57qmd")
 
 [node name="2x2" type="Area2D" parent="Node" unique_id=115844316]
-position = Vector2(339, 238)
+position = Vector2(365, 168.00002)
+scale = Vector2(0.92548925, 0.9395582)
 script = ExtResource("2_1fxka")
 
 [node name="TextureRect" type="TextureRect" parent="Node/2x2" unique_id=1797867114]
@@ -112,7 +139,8 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_57qmd")
 
 [node name="2x3" type="Area2D" parent="Node" unique_id=585594176]
-position = Vector2(392, 238)
+position = Vector2(415, 168.00002)
+scale = Vector2(0.92548925, 0.9395582)
 script = ExtResource("2_1fxka")
 
 [node name="TextureRect" type="TextureRect" parent="Node/2x3" unique_id=242622148]
@@ -125,7 +153,8 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_57qmd")
 
 [node name="2x4" type="Area2D" parent="Node" unique_id=790064663]
-position = Vector2(445, 238)
+position = Vector2(465, 168.00002)
+scale = Vector2(0.92548925, 0.9395582)
 script = ExtResource("2_1fxka")
 
 [node name="TextureRect" type="TextureRect" parent="Node/2x4" unique_id=953366720]
@@ -138,7 +167,8 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_57qmd")
 
 [node name="2x5" type="Area2D" parent="Node" unique_id=244502570]
-position = Vector2(497, 238)
+position = Vector2(515.00006, 168.00002)
+scale = Vector2(0.92548925, 0.9395582)
 script = ExtResource("2_1fxka")
 
 [node name="TextureRect" type="TextureRect" parent="Node/2x5" unique_id=422995793]
@@ -151,7 +181,8 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_57qmd")
 
 [node name="3x1" type="Area2D" parent="Node" unique_id=1820187262]
-position = Vector2(287, 292)
+position = Vector2(315.00003, 222)
+scale = Vector2(0.92548925, 0.9395582)
 script = ExtResource("2_1fxka")
 
 [node name="TextureRect" type="TextureRect" parent="Node/3x1" unique_id=356848045]
@@ -164,7 +195,8 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_57qmd")
 
 [node name="3x2" type="Area2D" parent="Node" unique_id=1522067985]
-position = Vector2(339, 292)
+position = Vector2(365, 222)
+scale = Vector2(0.92548925, 0.9395582)
 script = ExtResource("2_1fxka")
 
 [node name="TextureRect" type="TextureRect" parent="Node/3x2" unique_id=1145105492]
@@ -177,7 +209,8 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_57qmd")
 
 [node name="3x3" type="Area2D" parent="Node" unique_id=1969813857]
-position = Vector2(392, 292)
+position = Vector2(415, 222)
+scale = Vector2(0.92548925, 0.9395582)
 script = ExtResource("2_1fxka")
 
 [node name="TextureRect" type="TextureRect" parent="Node/3x3" unique_id=626086350]
@@ -190,7 +223,8 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_57qmd")
 
 [node name="3x4" type="Area2D" parent="Node" unique_id=457632066]
-position = Vector2(445, 292)
+position = Vector2(465, 222)
+scale = Vector2(0.92548925, 0.9395582)
 script = ExtResource("2_1fxka")
 
 [node name="TextureRect" type="TextureRect" parent="Node/3x4" unique_id=1285761747]
@@ -203,7 +237,8 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_57qmd")
 
 [node name="3x5" type="Area2D" parent="Node" unique_id=1804795463]
-position = Vector2(497, 292)
+position = Vector2(515.00006, 222)
+scale = Vector2(0.92548925, 0.9395582)
 script = ExtResource("2_1fxka")
 
 [node name="TextureRect" type="TextureRect" parent="Node/3x5" unique_id=1786825224]
@@ -216,7 +251,8 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_57qmd")
 
 [node name="4x1" type="Area2D" parent="Node" unique_id=1337742661]
-position = Vector2(289, 346)
+position = Vector2(315, 275.99997)
+scale = Vector2(0.92548925, 0.9395582)
 script = ExtResource("2_1fxka")
 
 [node name="TextureRect" type="TextureRect" parent="Node/4x1" unique_id=59651539]
@@ -229,7 +265,8 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_57qmd")
 
 [node name="4x2" type="Area2D" parent="Node" unique_id=1549823262]
-position = Vector2(341, 346)
+position = Vector2(365.00003, 275.99997)
+scale = Vector2(0.92548925, 0.9395582)
 script = ExtResource("2_1fxka")
 
 [node name="TextureRect" type="TextureRect" parent="Node/4x2" unique_id=1100043349]
@@ -242,7 +279,8 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_57qmd")
 
 [node name="4x3" type="Area2D" parent="Node" unique_id=1304341574]
-position = Vector2(394, 346)
+position = Vector2(415, 275.99997)
+scale = Vector2(0.92548925, 0.9395582)
 script = ExtResource("2_1fxka")
 
 [node name="TextureRect" type="TextureRect" parent="Node/4x3" unique_id=1756120952]
@@ -255,7 +293,8 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_57qmd")
 
 [node name="4x4" type="Area2D" parent="Node" unique_id=1070745276]
-position = Vector2(447, 346)
+position = Vector2(465, 275.99997)
+scale = Vector2(0.92548925, 0.9395582)
 script = ExtResource("2_1fxka")
 
 [node name="TextureRect" type="TextureRect" parent="Node/4x4" unique_id=348916609]
@@ -268,7 +307,8 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_57qmd")
 
 [node name="4x5" type="Area2D" parent="Node" unique_id=324073950]
-position = Vector2(499, 346)
+position = Vector2(515.00006, 275.99997)
+scale = Vector2(0.92548925, 0.9395582)
 script = ExtResource("2_1fxka")
 
 [node name="TextureRect" type="TextureRect" parent="Node/4x5" unique_id=2042085269]
@@ -281,7 +321,8 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_57qmd")
 
 [node name="5x1" type="Area2D" parent="Node" unique_id=984202145]
-position = Vector2(291, 398)
+position = Vector2(315, 330)
+scale = Vector2(0.92548925, 0.9395582)
 script = ExtResource("2_1fxka")
 
 [node name="TextureRect" type="TextureRect" parent="Node/5x1" unique_id=1819294399]
@@ -294,7 +335,8 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_57qmd")
 
 [node name="5x2" type="Area2D" parent="Node" unique_id=1528709082]
-position = Vector2(343, 398)
+position = Vector2(365.00003, 330)
+scale = Vector2(0.92548925, 0.9395582)
 script = ExtResource("2_1fxka")
 
 [node name="TextureRect" type="TextureRect" parent="Node/5x2" unique_id=1386169762]
@@ -307,7 +349,8 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_57qmd")
 
 [node name="5x3" type="Area2D" parent="Node" unique_id=1883101556]
-position = Vector2(396, 398)
+position = Vector2(415, 330)
+scale = Vector2(0.92548925, 0.9395582)
 script = ExtResource("2_1fxka")
 
 [node name="TextureRect" type="TextureRect" parent="Node/5x3" unique_id=1885038332]
@@ -320,7 +363,8 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_57qmd")
 
 [node name="5x4" type="Area2D" parent="Node" unique_id=1836061344]
-position = Vector2(449, 398)
+position = Vector2(464.99997, 330)
+scale = Vector2(0.92548925, 0.9395582)
 script = ExtResource("2_1fxka")
 
 [node name="TextureRect" type="TextureRect" parent="Node/5x4" unique_id=864343838]
@@ -333,7 +377,8 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_57qmd")
 
 [node name="5x5" type="Area2D" parent="Node" unique_id=1567669787]
-position = Vector2(501, 398)
+position = Vector2(515.00006, 330)
+scale = Vector2(0.92548925, 0.9395582)
 script = ExtResource("2_1fxka")
 
 [node name="TextureRect" type="TextureRect" parent="Node/5x5" unique_id=156221820]
@@ -346,50 +391,213 @@ position = Vector2(20, 20)
 shape = SubResource("RectangleShape2D_57qmd")
 
 [node name="Limit" type="Area2D" parent="." unique_id=319158026]
-position = Vector2(556, 301)
+position = Vector2(568, 219)
+scale = Vector2(0.9125482, 0.8029188)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Limit" unique_id=890873817]
-position = Vector2(-142.5, 11)
+position = Vector2(-148.48532, 32.381866)
 shape = SubResource("RectangleShape2D_yf5fn")
 
 [node name="ColorRect" type="ColorRect" parent="Limit" unique_id=887990890]
-offset_left = -314.0
-offset_top = -163.0
-offset_right = 316.0
-offset_bottom = 205.0
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -315.0
+offset_top = -184.0
+offset_right = 315.0
+offset_bottom = 184.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.1796335, 1.2064991)
+size_flags_horizontal = 4
+size_flags_vertical = 4
 color = Color(0.7872891, 0.890908, 0, 1)
 
 [node name="inventory" type="ColorRect" parent="Limit/ColorRect" unique_id=1036376450]
 layout_mode = 0
-offset_left = 35.0
-offset_top = 34.0
-offset_right = 309.0
-offset_bottom = 314.0
+offset_left = 28.822514
+offset_top = 38.126846
+offset_right = 302.8225
+offset_bottom = 318.12683
+scale = Vector2(0.86599076, 0.887505)
 color = Color(0.8199198, 0.80544436, 7.70092e-07, 1)
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1093383197]
 z_index = 10
-position = Vector2(565, 320)
+position = Vector2(620, 330)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=837787573]
 shape = SubResource("CircleShape2D_1fxka")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1717092253]
-position = Vector2(577, 324)
-
-[node name="Label" type="Label" parent="." unique_id=1484475775]
-offset_left = 795.0
-offset_top = 158.0
-offset_right = 835.0
-offset_bottom = 181.0
+position = Vector2(643, 333)
+scale = Vector2(1.548978, 1.4816025)
+zoom = Vector2(0.775, 0.775)
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=134048575]
-offset_left = 632.00006
-offset_top = 190.99998
-offset_right = 672.00006
-offset_bottom = 230.99998
-scale = Vector2(3.9161592, 3.8315997)
-texture = SubResource("ViewportTexture_yf5fn")
+material = SubResource("ShaderMaterial_14jcw")
+offset_left = 349.0
+offset_top = 406.0
+offset_right = 477.0
+offset_bottom = 534.0
+scale = Vector2(0.9159401, 0.9513689)
+texture = ExtResource("4_t0gvn")
+
+[node name="NOmbre" type="Label" parent="." unique_id=1484475775]
+offset_left = 289.0
+offset_top = 403.0
+offset_right = 386.0
+offset_bottom = 426.0
+rotation = -0.31758323
+scale = Vector2(1.2683423, 1.8331048)
+text = "Frutos secos"
+label_settings = ExtResource("5_14jcw")
+
+[node name="Cantidad" type="Label" parent="." unique_id=430455228]
+offset_left = 238.00002
+offset_top = 497.0
+offset_right = 311.0
+offset_bottom = 520.0
+scale = Vector2(1.205184, 1.4853342)
+text = "Unidades"
+label_settings = ExtResource("5_14jcw")
+
+[node name="Cantidad" type="Label" parent="Cantidad" unique_id=879490737]
+layout_mode = 0
+offset_left = 30.700695
+offset_top = -23.563723
+offset_right = 70.7007
+offset_bottom = -0.5637226
+text = "0"
+label_settings = ExtResource("5_14jcw")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=236066031]
+visible = false
+offset_left = 502.0
+offset_top = 114.0
+offset_right = 515.0
+offset_bottom = 367.0
+
+[node name="ColorRect2" type="ColorRect" parent="ColorRect" unique_id=1917824892]
+layout_mode = 0
+offset_left = -50.0
+offset_right = -37.0
+offset_bottom = 253.0
+
+[node name="ColorRect9" type="ColorRect" parent="ColorRect" unique_id=1782429599]
+layout_mode = 0
+offset_left = 50.0
+offset_right = 63.0
+offset_bottom = 253.0
+
+[node name="ColorRect10" type="ColorRect" parent="ColorRect" unique_id=1655915418]
+layout_mode = 0
+offset_left = -200.0
+offset_right = -187.0
+offset_bottom = 253.0
+
+[node name="ColorRect3" type="ColorRect" parent="ColorRect" unique_id=1227586672]
+layout_mode = 0
+offset_left = -100.0
+offset_right = -87.0
+offset_bottom = 253.0
+
+[node name="ColorRect4" type="ColorRect" parent="ColorRect" unique_id=903482694]
+layout_mode = 0
+offset_left = -150.0
+offset_right = -137.0
+offset_bottom = 253.0
+
+[node name="ColorRect5" type="ColorRect" parent="ColorRect" unique_id=72092693]
+layout_mode = 0
+offset_left = -187.0
+offset_top = 38.0
+offset_right = 50.0
+offset_bottom = 78.0
+scale = Vector2(1, 0.3999951)
+
+[node name="ColorRect6" type="ColorRect" parent="ColorRect" unique_id=1147761790]
+layout_mode = 0
+offset_left = -187.0
+offset_top = 92.0
+offset_right = 50.0
+offset_bottom = 132.0
+scale = Vector2(1, 0.3999951)
+
+[node name="ColorRect7" type="ColorRect" parent="ColorRect" unique_id=1077913013]
+layout_mode = 0
+offset_left = -187.0
+offset_top = 146.0
+offset_right = 50.0
+offset_bottom = 186.0
+scale = Vector2(1, 0.3999951)
+
+[node name="ColorRect11" type="ColorRect" parent="ColorRect" unique_id=937798723]
+layout_mode = 0
+offset_left = -200.0
+offset_top = 253.0
+offset_right = 63.0
+offset_bottom = 293.0
+scale = Vector2(1, 0.3999951)
+
+[node name="ColorRect12" type="ColorRect" parent="ColorRect" unique_id=684782078]
+layout_mode = 0
+offset_left = -200.0
+offset_top = -16.0
+offset_right = 63.0
+offset_bottom = 24.0
+scale = Vector2(1, 0.3999951)
+
+[node name="ColorRect8" type="ColorRect" parent="ColorRect" unique_id=2055784319]
+layout_mode = 0
+offset_left = -187.0
+offset_top = 200.0
+offset_right = 50.0
+offset_bottom = 240.0
+scale = Vector2(1, 0.3999951)
+
+[node name="Stars" type="Node2D" parent="." unique_id=790318406]
+
+[node name="Star" type="Sprite2D" parent="Stars" unique_id=1353663464]
+position = Vector2(529, 402)
+scale = Vector2(0.17678438, 0.20218794)
+texture = ExtResource("6_14jcw")
+
+[node name="Star2" type="Sprite2D" parent="Stars" unique_id=1348457356]
+position = Vector2(507.00003, 425)
+scale = Vector2(0.17678438, 0.20218794)
+texture = ExtResource("6_14jcw")
+
+[node name="Star3" type="Sprite2D" parent="Stars" unique_id=1549304629]
+position = Vector2(551.00006, 425)
+scale = Vector2(0.17678438, 0.20218794)
+texture = ExtResource("6_14jcw")
+
+[node name="Star4" type="Sprite2D" parent="Stars" unique_id=180730020]
+position = Vector2(529, 445)
+scale = Vector2(0.17678438, 0.20218794)
+texture = ExtResource("6_14jcw")
+
+[node name="Estado" type="Label" parent="." unique_id=96250337]
+offset_left = 485.99997
+offset_top = 457.0
+offset_right = 543.0
+offset_bottom = 480.0
+scale = Vector2(1.273307, 1.0593305)
+text = "Estado:"
+label_settings = ExtResource("5_14jcw")
+
+[node name="Estado" type="Label" parent="Estado" unique_id=698829038]
+layout_mode = 0
+offset_top = 16.0
+offset_right = 51.0
+offset_bottom = 39.0
+scale = Vector2(1.8062577, 2.1565745)
+text = "Fresco"
+label_settings = ExtResource("5_14jcw")
 
 [connection signal="area_entered" from="Node/1x1" to="Node/1x1" method="_on_area_entered"]
 [connection signal="area_exited" from="Node/1x1" to="Node/1x1" method="_on_area_exited"]

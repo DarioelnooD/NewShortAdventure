@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://b33t8i57cblt2" path="res://icon.svg" id="5_48jby"]
 [ext_resource type="Script" uid="uid://c87xbdkm5yt2n" path="res://Player/script/machete.gd" id="6_g4q1w"]
 [ext_resource type="Texture2D" uid="uid://claywbbse3gna" path="res://Player/Sprite/Vaina.png" id="6_ja273"]
-[ext_resource type="Texture2D" uid="uid://dsjnyk77ya3ec" path="res://Imports/Start.png" id="6_syvh5"]
+[ext_resource type="Texture2D" uid="uid://dsjnyk77ya3ec" path="res://Imports/Star.png" id="6_syvh5"]
 [ext_resource type="Texture2D" uid="uid://dxgm2en2dnrh5" path="res://Imports/Map.png" id="10_vv2ru"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2nkdj"]
@@ -6483,6 +6483,7 @@ collision_mask = 32768
 script = ExtResource("1_iwrfg")
 
 [node name="Book" type="Sprite2D" parent="." unique_id=1499193976]
+visible = false
 z_index = 10
 position = Vector2(-0.99999976, -34.000004)
 scale = Vector2(0.38671792, 0.51956534)
@@ -6559,7 +6560,6 @@ scale = Vector2(1.0267687, 0.7859243)
 texture = ExtResource("3_2nkdj")
 
 [node name="Inventario" type="Node2D" parent="Book" unique_id=94313108]
-visible = false
 
 [node name="Saldo" type="Label" parent="Book/Inventario" unique_id=1748213377]
 offset_left = 108.60631
