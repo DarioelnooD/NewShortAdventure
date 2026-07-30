@@ -1,11 +1,10 @@
 [gd_scene format=4 uid="uid://bxcbd744bhkpe"]
 
 [ext_resource type="Script" uid="uid://i61uyl47tb5b" path="res://Map/Script/map_test.gd" id="1_fds0u"]
-[ext_resource type="Texture2D" uid="uid://b614nfdv1sh5p" path="res://Map/Sprite/Pueblo.png" id="1_g1ni8"]
 [ext_resource type="Texture2D" uid="uid://dv8ifpexxu628" path="res://Map/Sprite/SkyTemplate.webp" id="1_iowgq"]
 [ext_resource type="Texture2D" uid="uid://cw3fvqtixuc2x" path="res://Map/Sprite/WhatsApp Image 2026-03-10 at 9.59.01 PM.jpeg" id="2_fh5v5"]
 [ext_resource type="PackedScene" uid="uid://dkj47x8n1761e" path="res://Player/scenes/p_layer_cut_out.tscn" id="5_fds0u"]
-[ext_resource type="Texture2D" uid="uid://dty2obg5ac6kq" path="res://Trees/Sprites/tree.png" id="6_mg86x"]
+[ext_resource type="Texture2D" uid="uid://dty2obg5ac6kq" path="res://tree.png" id="6_mg86x"]
 [ext_resource type="Texture2D" uid="uid://bfn3vvx8dxssn" path="res://Trees/Sprites/Tree4.png" id="7_gm2te"]
 [ext_resource type="Texture2D" uid="uid://d2c7ybughuwts" path="res://Trees/Sprites/Tree3.png" id="8_xh35e"]
 
@@ -156,24 +155,15 @@ size = Vector2(23, 161)
 [node name="MapTest" type="Node2D" unique_id=1117060482]
 script = ExtResource("1_fds0u")
 
-[node name="SkyTemplate" type="Sprite2D" parent="." unique_id=628814589]
-visible = false
-z_index = -100
-position = Vector2(1671.3754, 38.749977)
-scale = Vector2(14.502702, 9.080358)
-texture = ExtResource("1_iowgq")
+[node name="Tree4" type="Sprite2D" parent="." unique_id=1363262548]
+position = Vector2(1323.0001, -54)
+scale = Vector2(0.14913657, 0.18507187)
+texture = ExtResource("7_gm2te")
 
-[node name="Pueblo" type="Sprite2D" parent="." unique_id=1108836393]
-position = Vector2(3255, -159.99988)
-scale = Vector2(0.68507725, 0.4594112)
-texture = ExtResource("1_g1ni8")
-
-[node name="ColorRect" type="ColorRect" parent="Pueblo" unique_id=1061724643]
-offset_left = -776.72095
-offset_top = -380.6018
-offset_right = 789.09875
-offset_bottom = 412.31848
-color = Color(0.11372549, 0.1254902, 1, 0.13725491)
+[node name="Tree" type="Sprite2D" parent="." unique_id=1198598951]
+position = Vector2(1498, -92.00001)
+scale = Vector2(-0.159, 0.222)
+texture = ExtResource("6_mg86x")
 
 [node name="Node2D" type="Node2D" parent="." unique_id=1323578622]
 
@@ -204,7 +194,7 @@ tile_set = SubResource("TileSet_iowgq")
 offset_left = 1272.0
 offset_top = -86.0
 offset_right = 1485.0
-offset_bottom = -11.0
+offset_bottom = 41.0
 text = "Campamento 
 Temporal hasta
 conseguir casa en el pueblo"

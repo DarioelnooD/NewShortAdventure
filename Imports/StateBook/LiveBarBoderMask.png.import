@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://coe0ni1i8psvl"
-path="res://.godot/imported/Book.png-d754bb28cd4b2b2e33a0d3e0473213e3.ctex"
+uid="uid://didyafn0fxais"
+path="res://.godot/imported/LiveBarBoderMask.png-7cf0d8f85dddedd9b5dbde8f7b40ebc7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Imports/Book.png"
-dest_files=["res://.godot/imported/Book.png-d754bb28cd4b2b2e33a0d3e0473213e3.ctex"]
+source_file="res://Imports/StateBook/LiveBarBoderMask.png"
+dest_files=["res://.godot/imported/LiveBarBoderMask.png-7cf0d8f85dddedd9b5dbde8f7b40ebc7.ctex"]
 
 [params]
 

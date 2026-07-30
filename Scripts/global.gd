@@ -24,7 +24,7 @@ func get_saldo():
 		var data = JSON.parse_string(content)
 		return data["Saldo"]
 
-func get_live():
+func get_live(): 
 	if FileAccess.file_exists(DATA_PLAYER):
 		var file = FileAccess.open(DATA_PLAYER, FileAccess.READ)
 		var content = file.get_as_text()
@@ -67,6 +67,33 @@ func put_last_position_in_door(name = "", x = 0, y = 0):
 	var file_write = FileAccess.open(DATA_PLAYER, FileAccess.WRITE)
 	file_write.store_string(JSON.stringify(data))
 	print(data)
+
+func change_slot_inventory(name = "", slot = "0x0"):
+	var data = get_last_position_in_door()
+	
+	if name == "":
+		return
+		
+	if not data.has("Inventary"):
+		data["Inventary"] = []
+		
+	var exist = false
+	
+	for i in range(data["Inventary"].size()):
+		if data["Inventary"][i]["Name"] == clear_name(name):
+			data["Inventary"][i]["Slot"] = slot
+			exist = true
+			break
+			
+	if not exist:
+		data["Inventary"].append({
+			"Name": name,
+			"Slot": slot,
+			"Image": Image
+		})
+		
+	var file_write = FileAccess.open(DATA_PLAYER, FileAccess.WRITE)
+	file_write.store_string(JSON.stringify(data))
 
 func save_inventory(name = "", cantidad = 0, estado = "", calidad = 0,Image = ""):
 	var data = get_last_position_in_door()

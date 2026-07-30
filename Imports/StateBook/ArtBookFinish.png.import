@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xiil23t78t1y"
-path="res://.godot/imported/PlaceholderAnimationBook.png-f8e4d1a12461c6df546f97dd5f5326d9.ctex"
+uid="uid://b0hvhw34663yg"
+path="res://.godot/imported/ArtBookFinish.png-7ca66d1681bd4da0c6adfa6034b41831.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Imports/PlaceholderAnimationBook.png"
-dest_files=["res://.godot/imported/PlaceholderAnimationBook.png-f8e4d1a12461c6df546f97dd5f5326d9.ctex"]
+source_file="res://Imports/StateBook/ArtBookFinish.png"
+dest_files=["res://.godot/imported/ArtBookFinish.png-7ca66d1681bd4da0c6adfa6034b41831.ctex"]
 
 [params]
 

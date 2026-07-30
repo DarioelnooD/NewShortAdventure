@@ -280,9 +280,9 @@ offset_bottom = 572.0
 scale = Vector2(1.6874163, 0.32394737)
 
 [node name="Npc" parent="." unique_id=1830366603 node_paths=PackedStringArray("Wepoint") instance=ExtResource("5_il1fd")]
-position = Vector2(317, 391)
+position = Vector2(150, 524)
 speed = 20.0
-Wepoint = [NodePath("../MarketList/Marker2D"), NodePath("../MarketList/Marker2D2")]
+Wepoint = [NodePath("../MarketList/Marker2D")]
 
 [node name="Puestico" type="Area2D" parent="." unique_id=139240011]
 position = Vector2(792, 267)
@@ -300,12 +300,9 @@ position = Vector2(13.168945, 167.7135)
 shape = SubResource("RectangleShape2D_g4v7s")
 
 [node name="MarketList" type="Node2D" parent="." unique_id=635070476]
-position = Vector2(356, 362)
+position = Vector2(47, 492)
 
 [node name="Marker2D" type="Marker2D" parent="MarketList" unique_id=1940646747]
-position = Vector2(189, -29)
-
-[node name="Marker2D2" type="Marker2D" parent="MarketList" unique_id=1839789136]
-position = Vector2(2, 35)
+position = Vector2(68, 37)
 
 [connection signal="body_entered" from="forest" to="." method="_on_forest_body_entered"]

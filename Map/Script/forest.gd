@@ -29,6 +29,12 @@ func _ready() -> void:
 		var post = Global.get_last_position_in_door('forest')
 		if post != null:
 			_Body.position = Vector2(post["x"], post["y"])
+			
+			
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("ui_up") and $Puente/Der/CollisionShape2D:
+		$Puente/T7toD.queue_free()
+		$Puente/Der/CollisionShape2D.queue_free()
 
 func _on_pueblo_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
@@ -42,3 +48,7 @@ func _on_base_body_entered(body: Node2D) -> void:
 		#Global.LastPosition(body.position)
 		Global.put_last_position_in_door("forest",body.position.x + 5,body.position.y)
 		get_tree().change_scene_to_file("res://Map/Scene/map_test.tscn")
+
+func _on_s_pirit_land_body_entered(body: Node2D) -> void:
+	if body is CharacterBody2D:
+		Global.put_last_position_in_door("forest2",body.position.x - 5,body.position.y)

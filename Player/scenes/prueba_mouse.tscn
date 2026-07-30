@@ -1,0 +1,521 @@
+[gd_scene format=3 uid="uid://ch0kcsbu568m"]
+
+[ext_resource type="Script" uid="uid://dhlo7gaaopllh" path="res://Player/script/PruebaDeMouse.gd" id="1_o3ujx"]
+[ext_resource type="Texture2D" uid="uid://c761ylv7uc6cm" path="res://Imports/Manos.png" id="2_5adys"]
+[ext_resource type="Texture2D" uid="uid://b0hvhw34663yg" path="res://Imports/StateBook/ArtBookFinish.png" id="2_irp4e"]
+[ext_resource type="Script" uid="uid://c224t3augtdkk" path="res://Scripts/reloj.gd" id="3_yx525"]
+[ext_resource type="PackedScene" uid="uid://cm278lc0o1fi0" path="res://Player/scenes/OneSlot.tscn" id="4_5adys"]
+[ext_resource type="Shader" uid="uid://u2mdatamlwnn" path="res://Player/Shader/prueba_mouse.gdshader" id="5_n3php"]
+[ext_resource type="Texture2D" uid="uid://5t0yx6jn4ya7" path="res://Assets/Items/agua_con_gas.png" id="6_gt2c4"]
+[ext_resource type="LabelSettings" uid="uid://5fduly8bs47x" path="res://Scripts/label_settings_book.tres" id="7_lfvgy"]
+[ext_resource type="Texture2D" uid="uid://dsjnyk77ya3ec" path="res://Imports/Star.png" id="8_oethf"]
+[ext_resource type="Texture2D" uid="uid://crxdbl0vxbpbn" path="res://Imports/LiveBarBoder.png" id="9_2417q"]
+[ext_resource type="Texture2D" uid="uid://dfjr2b6e1coda" path="res://Imports/LiveOfLiveBar.png" id="10_jn532"]
+[ext_resource type="Texture2D" uid="uid://cjca08a12oswg" path="res://Imports/FaceInBook.png" id="11_frdbw"]
+[ext_resource type="Texture2D" uid="uid://x3bxh4m7a033" path="res://Imports/BordeFace.png" id="12_e1fkx"]
+[ext_resource type="Texture2D" uid="uid://didyafn0fxais" path="res://Imports/StateBook/LiveBarBoderMask.png" id="13_dd5g1"]
+[ext_resource type="Texture2D" uid="uid://dtqy8bnnm2apx" path="res://Imports/StateBook/VolumenIcon.png" id="14_irp4e"]
+[ext_resource type="Texture2D" uid="uid://dxgm2en2dnrh5" path="res://Imports/Map.png" id="14_ootgx"]
+[ext_resource type="Texture2D" uid="uid://cxiv5jogoctaj" path="res://Imports/pulgares.png" id="17_n3php"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g0mqq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8bmkv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4suqp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_702t5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hcbdt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_er3g1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mexxq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k3vv8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qvsei"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tgt55"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yx5eb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bqrvs"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wt1l0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_14jcw"]
+shader = ExtResource("5_n3php")
+shader_parameter/scale = Vector2(30, 30)
+shader_parameter/strength = 2.0
+shader_parameter/fps = 3.0
+shader_parameter/noise = SubResource("NoiseTexture2D_wt1l0")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yf5fn"]
+size = Vector2(311.6369, 348.72766)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fn7p0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8742k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_101oe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n0rsy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3rpeq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6x26r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vpjl7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ebgnh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ju0vh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1fxka"]
+
+[node name="PruebaMouse" type="Node2D" unique_id=479737174]
+script = ExtResource("1_o3ujx")
+
+[node name="Manos" type="Sprite2D" parent="." unique_id=1619482780]
+position = Vector2(636, 622.99994)
+scale = Vector2(1.8340231, 1.7266436)
+texture = ExtResource("2_5adys")
+
+[node name="PlaceholderAnimationBook" type="Sprite2D" parent="." unique_id=1841343131]
+position = Vector2(636, 334)
+scale = Vector2(1.0501208, 1.0449331)
+texture = ExtResource("2_irp4e")
+
+[node name="reloj" type="Node2D" parent="." unique_id=1633475429]
+position = Vector2(615, 788)
+script = ExtResource("3_yx525")
+
+[node name="minuts" type="Node2D" parent="reloj" unique_id=1791878184]
+position = Vector2(-2, -3)
+rotation = 6.276339
+
+[node name="ColorRect" type="ColorRect" parent="reloj/minuts" unique_id=861905506]
+offset_left = -3.2356343
+offset_top = -59.046856
+offset_right = 36.764366
+offset_bottom = -16.742382
+scale = Vector2(0.16551037, 1.3359684)
+color = Color(0, 0, 0, 1)
+
+[node name="Hour" type="Node2D" parent="reloj" unique_id=1584798321]
+position = Vector2(-2, -3)
+
+[node name="ColorRect" type="ColorRect" parent="reloj/Hour" unique_id=1734434423]
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 43.0
+offset_bottom = 43.0
+scale = Vector2(-0.16150886, 0.8504444)
+color = Color(0, 0, 0, 1)
+
+[node name="Taks" type="Node2D" parent="." unique_id=2097239693]
+
+[node name="InventTrip" type="Button" parent="Taks" unique_id=2030808560]
+offset_left = 154.745
+offset_top = 146.745
+offset_right = 162.74503
+offset_bottom = 154.745
+scale = Vector2(9.738752, 7.323871)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_g0mqq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_8bmkv")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4suqp")
+
+[node name="ShopTrip" type="Button" parent="Taks" unique_id=1190653301]
+offset_left = 153.725
+offset_top = 235.575
+offset_right = 161.72505
+offset_bottom = 243.575
+scale = Vector2(4.9988623, 5.202491)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_702t5")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_hcbdt")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_er3g1")
+
+[node name="MapTrip" type="Button" parent="Taks" unique_id=1600560851]
+offset_left = 156.15
+offset_top = 176.03
+offset_right = 164.15
+offset_bottom = 184.03
+scale = Vector2(5.170883, 4.9457207)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_mexxq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_k3vv8")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_qvsei")
+
+[node name="ConfigTrip" type="Button" parent="Taks" unique_id=397883218]
+offset_left = 1030.0
+offset_top = 528.0
+offset_right = 1038.0
+offset_bottom = 536.0
+scale = Vector2(4.434496, 4.519611)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_tgt55")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_yx5eb")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_bqrvs")
+
+[node name="Inventory" type="Node2D" parent="." unique_id=641471237]
+
+[node name="Node" type="Node2D" parent="Inventory" unique_id=856367470]
+position = Vector2(-23, 2)
+
+[node name="1x1" parent="Inventory/Node" unique_id=896740345 instance=ExtResource("4_5adys")]
+position = Vector2(298, 123.00001)
+rotation = -0.14136736
+
+[node name="1x2" parent="Inventory/Node" unique_id=2038673548 instance=ExtResource("4_5adys")]
+position = Vector2(351.99997, 114)
+rotation = -0.08935193
+
+[node name="1x3" parent="Inventory/Node" unique_id=173088247 instance=ExtResource("4_5adys")]
+position = Vector2(403.99997, 106.99999)
+rotation = -0.07072615
+
+[node name="1x4" parent="Inventory/Node" unique_id=1036361134 instance=ExtResource("4_5adys")]
+position = Vector2(458.99997, 100.99999)
+rotation = -0.048344154
+
+[node name="1x5" parent="Inventory/Node" unique_id=1351685444 instance=ExtResource("4_5adys")]
+position = Vector2(512.99994, 100.99999)
+rotation = 0.033296663
+
+[node name="2x1" parent="Inventory/Node" unique_id=1524061183 instance=ExtResource("4_5adys")]
+position = Vector2(300.00003, 175)
+rotation = -0.1612082
+
+[node name="2x2" parent="Inventory/Node" unique_id=725847331 instance=ExtResource("4_5adys")]
+position = Vector2(356.00003, 164.00002)
+rotation = -0.1018222
+
+[node name="2x3" parent="Inventory/Node" unique_id=262575944 instance=ExtResource("4_5adys")]
+position = Vector2(407, 159.00002)
+rotation = -0.11972201
+
+[node name="2x4" parent="Inventory/Node" unique_id=270985235 instance=ExtResource("4_5adys")]
+position = Vector2(458.99997, 151)
+rotation = -0.07730004
+
+[node name="2x5" parent="Inventory/Node" unique_id=1355747099 instance=ExtResource("4_5adys")]
+position = Vector2(516, 150)
+rotation = 0.017747428
+
+[node name="3x1" parent="Inventory/Node" unique_id=1946880237 instance=ExtResource("4_5adys")]
+position = Vector2(304, 221)
+rotation = -0.11525414
+
+[node name="3x2" parent="Inventory/Node" unique_id=1773164949 instance=ExtResource("4_5adys")]
+position = Vector2(359, 211.99998)
+rotation = -0.086200364
+
+[node name="3x3" parent="Inventory/Node" unique_id=313676731 instance=ExtResource("4_5adys")]
+position = Vector2(410.99997, 205.99998)
+rotation = -0.10712363
+
+[node name="3x4" parent="Inventory/Node" unique_id=702205911 instance=ExtResource("4_5adys")]
+position = Vector2(464.99997, 198.99998)
+rotation = -0.062513016
+
+[node name="3x5" parent="Inventory/Node" unique_id=1721887113 instance=ExtResource("4_5adys")]
+position = Vector2(517.99994, 197.99998)
+
+[node name="4x1" parent="Inventory/Node" unique_id=170823646 instance=ExtResource("4_5adys")]
+position = Vector2(309.99997, 268.99997)
+rotation = -0.12290264
+
+[node name="4x2" parent="Inventory/Node" unique_id=998699861 instance=ExtResource("4_5adys")]
+position = Vector2(364, 262.00003)
+rotation = -0.060087133
+
+[node name="4x3" parent="Inventory/Node" unique_id=1277522141 instance=ExtResource("4_5adys")]
+position = Vector2(416.99997, 253.99997)
+rotation = -0.0915709
+
+[node name="4x4" parent="Inventory/Node" unique_id=218521392 instance=ExtResource("4_5adys")]
+position = Vector2(468.99997, 249.99997)
+rotation = -0.06902526
+
+[node name="4x5" parent="Inventory/Node" unique_id=908309942 instance=ExtResource("4_5adys")]
+position = Vector2(521.99994, 246.99997)
+
+[node name="5x1" parent="Inventory/Node" unique_id=599831863 instance=ExtResource("4_5adys")]
+position = Vector2(314.99997, 319)
+rotation = -0.10566466
+
+[node name="5x2" parent="Inventory/Node" unique_id=2084868664 instance=ExtResource("4_5adys")]
+position = Vector2(369, 314)
+rotation = -0.047155753
+
+[node name="5x3" parent="Inventory/Node" unique_id=1483181363 instance=ExtResource("4_5adys")]
+position = Vector2(419.99997, 308)
+rotation = -0.056945093
+
+[node name="5x4" parent="Inventory/Node" unique_id=120030299 instance=ExtResource("4_5adys")]
+position = Vector2(474.99997, 303)
+rotation = -0.09178656
+
+[node name="5x5" parent="Inventory/Node" unique_id=374105047 instance=ExtResource("4_5adys")]
+position = Vector2(525.99994, 304)
+rotation = -0.057688594
+
+[node name="TextureRect" type="TextureRect" parent="Inventory" unique_id=134048575]
+material = SubResource("ShaderMaterial_14jcw")
+offset_left = 331.0
+offset_top = 388.41852
+offset_right = 459.0
+offset_bottom = 516.4185
+scale = Vector2(0.9159401, 0.9513689)
+texture = ExtResource("6_gt2c4")
+
+[node name="NOmbre" type="Label" parent="Inventory" unique_id=1484475775]
+offset_left = 271.0
+offset_top = 385.41852
+offset_right = 368.0
+offset_bottom = 408.41852
+rotation = -0.31758323
+scale = Vector2(1.2683423, 1.8331048)
+text = "Frutos secos"
+label_settings = ExtResource("7_lfvgy")
+
+[node name="Cantidad" type="Label" parent="Inventory" unique_id=430455228]
+offset_left = 220.0
+offset_top = 479.41852
+offset_right = 293.0
+offset_bottom = 502.41852
+scale = Vector2(1.205184, 1.4853342)
+text = "Unidades"
+label_settings = ExtResource("7_lfvgy")
+
+[node name="Cantidad" type="Label" parent="Inventory/Cantidad" unique_id=879490737]
+layout_mode = 0
+offset_left = 30.700695
+offset_top = -23.563723
+offset_right = 70.7007
+offset_bottom = -0.5637226
+text = "0"
+label_settings = ExtResource("7_lfvgy")
+
+[node name="Limit" type="Area2D" parent="Inventory" unique_id=319158026]
+position = Vector2(568, 219)
+scale = Vector2(0.9125482, 0.8029188)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inventory/Limit" unique_id=890873817]
+position = Vector2(-176.45615, 26.273468)
+rotation = -0.053523436
+scale = Vector2(0.9999999, 0.9999999)
+shape = SubResource("RectangleShape2D_yf5fn")
+
+[node name="Stars" type="Node2D" parent="Inventory" unique_id=790318406]
+position = Vector2(-20, -20)
+
+[node name="Star" type="Sprite2D" parent="Inventory/Stars" unique_id=1353663464]
+position = Vector2(529, 402)
+scale = Vector2(0.17678438, 0.20218794)
+texture = ExtResource("8_oethf")
+
+[node name="Star2" type="Sprite2D" parent="Inventory/Stars" unique_id=1348457356]
+position = Vector2(507.00003, 425)
+scale = Vector2(0.17678438, 0.20218794)
+texture = ExtResource("8_oethf")
+
+[node name="Star3" type="Sprite2D" parent="Inventory/Stars" unique_id=1549304629]
+position = Vector2(551.00006, 425)
+scale = Vector2(0.17678438, 0.20218794)
+texture = ExtResource("8_oethf")
+
+[node name="Star4" type="Sprite2D" parent="Inventory/Stars" unique_id=180730020]
+position = Vector2(529, 445)
+scale = Vector2(0.17678438, 0.20218794)
+texture = ExtResource("8_oethf")
+
+[node name="Estado" type="Label" parent="Inventory" unique_id=96250337]
+offset_left = 465.99997
+offset_top = 437.0
+offset_right = 523.0
+offset_bottom = 460.0
+scale = Vector2(1.273307, 1.0593305)
+text = "Estado:"
+label_settings = ExtResource("7_lfvgy")
+
+[node name="Estado" type="Label" parent="Inventory/Estado" unique_id=698829038]
+layout_mode = 0
+offset_top = 16.0
+offset_right = 51.0
+offset_bottom = 39.0
+scale = Vector2(1.8062577, 2.1565745)
+text = "Fresco"
+label_settings = ExtResource("7_lfvgy")
+
+[node name="LiveBarBoder" type="Sprite2D" parent="Inventory" unique_id=193378233]
+position = Vector2(649, 328)
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("9_2417q")
+
+[node name="LiveOfLiveBar" type="Sprite2D" parent="Inventory/LiveBarBoder" unique_id=684553776]
+visible = false
+show_behind_parent = true
+texture_filter = 3
+position = Vector2(-12, 2.9999995)
+scale = Vector2(1.0423554, 1.0177273)
+texture = ExtResource("10_jn532")
+region_rect = Rect2(16.685, 14.115, 0, 0)
+
+[node name="ColorRect" type="ColorRect" parent="Inventory/LiveBarBoder" unique_id=2137831400]
+show_behind_parent = true
+offset_left = 193.0
+offset_top = -173.00005
+offset_right = 229.87154
+offset_bottom = -137.44308
+scale = Vector2(4.393634, 1.4343185)
+color = Color(0.7738555, 2.23808e-06, 9.62615e-07, 1)
+
+[node name="FaceInBook" type="Sprite2D" parent="Inventory/LiveBarBoder" unique_id=540308384]
+position = Vector2(-10, 10)
+texture = ExtResource("11_frdbw")
+
+[node name="BordeFace" type="Sprite2D" parent="Inventory/LiveBarBoder" unique_id=1993939582]
+position = Vector2(-11, 12)
+texture = ExtResource("12_e1fkx")
+
+[node name="LiveBarBoderMask" type="Sprite2D" parent="Inventory/LiveBarBoder" unique_id=1240297869]
+position = Vector2(275, -145.50006)
+scale = Vector2(0.4210527, 0.41935492)
+texture = ExtResource("13_dd5g1")
+
+[node name="Settings" type="Node2D" parent="." unique_id=622005845]
+visible = false
+position = Vector2(496, 248)
+scale = Vector2(2.8360915, 2.4211004)
+
+[node name="General" type="Button" parent="Settings" unique_id=2048250891]
+offset_left = 82.324
+offset_top = -31.067
+offset_right = 140.93896
+offset_bottom = -6.931999
+theme_override_styles/normal = SubResource("StyleBoxEmpty_fn7p0")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_8742k")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_101oe")
+
+[node name="Volumen" type="Button" parent="Settings" unique_id=347140675]
+offset_left = 85.953
+offset_top = 5.676
+offset_right = 139.31284
+offset_bottom = 30.916006
+theme_override_styles/normal = SubResource("StyleBoxEmpty_n0rsy")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_3rpeq")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_6x26r")
+
+[node name="Exit" type="Button" parent="Settings" unique_id=1635118838]
+offset_left = 91.25
+offset_top = 45.51
+offset_right = 139.54001
+offset_bottom = 66.56999
+theme_override_styles/normal = SubResource("StyleBoxEmpty_vpjl7")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ebgnh")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ju0vh")
+
+[node name="IGeneral" type="Node2D" parent="Settings" unique_id=191584488]
+visible = false
+position = Vector2(-64.52542, -64.43351)
+
+[node name="Button" type="Button" parent="Settings/IGeneral" unique_id=1655837829]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "buenas"
+
+[node name="IVolumen" type="Node2D" parent="Settings" unique_id=1601859544]
+
+[node name="General" type="Button" parent="Settings/IVolumen" unique_id=567613614]
+offset_left = -94.84884
+offset_top = -29.738544
+offset_right = -18.848839
+offset_bottom = 1.2614555
+scale = Vector2(0.57967854, 0.53127366)
+text = "General"
+
+[node name="VolumenIcon" type="Sprite2D" parent="Settings/IVolumen/General" unique_id=283473038]
+position = Vector2(95.49754, 16.326324)
+scale = Vector2(0.044260852, 0.05270407)
+texture = ExtResource("14_irp4e")
+
+[node name="ColorRect" type="ColorRect" parent="Settings/IVolumen" unique_id=1836212596]
+offset_left = -94.49624
+offset_top = -7.434634
+offset_right = -54.49624
+offset_bottom = 32.565365
+scale = Vector2(2.7514594, 0.11674211)
+
+[node name="ColorRect" type="ColorRect" parent="Settings/IVolumen/ColorRect" unique_id=549740329]
+layout_mode = 0
+offset_left = 36.52258
+offset_top = -67.22227
+offset_right = 76.52258
+offset_bottom = -27.222267
+scale = Vector2(0.096845016, 3.8912523)
+color = Color(0, 0, 0, 1)
+
+[node name="Ambiente" type="Button" parent="Settings/IVolumen" unique_id=99181901]
+offset_left = -94.49624
+offset_top = 6.6085663
+offset_right = -18.496239
+offset_bottom = 37.608566
+scale = Vector2(0.57967854, 0.53127366)
+text = "Ambiente"
+
+[node name="VolumenIcon" type="Sprite2D" parent="Settings/IVolumen/Ambiente" unique_id=118339960]
+position = Vector2(104.62148, 17.103767)
+scale = Vector2(0.044260852, 0.05270407)
+texture = ExtResource("14_irp4e")
+
+[node name="ColorRect2" type="ColorRect" parent="Settings/IVolumen" unique_id=1674346032]
+offset_left = -94.14364
+offset_top = 28.912476
+offset_right = -54.14364
+offset_bottom = 68.912476
+scale = Vector2(2.7514594, 0.11674211)
+
+[node name="ColorRect" type="ColorRect" parent="Settings/IVolumen/ColorRect2" unique_id=511727569]
+layout_mode = 0
+offset_left = 36.52258
+offset_top = -67.22227
+offset_right = 76.52258
+offset_bottom = -27.222267
+scale = Vector2(0.096845016, 3.8912523)
+color = Color(0, 0, 0, 1)
+
+[node name="Map" type="Node2D" parent="." unique_id=1861038061]
+visible = false
+position = Vector2(616, 311)
+scale = Vector2(1.4306488, 1.8548149)
+
+[node name="Map2" type="Sprite2D" parent="Map" unique_id=271167689]
+position = Vector2(25.85864, -9.623419)
+scale = Vector2(0.774903, 0.44056118)
+texture = ExtResource("14_ootgx")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1093383197]
+z_index = 10
+position = Vector2(620, 330)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=837787573]
+shape = SubResource("CircleShape2D_1fxka")
+
+[node name="Pulgares" type="Sprite2D" parent="." unique_id=2100388325]
+position = Vector2(632, 699.00006)
+scale = Vector2(1.8337272, 2.366782)
+texture = ExtResource("17_n3php")
+
+[connection signal="pressed" from="Taks/InventTrip" to="." method="invent_trip"]
+[connection signal="pressed" from="Taks/ShopTrip" to="." method="shop_trip"]
+[connection signal="pressed" from="Taks/MapTrip" to="." method="map_trip"]
+[connection signal="pressed" from="Taks/ConfigTrip" to="." method="config_trip"]
+[connection signal="area_entered" from="Inventory/Limit" to="." method="_on_limit_area_entered"]
+[connection signal="area_exited" from="Inventory/Limit" to="." method="_on_limit_area_exited"]
+[connection signal="pressed" from="Settings/General" to="." method="general_pressed"]
+[connection signal="pressed" from="Settings/Volumen" to="." method="volumen_pressed"]
+[connection signal="pressed" from="Settings/Exit" to="." method="exit_pressed"]
+[connection signal="pressed" from="Settings/IVolumen/General" to="." method="generalMute"]
+[connection signal="pressed" from="Settings/IVolumen/Ambiente" to="." method="ambienteMute"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

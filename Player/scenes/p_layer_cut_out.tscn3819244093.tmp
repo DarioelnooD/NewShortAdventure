@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://rqudijo1b4qh" path="res://Player/script/player.gd" id="1_iwrfg"]
 [ext_resource type="Texture2D" uid="uid://dqpgkbmcnpc3r" path="res://Imports/HeadNigga.png" id="1_vdgvh"]
-[ext_resource type="PackedScene" uid="uid://ch0kcsbu568m" path="res://Player/scenes/prueba_mouse.tscn" id="2_g4q1w"]
 [ext_resource type="Texture2D" uid="uid://db0131mq0seep" path="res://Imports/BrownBlock.png" id="2_iwrfg"]
 [ext_resource type="Texture2D" uid="uid://djcgymbpjyrh8" path="res://Player/Sprite/placeholder/AnteBrazoDerecho.png" id="4_g7o8v"]
 [ext_resource type="Texture2D" uid="uid://bwfvhdhxmki1s" path="res://Player/Sprite/Machete.png" id="5_03j0d"]
@@ -6329,160 +6328,15 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iwrfg"]
 size = Vector2(26, 32)
 
-[sub_resource type="Animation" id="Animation_li8r6"]
-resource_name = "Off"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PruebaMouse:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-119.00001, -128), Vector2(-119.00001, 434)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"BookOn"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_nr32f"]
-resource_name = "OffLarge"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PruebaMouse:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-220, -195.00002), Vector2(-220, 434)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"BookOn"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_48jby"]
-resource_name = "On"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PruebaMouse:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-119.00001, 434), Vector2(-119.00001, -128)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"BookOn"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_4nyip"]
-resource_name = "OnLarge"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PruebaMouse:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-220, 434), Vector2(-220, -195.00002)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"BookOn"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_syvh5"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PruebaMouse:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-119.00001, -128)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_2nkdj"]
-_data = {
-&"Off": SubResource("Animation_li8r6"),
-&"OffLarge": SubResource("Animation_nr32f"),
-&"On": SubResource("Animation_48jby"),
-&"OnLarge": SubResource("Animation_4nyip"),
-&"RESET": SubResource("Animation_syvh5")
-}
-
 [node name="PLayerCutOut" type="CharacterBody2D" unique_id=264839427]
 z_index = 2
 position = Vector2(0, 2)
 collision_mask = 32768
 script = ExtResource("1_iwrfg")
-
-[node name="PruebaMouse" parent="." unique_id=479737174 instance=ExtResource("2_g4q1w")]
-z_index = 50
-z_as_relative = false
-position = Vector2(-119.00001, -128)
-scale = Vector2(0.357, 0.343)
+QuitWindows = null
+zoom_speed = null
+min_zoom = null
+max_zoom = null
 
 [node name="Body" type="Node2D" parent="." unique_id=29846416]
 position = Vector2(-1, -8)
@@ -6744,7 +6598,7 @@ shape = SubResource("CircleShape2D_2nkdj")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=307361517]
 position = Vector2(-1, -37)
 scale = Vector2(31.294395, -92.90194)
-zoom = Vector2(2, 2)
+zoom = Vector2(4, 4)
 
 [node name="Label" type="Label" parent="." unique_id=1889988959]
 offset_left = -9.0
@@ -6847,9 +6701,6 @@ hit_from_inside = true
 [node name="Timer" type="Timer" parent="." unique_id=1052194384]
 wait_time = 3.0
 autostart = true
-
-[node name="Book" type="AnimationPlayer" parent="." unique_id=556943698]
-libraries/ = SubResource("AnimationLibrary_2nkdj")
 
 [connection signal="area_entered" from="Body/stomach/Chest/RightArmTop/RightArmBottom/Hand/RightHand" to="." method="_on_right_hand_area_entered"]
 [connection signal="area_exited" from="Body/stomach/Chest/RightArmTop/RightArmBottom/Hand/RightHand" to="." method="_on_right_hand_area_exited"]

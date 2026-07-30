@@ -1,0 +1,426 @@
+[gd_scene format=3 uid="uid://bc3j2eyftacem"]
+
+[ext_resource type="Script" uid="uid://cxod6sjn4b4ul" path="res://Player/script/Crafting.gd" id="1_x1tf3"]
+
+[sub_resource type="GDScript" id="GDScript_x1tf3"]
+script/source = "extends Node2D
+
+var cutDistance = 20
+@onready var cut_line: ColorRect = $CutLine
+var stepList = [Vector2(238,123),Vector2(360,123),Vector2(483,123)]
+var step = 0
+@export var finish:bool = false
+
+
+func _ready() -> void:
+	for part in $Parts.get_children():
+		if part == cut_line or not part is Control: 
+			continue
+			
+		part.mouse_entered.connect(func(): 
+			if part.color != Color(\"ff0000\"):
+				part.color = Color(\"ff00ff\")
+			)
+			
+		part.mouse_exited.connect(func(): 
+			if part.color != Color(\"ff0000\"):
+				part.color = Color(\"ffffff\")
+			)
+			
+		part.gui_input.connect(func(event: InputEvent): 
+			if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT: 
+				
+				part.color = Color(\"ff0000\")
+				print(\"Clic exitoso! Avanzando al paso: \", step + 1)
+				print(\"position\", stepList[step])
+				part.position.x -= cutDistance
+				
+				cutDistance -= 5
+				if step < stepList.size() - 1:
+					step += 1
+				else:
+					finish = true
+			)
+
+func _process(delta: float) -> void:
+	if finish:
+		$Parts/AnimationPlayer.play(\"Leave\")
+		return
+
+	cut_line.position = stepList[step]
+
+func Destroid():
+	self.visible = false
+"
+
+[sub_resource type="Animation" id="Animation_7w20l"]
+resource_name = "Leave"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect4:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(227, 174.00002), Vector2(-665, 174)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(351, 174.00002), Vector2(-541, 174)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(600, 174.00002), Vector2(-292, 174)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ColorRect3:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(474, 174.00002), Vector2(-418, 174)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"Destroid"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_xfiow"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect4:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(227, 174.00002)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(351, 174.00002)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(600, 174.00002)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ColorRect3:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(474, 174.00002)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_md6dm"]
+_data = {
+&"Leave": SubResource("Animation_7w20l"),
+&"RESET": SubResource("Animation_xfiow")
+}
+
+[sub_resource type="Animation" id="Animation_b242q"]
+resource_name = "MOVE"
+length = 0.5
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(238, 123), Vector2(238, 150)]
+}
+
+[sub_resource type="Animation" id="Animation_eucfr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(238, 123)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7w20l"]
+_data = {
+&"MOVE": SubResource("Animation_b242q"),
+&"RESET": SubResource("Animation_eucfr")
+}
+
+[sub_resource type="GDScript" id="GDScript_b242q"]
+script/source = "extends Node2D
+
+var cutDistance = 20
+@onready var cut_line: ColorRect = $CutLine
+var stepList = [Vector2(238,123)]
+var step = 0
+var finish:bool = false
+
+
+func _ready() -> void:
+	for part in $Parts.get_children():
+		if part == cut_line or not part is Control: 
+			continue
+			
+		part.mouse_entered.connect(func(): 
+			if part.color != Color(\"ff0000\"):
+				part.color = Color(\"ff00ff\")
+			)
+			
+		part.mouse_exited.connect(func(): 
+			if part.color != Color(\"ff0000\"):
+				part.color = Color(\"ffffff\")
+			)
+			
+		part.gui_input.connect(func(event: InputEvent): 
+			if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT: 
+				
+				part.color = Color(\"ff0000\")
+				print(\"Clic exitoso! Avanzando al paso: \", step + 1)
+				print(\"position\", stepList[step])
+				part.position.x -= cutDistance
+				
+				cutDistance -= 5
+				if step < stepList.size() - 1:
+					step += 1
+				else:
+					finish = true
+			)
+
+func _process(delta: float) -> void:
+	if finish:
+		$Parts/AnimationPlayer.play(\"Leave\")
+		return
+		
+	cut_line.position = stepList[step]
+
+func DestroidLemon():
+	self.visible = false
+"
+
+[sub_resource type="Animation" id="Animation_md6dm"]
+resource_name = "Leave"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(374, 174.00002), Vector2(-497, 174)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(600, 174.00002), Vector2(-271, 174)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.43333334),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"DestroidLemon"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_05c6h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(374, 174.00002)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(600, 174.00002)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qe6s7"]
+_data = {
+&"Leave": SubResource("Animation_md6dm"),
+&"RESET": SubResource("Animation_05c6h")
+}
+
+[node name="Crafting" type="Node2D" unique_id=842451889]
+script = ExtResource("1_x1tf3")
+
+[node name="Fish" type="Node2D" parent="." unique_id=1137432478]
+visible = false
+position = Vector2(111, -2)
+script = SubResource("GDScript_x1tf3")
+
+[node name="Parts" type="Node2D" parent="Fish" unique_id=1971492973]
+
+[node name="ColorRect" type="ColorRect" parent="Fish/Parts" unique_id=1808966111]
+offset_left = 351.0
+offset_top = 174.00002
+offset_right = 391.00006
+offset_bottom = 214.00002
+scale = Vector2(3.027548, 7.4240146)
+
+[node name="ColorRect2" type="ColorRect" parent="Fish/Parts" unique_id=2102054861]
+offset_left = 600.0
+offset_top = 174.00002
+offset_right = 640.0
+offset_bottom = 214.00002
+scale = Vector2(3.027548, 7.4240146)
+
+[node name="ColorRect3" type="ColorRect" parent="Fish/Parts" unique_id=1409163178]
+offset_left = 474.0
+offset_top = 174.00002
+offset_right = 514.0
+offset_bottom = 214.00002
+scale = Vector2(3.027548, 7.4240146)
+
+[node name="ColorRect4" type="ColorRect" parent="Fish/Parts" unique_id=608748420]
+offset_left = 227.0
+offset_top = 174.00002
+offset_right = 267.0
+offset_bottom = 214.00002
+scale = Vector2(3.027548, 7.4240146)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Fish/Parts" unique_id=1356615751]
+libraries/ = SubResource("AnimationLibrary_md6dm")
+
+[node name="CutLine" type="ColorRect" parent="Fish" unique_id=1598170708]
+offset_left = 238.0
+offset_top = 123.0
+offset_right = 278.0
+offset_bottom = 162.99866
+scale = Vector2(0.07999867, 9.720001)
+color = Color(1, 0, 1, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Fish/CutLine" unique_id=356040724]
+libraries/ = SubResource("AnimationLibrary_7w20l")
+
+[node name="Lemon" type="Node2D" parent="." unique_id=1565559704]
+visible = false
+script = SubResource("GDScript_b242q")
+
+[node name="Parts" type="Node2D" parent="Lemon" unique_id=1863740878]
+
+[node name="ColorRect" type="ColorRect" parent="Lemon/Parts" unique_id=209315518]
+offset_left = 374.0
+offset_top = 174.00002
+offset_right = 414.00006
+offset_bottom = 214.00002
+scale = Vector2(5.5986814, 7.410644)
+
+[node name="ColorRect2" type="ColorRect" parent="Lemon/Parts" unique_id=1212660954]
+offset_left = 600.0
+offset_top = 174.00002
+offset_right = 640.0
+offset_bottom = 214.00002
+scale = Vector2(5.5986814, 7.410644)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Lemon/Parts" unique_id=366301879]
+libraries/ = SubResource("AnimationLibrary_qe6s7")
+
+[node name="CutLine" type="ColorRect" parent="Lemon" unique_id=362586817]
+visible = false
+offset_left = 238.0
+offset_top = 123.0
+offset_right = 278.0
+offset_bottom = 162.99866
+scale = Vector2(0.07999867, 9.720001)
+color = Color(1, 0, 1, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Lemon/CutLine" unique_id=151486379]
+libraries/ = SubResource("AnimationLibrary_7w20l")

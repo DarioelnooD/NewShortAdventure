@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qjbl4egogia3"
-path="res://.godot/imported/aSETATO.png-1e33680c00da88b0ef0f9dc25ba24b62.ctex"
+uid="uid://crxdbl0vxbpbn"
+path="res://.godot/imported/LiveBarBoder.png-8060b3824b123a13541b6c186c24009f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://aSETATO.png"
-dest_files=["res://.godot/imported/aSETATO.png-1e33680c00da88b0ef0f9dc25ba24b62.ctex"]
+source_file="res://Imports/LiveBarBoder.png"
+dest_files=["res://.godot/imported/LiveBarBoder.png-8060b3824b123a13541b6c186c24009f.ctex"]
 
 [params]
 

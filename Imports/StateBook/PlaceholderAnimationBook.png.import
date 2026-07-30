@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvg16bn1hbjh"
-path="res://.godot/imported/Asetato.png-11f3b9d0813713e927342a6466ebabee.ctex"
+uid="uid://xiil23t78t1y"
+path="res://.godot/imported/PlaceholderAnimationBook.png-9637d8496a5cfb8852469e30be685fcf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Imports/Asetato.png"
-dest_files=["res://.godot/imported/Asetato.png-11f3b9d0813713e927342a6466ebabee.ctex"]
+source_file="res://Imports/StateBook/PlaceholderAnimationBook.png"
+dest_files=["res://.godot/imported/PlaceholderAnimationBook.png-9637d8496a5cfb8852469e30be685fcf.ctex"]
 
 [params]
 

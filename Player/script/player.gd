@@ -67,7 +67,6 @@ var shoot := false
 var power := 0.0
 var _area
 var menu: bool = false
-var live = Global.get_live()
 var NPC:CharacterBody2D;
 var selected_index := 0
 var inventory_cache := []
@@ -80,19 +79,31 @@ var has_machete := true
 var machete := false         
 @export var QuitWindows = false
 
+var book = true
+
+#region godot
 ##########################################
 ##----------------GODOT-----------------##
 ##########################################
 
 func _ready():
-	connect_inventory_slots()
 	update_machete()
 	limbsControl()
+	print('inventory childrens: ', $PruebaMouse/Inventory/Node.get_children()) 
+	
+	$Book.play("On")
 	
 	Global.ultima_escena = get_tree().current_scene.scene_file_path
-	$Book.visible = true
-	$Book.position = Vector2(-1, 494.0)
-	$Camera2D.zoom = Vector2(2,2)
+	#$Book.visible = true
+	#$Book.position = Vector2(-1, 494.0)
+	if get_node(".").get_parent().name == "Pueblo":
+		$"Book".play("Off")
+		$PruebaMouse.scale = Vector2(0.193,0.193) 
+	else:
+		$"Book".play("OffLarge")
+		$PruebaMouse.scale = Vector2(0.357,0.343) 
+		$Camera2D.zoom = Vector2(2,2)
+
 	stamine = top_climb
 	current_state = STATE.IDLE
 	#current_state = STATE.CLIMB
@@ -120,15 +131,23 @@ func _physics_process(delta: float) -> void:
 		move_set()
 		detectar_arbol()
 	check_point(self.position)
-	inventory(delta)
 	statemachine()
 	move_and_slide()
-	stadistic_player()
 
 func _process(delta: float) -> void:
 	if get_node(".").get_parent().name == "Pueblo":
 		$Camera2D.zoom = $Camera2D.zoom.lerp(Vector2(3.5, 3.5), 3.5 * delta)
 	DebugOption()
+#	-130 -100
+	if Input.is_action_just_pressed("PAUSE"):
+		if get_node(".").get_parent().name == "Pueblo":
+			if book: $"Book".play("Off")
+			else: $"Book".play("On") 
+			$PruebaMouse.scale = Vector2(0.193,0.193) 
+		else:
+			if book: $"Book".play("OffLarge")
+			else: $"Book".play("OnLarge") 
+			$PruebaMouse.scale = Vector2(0.357,0.343) 
 
 	delta = delta + 0
 	if $Body.scale.x < 0:
@@ -142,15 +161,16 @@ func _process(delta: float) -> void:
 		$CollisionShape2D/Verificar.position.x = 2
 		$CollisionShape2D/Verificar.target_position.y = 25
 	
-	$Book.position = $Book.position.lerp(
-		target_book_position,
-		8.0 * delta
-	)
+	#$PruebaMouse.global_position = self.global_position
+	#$Book.position = $Book.position.lerp(
+		#target_book_position,
+		#8.0 * delta
+	#)
 
 ##########################################
 ##--------------//GODOT//---------------##
 ##########################################
-
+#endregion
 
 func update_machete():
 	$Body/stomach/Chest/LeftArmTop/LeftArmBottom/Hand/Sprite2D/Machete.visible = machete
@@ -515,6 +535,7 @@ func get_closest_hold_point(node: Node, hand_position: Vector2) -> Vector2:
 			closest_pos = point.global_position
 	return closest_pos
 
+#region DeBug
 ##########################################
 ##----------------DEBUG-----------------##
 ##########################################
@@ -523,7 +544,7 @@ func validation():
 	
 	$Stamine.text = str(stamine)
 	$Power.text = str(power)
-	$Book/Inventario/Saldo.text = str("$",Global.saldo)
+	#$Book/Inventario/Saldo.text = str("$",Global.saldo)
 	
 	if current_state == STATE.IDLE:
 		$Label.text = "IDLE"
@@ -569,174 +590,9 @@ func _unhandled_input(event):
 ##########################################
 ##--------------//DEBUG//---------------##
 ##########################################
+#endregion
 
-
-
-
-##########################################
-##------------INVENTARIO----------------##
-##########################################
-
-func inventory(delta):
-	state_machine_book()
-	$Book.position = $Book.position.lerp(
-		target_book_position,
-		8.0 * delta
-	)
-
-	if Input.is_action_just_pressed("PAUSE"):
-		book_open = !book_open
-
-		if book_open:
-			$Book.visible = true
-			target_book_position = Vector2(-1, -34)
-
-			inventory_cache = Global.get_inventory_to_array()
-
-			for i in range(inventory_cache.size()):
-				var item = inventory_cache[i]
-				var slot_name = item["Slot"]
-
-				if !$Book/Inventario/Cuadrilla.has_node(slot_name):
-					continue
-
-				var slot = $Book/Inventario/Cuadrilla.get_node(slot_name)
-
-				if item.has("Image") and item["Image"] != "":
-					slot.texture = load(item["Image"])
-				else:
-					slot.texture = load("res://icon.svg")
-				slot.get_node("Cantidad").text = str(int(item["Cantidad"]))
-
-			selected_index = 0
-			update_selected_item()
-
-		else:
-			target_book_position = Vector2(-1, 494.0)
-
-			await get_tree().create_timer(0.2).timeout
-			$Book.visible = false
-
-func connect_inventory_slots():
-	for child in $"Book/Inventario/Cuadrilla".get_children():
-		child.gui_input.connect(_on_slot_gui_input.bind(child))
-
-func _on_slot_gui_input(event: InputEvent, slot):
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-
-			for i in range(inventory_cache.size()):
-
-				if inventory_cache[i]["Slot"] == slot.name:
-					selected_index = i
-					update_selected_item()
-					return
-
-func update_selected_item():
-
-	if inventory_cache.is_empty():
-		return
-
-	selected_index = clamp(selected_index, 0, inventory_cache.size() - 1)
-
-	var item = inventory_cache[selected_index]
-
-	$Book/Inventario/DetailItem/ItemCount.text = str(int(item["Cantidad"]))
-	$Book/Inventario/DetailItem/Title.text = str(item["Name"])
-	$Book/Inventario/DetailItem/State.text = str(item["Estado"])
-	if item.has("Image") and item["Image"] != "":
-		$Book/Inventario/DetailItem/Item.texture = load(item["Image"])
-	else:
-		$Book/Inventario/DetailItem/Item.texture = load("res://icon.svg")
-	
-	update_cursor()
-	update_quality(int(item["Calidad"]))
-
-func update_quality(value):
-	$Book/Inventario/DetailItem/Calidad/Start.visible = value >= 0
-	$Book/Inventario/DetailItem/Calidad/Start2.visible = value >= 1
-	$Book/Inventario/DetailItem/Calidad/Start3.visible = value >= 2
-	$Book/Inventario/DetailItem/Calidad/Start4.visible = value >= 3
-	match value:
-		0:
-			$Book/Inventario/DetailItem/Calidad.modulate = Color.WHITE
-		1:
-			$Book/Inventario/DetailItem/Calidad.modulate = Color("#979797")
-		2:
-			$Book/Inventario/DetailItem/Calidad.modulate = Color("#ff9871")
-		3:
-			$Book/Inventario/DetailItem/Calidad.modulate = Color("#e9c63e")
-
-func update_cursor():
-	if inventory_cache.is_empty():
-		return
-
-	if !$Book.has_node("Selector"):
-		return
-
-	var item = inventory_cache[selected_index]
-	var slot_name = item["Slot"]
-
-	if !$"Book/Inventario/Cuadrilla".has_node(slot_name):
-		return
-
-	var slot = $"Book/Inventario/Cuadrilla".get_node(slot_name)
-
-	$Book/Inventario/Selector.global_position = slot.global_position
-
-func stadistic_player():
-	var hearts = [
-		$Book/Inventario/HBoxContainer/FullHeath,
-		$Book/Inventario/HBoxContainer/FullHeath2,
-		$Book/Inventario/HBoxContainer/FullHeath3,
-		$Book/Inventario/HBoxContainer/FullHeath4,
-		$Book/Inventario/HBoxContainer/FullHeath5
-	]
-	for i in range(hearts.size()):
-
-		if i < live:
-			hearts[i].texture = preload("uid://de0gu8qmdu6om")
-		else:
-			hearts[i].texture = preload("uid://b3o0v5cn1cnme")
-	#for i in [1,2,3,4,5]:
-		#$Book/HBoxContainer/FullHeath{{i}}.texture = "res://Imports/FullHeath.png"
-
-func state_machine_book():
-	match current_state_book:
-		STATE_BOOK.INVENTORY:
-			$Book/Inventario.visible = true
-			$Book/Map.visible = false
-			$Book/Shop.visible = false
-			$Book/Settings.visible = false
-			#$Book/AnimationPlayer.play_backwards("ChangePage")
-			
-		STATE_BOOK.SETTINGS:
-			$Book/Inventario.visible = false
-			$Book/Map.visible = false
-			$Book/Shop.visible = false
-			$Book/Settings.visible = true
-			#$Book/AnimationPlayer.play("ChangePage")
-
-		STATE_BOOK.SHOP:
-			$Book/Inventario.visible = false
-			$Book/Map.visible = false
-			$Book/Shop.visible = true
-			$Book/Settings.visible = false
-			#$Book/AnimationPlayer.play("ChangePage")
-
-		STATE_BOOK.MAP:
-			$Book/Inventario.visible = false
-			$Book/Map.visible = true
-			$Book/Shop.visible = false
-			$Book/Settings.visible = false
-			#$Book/AnimationPlayer.play("ChangePage")
-##########################################
-##----------//INVENTARIO//--------------##
-##########################################
-
-
-
-
+#region signal
 ##########################################
 ##--------------Signal------------------##
 ##########################################
@@ -794,6 +650,7 @@ func _on_timer_timeout():
 func stop_attack():
 	current_state = STATE.IDLE
 
+#region LIMBS
 ###################
 ##-----LIMBS-----##
 ###################
@@ -837,6 +694,7 @@ func _on_left_foot_area_exited(area: Area2D) -> void:
 ###################
 ##----/LIMBS/----##
 ###################
+#endregion
 
 func _on_map_tip_pressed() -> void:
 	current_state_book = STATE_BOOK.MAP
@@ -853,3 +711,7 @@ func _on_settings_t_ip_pressed() -> void:
 ##########################################
 ##------------//Signal//----------------##
 ##########################################
+#endregion
+
+func BookOn():
+	book = !book

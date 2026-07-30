@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b18p4ebgakkpw"]
 
 [ext_resource type="Script" uid="uid://svpdbii3wvhu" path="res://Scripts/menu.gd" id="1_4hy44"]
-[ext_resource type="Texture2D" uid="uid://xiil23t78t1y" path="res://Imports/PlaceholderAnimationBook.png" id="1_mae5d"]
+[ext_resource type="Texture2D" uid="uid://xiil23t78t1y" path="res://Imports/StateBook/PlaceholderAnimationBook.png" id="1_mae5d"]
 [ext_resource type="Texture2D" uid="uid://b2qtey8cy6euh" path="res://Imports/BOsqueesquema.png" id="2_4hy44"]
 [ext_resource type="LabelSettings" uid="uid://5fduly8bs47x" path="res://Scripts/label_settings_book.tres" id="3_ytr4m"]
 

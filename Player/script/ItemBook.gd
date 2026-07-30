@@ -8,3 +8,5 @@ func _ready() -> void:
 		$TextureRect.texture = load(image)
 	if Cantidad:
 		$Label.text = str(int(Cantidad))
+	
+	self.set_meta("LastValidPos", self.global_position)

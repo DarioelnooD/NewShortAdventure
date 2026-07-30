@@ -3758,3 +3758,15 @@ visible = false
 position = Vector2(8.000001, -17)
 scale = Vector2(0.041666668, 0.04508199)
 texture = ExtResource("5_biusv")
+
+[node name="Label" type="Label" parent="." unique_id=692921982]
+offset_left = -9.0
+offset_top = -22.999998
+offset_right = 47.0
+scale = Vector2(0.27649632, 0.27012518)
+text = "Market"
+
+[node name="Timer" type="Timer" parent="." unique_id=1286881233]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

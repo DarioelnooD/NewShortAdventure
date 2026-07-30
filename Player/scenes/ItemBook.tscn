@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://blce1yqv3wkhk"]
 
-[ext_resource type="Texture2D" uid="uid://6bnp4vvv8k8r" path="res://Fruits/Sprites/Mango.png" id="1_2hdwp"]
-[ext_resource type="Script" uid="uid://dur1k0jqellx3" path="res://ItemBook.gd" id="1_to5g4"]
+[ext_resource type="Script" uid="uid://dur1k0jqellx3" path="res://Player/script/ItemBook.gd" id="1_to5g4"]
+[ext_resource type="Texture2D" uid="uid://b33t8i57cblt2" path="res://icon.svg" id="2_0wyrc"]
 [ext_resource type="Texture2D" uid="uid://q5dq4noatj1m" path="res://Imports/SELECTED.png" id="3_0wyrc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
@@ -102,6 +102,7 @@ script = ExtResource("1_to5g4")
 metadata/Item = true
 metadata/take = false
 metadata/Index = 0
+metadata/LastValidPos = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=661160683]
 shape = SubResource("RectangleShape2D_g4v7s")
@@ -112,7 +113,7 @@ offset_top = -19.999998
 offset_right = 108.0
 offset_bottom = 108.0
 scale = Vector2(0.31060618, 0.31305397)
-texture = ExtResource("1_2hdwp")
+texture = ExtResource("2_0wyrc")
 
 [node name="Label" type="Label" parent="." unique_id=312879845]
 offset_right = 40.0

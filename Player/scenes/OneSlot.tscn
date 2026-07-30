@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cm278lc0o1fi0"]
+
+[ext_resource type="Script" uid="uid://bbdx0i7jq6oa3" path="res://Player/script/SlotsPrue.gd" id="1_udci8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_57qmd"]
+size = Vector2(40, 40)
+
+[node name="5x5" type="Area2D" unique_id=374105047]
+scale = Vector2(0.92548925, 0.9395582)
+script = ExtResource("1_udci8")
+metadata/Free = true
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=526902548]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1164795993]
+position = Vector2(20, 20)
+shape = SubResource("RectangleShape2D_57qmd")

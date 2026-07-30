@@ -20,6 +20,7 @@ config/icon="uid://brewge6lsnji8"
 
 Global="*uid://dyoo4qmh2s6qf"
 DataManager="*uid://dnq3mh5uytjrg"
+Reloj="*uid://c224t3augtdkk"
 
 [file_customization]
 
@@ -27,6 +28,7 @@ folder_colors={
 "res://Assets/": "gray",
 "res://Fruits/": "yellow",
 "res://Imports/": "orange",
+"res://Ingredientes/": "blue",
 "res://Map/": "teal",
 "res://Npc`s/": "pink",
 "res://Player/": "red",
